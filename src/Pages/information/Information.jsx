@@ -11,7 +11,7 @@ const Information = () => {
     const handleSubmit = (values) => {
         console.log(values)
     };
-    //dasdfkljasd
+    //dasdfkljas
     return (
         <div className='container m-auto'>
 
