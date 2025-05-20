@@ -59,7 +59,7 @@ const InsuranceCompanyInfo = () => {
                             </Form.Item>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           <Form.Item
+                            <Form.Item
                                 label="Website Link"
                                 name="link"
                                 rules={[{ required: true, message: "Please input your website!" }]}
@@ -67,7 +67,7 @@ const InsuranceCompanyInfo = () => {
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Type link" />
                             </Form.Item>
 
-                          <Form.Item
+                            <Form.Item
                                 label="Phone Number"
                                 name="phone"
                                 rules={[{ required: true, message: "Please input your Phone Number!" }]}

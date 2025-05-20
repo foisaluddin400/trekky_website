@@ -38,36 +38,36 @@ const Reports = () => {
                     <h1 className='text-3xl font-semibold '>New Expense</h1>
                 </div>
                 <div className='max-w-6xl bg-[#F9B038] shadow-xl p-7 px-20'>
-                   <div >
-                     <Form form={form} onFinish={handleSubmit} layout="vertical">
-                        <div className='' >
-                            <label className='text-xl font-semibold' htmlFor="Upload">Upload</label>
-                            <Dragger  {...props}>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">
-                                    Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                    banned files.
-                                </p>
-                            </Dragger>
-                            <Form.Item
-                                label="Description"
-                                name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
-                            >
-                                <Input.TextArea className='w-full bg-transparent border border-black py-2' rows={4} placeholder="Type Here..." />
-                            </Form.Item>
-                        </div>
+                    <div >
+                        <Form form={form} onFinish={handleSubmit} layout="vertical">
+                            <div className='' >
+                                <label className='text-xl font-semibold' htmlFor="Upload">Upload</label>
+                                <Dragger  {...props}>
+                                    <p className="ant-upload-drag-icon">
+                                        <InboxOutlined />
+                                    </p>
+                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                    <p className="ant-upload-hint">
+                                        Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+                                        banned files.
+                                    </p>
+                                </Dragger>
+                                <Form.Item
+                                    label="Description"
+                                    name="feedback"
+                                    rules={[{ required: true, message: "Please input description!" }]}
+                                >
+                                    <Input.TextArea className='w-full bg-transparent border border-black py-2' rows={4} placeholder="Type Here..." />
+                                </Form.Item>
+                            </div>
 
-                        <Form.Item className=" pt-7">
-                            <button type="primary" htmlType="submit" className="w-full border border-black py-2">
-                                Save
-                            </button>
-                        </Form.Item>
-                    </Form>
-                   </div>
+                            <Form.Item className=" pt-7">
+                                <button type="primary" htmlType="submit" className="w-full border border-black py-2">
+                                    Save
+                                </button>
+                            </Form.Item>
+                        </Form>
+                    </div>
                 </div>
             </div>
         </div>

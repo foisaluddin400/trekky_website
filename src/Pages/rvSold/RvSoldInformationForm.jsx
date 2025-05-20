@@ -37,9 +37,9 @@ const RvSoldInformationForm = () => {
                 <div className='w-[400px]'>
                     <h1 className='text-3xl font-semibold '>Insurance Company Info</h1>
                 </div>
-            
-                    <div className='w-full max-w-4xl'>
-                        <Form form={form} onFinish={handleSubmit} layout="vertical">
+
+                <div className='w-full max-w-4xl'>
+                    <Form form={form} onFinish={handleSubmit} layout="vertical">
 
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -87,8 +87,8 @@ const RvSoldInformationForm = () => {
                             </button>
                         </Form.Item>
                     </Form>
-                    </div>
-             
+                </div>
+
             </div>
         </div>
     )

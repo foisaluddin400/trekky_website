@@ -15,7 +15,7 @@ import { ForgotPassword } from "../Auth/ForgotPassword";
 import { Verification } from "../Auth/Verification";
 import { NewPassword } from "../Auth/NewPassword";
 import { SignUp } from "../Auth/SignUp";
-import  ProfilePage  from "../Pages/ProfilePage/ProfilePage";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import { OngoingTicketPage } from "../Pages/ProfilePage/OngoingTicketPage";
 import NewExpense from "../Pages/newExpense/NewExpense";
 import Information from "../Pages/information/Information";
@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
                 path: '/',
                 element: <HomePage></HomePage>,
             },
-             {
+            {
                 path: '/newExpense',
                 element: <NewExpense></NewExpense>
             },
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
                 path: '/reports',
                 element: <Reports></Reports>
             },
-             {
+            {
                 path: '/myreports',
                 element: <MyReport></MyReport>
             },
@@ -67,11 +67,11 @@ export const router = createBrowserRouter([
                 path: '/insuranceCompanyInfoForm',
                 element: <InsuranceCompanyInfo></InsuranceCompanyInfo>
             },
-              {
+            {
                 path: '/updatedingInsurance',
                 element: <UpdatingCompanyInfo></UpdatingCompanyInfo>
             },
-             {
+            {
                 path: '/addMembershipForm',
                 element: <AddMembershipForm></AddMembershipForm>
             },

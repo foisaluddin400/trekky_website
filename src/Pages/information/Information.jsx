@@ -11,7 +11,7 @@ const Information = () => {
     const handleSubmit = (values) => {
         console.log(values)
     };
-    
+
     return (
         <div className='container m-auto'>
 
@@ -56,21 +56,21 @@ const Information = () => {
                             </Form.Item>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <Form.Item
+                            <Form.Item
                                 label="Add another Belt"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add another Belt!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another Belt" />
                             </Form.Item>
-                           <Form.Item
+                            <Form.Item
                                 label="Add Oil Filter"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Oil Filter" />
                             </Form.Item>
-                        
+
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
@@ -86,7 +86,7 @@ const Information = () => {
                                 name="mileage"
                                 rules={[{ required: true, message: "Please input your mileage!" }]}
                             >
-                                  <ConfigProvider
+                                <ConfigProvider
                                     theme={{
                                         token: {
                                             colorPrimary: '#1d4ed8',
@@ -105,58 +105,58 @@ const Information = () => {
                             </Form.Item>
                         </div>
 
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <Form.Item
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Form.Item
                                 label="Mtg"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Mtg!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Mtg" />
                             </Form.Item>
-                           <Form.Item
+                            <Form.Item
                                 label="Model"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your MOdel" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Model" />
                             </Form.Item>
-                        
+
                         </div>
 
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <Form.Item
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Form.Item
                                 label="Name"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Name!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
                             </Form.Item>
-                           <Form.Item
+                            <Form.Item
                                 label="Serial ID"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Serial ID!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Serial ID" />
                             </Form.Item>
-                        
+
                         </div>
 
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <Form.Item
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Form.Item
                                 label="Engine Model"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Engine Model!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Engine Model" />
                             </Form.Item>
-                           <Form.Item
+                            <Form.Item
                                 label="Horsepower"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your horsepower!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Horse Prower" />
                             </Form.Item>
-                        
+
                         </div>
 
 

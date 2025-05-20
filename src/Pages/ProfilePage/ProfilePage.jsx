@@ -7,7 +7,7 @@ import { ChangePass } from "./ChangePass";
 
 const ProfilePage = () => {
 
-// const[updateProfile] = useUpdateProfileMutation()
+  // const[updateProfile] = useUpdateProfileMutation()
   const navigate = useNavigate();
   const [image, setImage] = useState();
   const [form] = Form.useForm();
@@ -27,7 +27,7 @@ const ProfilePage = () => {
     setImage(file);
   };
 
-  
+
   const onFinish = (values) => {
     // const formData = new FormData();
     // if (image) {
@@ -41,41 +41,40 @@ const ProfilePage = () => {
     //   .unwrap()
     //   .then((payload) => message.success(payload?.message))
     //   .catch((error) => message.error(error?.data?.message));
-};
+  };
 
 
 
 
   return (
     <div className="container m-auto">
-    
+
       <div className="bg-[#F9B038] border-l-[60px] border-white shadow-2xl rounded-3xl my-16 py-6 px-4 lg-px-0">
         <div className=" max-w-7xl m-auto  py-9 px-10 rounded-3xl  gap-6">
           <div className="flex justify-center items-center gap-5">
             <div>
-            <div className="relative w-[140px] h-[124px] mx-auto">
-              <input
-                type="file"
-                onInput={handleChange}
-                id="img"
-                style={{ display: "none" }}
-              />
-              <img
-                style={{ width: 140, height: 140, borderRadius: "100%" }}
-                src={`${
-                  image
-                    ? URL.createObjectURL(image)
-                    : ``
-                }`}
-                // src={img}
-                alt=""
-                className="shadow-2xl object-cover"
-              />
+              <div className="relative w-[140px] h-[124px] mx-auto">
+                <input
+                  type="file"
+                  onInput={handleChange}
+                  id="img"
+                  style={{ display: "none" }}
+                />
+                <img
+                  style={{ width: 140, height: 140, borderRadius: "100%" }}
+                  src={`${image
+                      ? URL.createObjectURL(image)
+                      : ``
+                    }`}
+                  // src={img}
+                  alt=""
+                  className="shadow-2xl object-cover"
+                />
 
-              {tab === "Profile" && (
-                <label
-                  htmlFor="img"
-                  className="
+                {tab === "Profile" && (
+                  <label
+                    htmlFor="img"
+                    className="
                             absolute top-1/2 -right-2
                             bg-white
                             rounded-full
@@ -83,11 +82,11 @@ const ProfilePage = () => {
                             flex items-center justify-center
                             cursor-pointer
                         "
-                >
-                  <CiEdit color="#929394" />
-                </label>
-              )}
-            </div>
+                  >
+                    <CiEdit color="#929394" />
+                  </label>
+                )}
+              </div>
             </div>
             <div className="">
               <div>
@@ -101,21 +100,19 @@ const ProfilePage = () => {
         <div className="flex items-center justify-start max-w-xl m-auto px-4 gap-6 my-6">
           <p
             onClick={() => handlePageChange("Profile")}
-            className={`${
-              tab === "Profile"
+            className={`${tab === "Profile"
                 ? "border-white border-b-2 font-bold text-white "
                 : "border-b-2 border-transparent font-normal text-white"
-            } pb-2 cursor-pointer text-[16px] leading-5`}
+              } pb-2 cursor-pointer text-[16px] leading-5`}
           >
             Edit Profile
           </p>
           <p
             onClick={() => handlePageChange("Change Password")}
-            className={`${
-              tab === "Change Password"
+            className={`${tab === "Change Password"
                 ? "border-white border-b-2 font-bold text-white "
                 : "border-b-2 border-transparent font-normal text-white"
-            } pb-2 cursor-pointer text-base leading-[18px]`}
+              } pb-2 cursor-pointer text-base leading-[18px]`}
           >
             Change Password
           </p>
@@ -141,7 +138,7 @@ const ProfilePage = () => {
                       style={{
                         width: "100%",
                         height: 40,
-                     
+
                         borderRadius: "8px",
                         color: "#919191",
                         backgroundColor: "#DBE3EA",
@@ -163,7 +160,7 @@ const ProfilePage = () => {
                       style={{
                         width: "100%",
                         height: 48,
-                     
+
                         borderRadius: "8px",
                         color: "#919191",
                         backgroundColor: "#DBE3EA",
@@ -187,7 +184,7 @@ const ProfilePage = () => {
                       style={{
                         width: "100%",
                         height: 48,
-                    
+
                         borderRadius: "8px",
                         color: "#919191",
                         backgroundColor: "#DBE3EA",
@@ -198,8 +195,8 @@ const ProfilePage = () => {
                     />
                   </Form.Item>
 
-                 
-                 
+
+
                   <Form.Item
                     style={{
                       marginBottom: 0,

@@ -11,11 +11,11 @@ const AddMembership = () => {
                     <div className="flex justify-center">
                         <div>
                             <h1>Add Membership</h1>
-                        <img className="w-[150px] h-[150px] rounded-full object-cover" src={ss} alt="" />
+                            <img className="w-[150px] h-[150px] rounded-full object-cover" src={ss} alt="" />
                         </div>
                     </div>
-                    
-                   <h1>Jon Smith</h1>
+
+                    <h1>Jon Smith</h1>
                     <div className="flex justify-center gap-4">
                         <span>Last Updated :</span>
                         <span className="font-normal">21-24-2025</span>
@@ -35,7 +35,7 @@ const AddMembership = () => {
                     </button>
                 </div>
 
-            
+
             </div>
         </div>
     );
