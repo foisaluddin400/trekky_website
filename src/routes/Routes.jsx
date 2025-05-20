@@ -17,6 +17,18 @@ import { NewPassword } from "../Auth/NewPassword";
 import { SignUp } from "../Auth/SignUp";
 import { ProfilePage } from "../Pages/ProfilePage/ProfilePage";
 import { OngoingTicketPage } from "../Pages/ProfilePage/OngoingTicketPage";
+import NewExpense from "../Pages/newExpense/NewExpense";
+import Information from "../Pages/information/Information";
+import Reports from "../Pages/reports/Reports";
+import MyReport from "../Pages/reports/MyReport";
+import AddMembership from "../Pages/reports/AddMembership";
+import AddMembershipForm from "../Pages/reports/AddMembershipForm";
+import UpdateExisting from "../Pages/reports/UpdateExisting";
+import InsuranceInfo from "../Pages/insuranceInfo/InsuranceInfo";
+import InsuranceCompanyInfo from "../Pages/insuranceInfo/InsuranceCompanyInfo";
+import UpdatingCompanyInfo from "../Pages/insuranceInfo/UpdatingCompanyInfo";
+import RvSold from "../Pages/rvSold/RvSold";
+import RvSoldInformationForm from "../Pages/rvSold/RvSoldInformationForm";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +38,54 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <HomePage></HomePage>,
+            },
+             {
+                path: '/newExpense',
+                element: <NewExpense></NewExpense>
+            },
+            {
+                path: '/information',
+                element: <Information></Information>
+            },
+            {
+                path: '/reports',
+                element: <Reports></Reports>
+            },
+             {
+                path: '/myreports',
+                element: <MyReport></MyReport>
+            },
+            {
+                path: '/addMembership',
+                element: <AddMembership></AddMembership>
+            },
+            {
+                path: '/insuranceInfo',
+                element: <InsuranceInfo></InsuranceInfo>
+            },
+            {
+                path: '/insuranceCompanyInfoForm',
+                element: <InsuranceCompanyInfo></InsuranceCompanyInfo>
+            },
+              {
+                path: '/updatedingInsurance',
+                element: <UpdatingCompanyInfo></UpdatingCompanyInfo>
+            },
+             {
+                path: '/addMembershipForm',
+                element: <AddMembershipForm></AddMembershipForm>
+            },
+            {
+                path: '/UpdateExisting',
+                element: <UpdateExisting></UpdateExisting>
+            },
+            {
+                path: '/rvSold',
+                element: <RvSold></RvSold>
+            },
+            {
+                path: '/rvSoldInsurance',
+                element: <RvSoldInformationForm></RvSoldInformationForm>
             },
             {
                 path: '/company/about-us',

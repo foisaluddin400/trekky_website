@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Drawer } from "antd";
-import Logo from "../assets/Home/logo.png";
+import Logo from "../assets/Home/hero.png";
 import { Link } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 
@@ -78,64 +78,72 @@ export const Navbar = () => {
       key: "home",
       label: <Link to="/">Home</Link>,
     },
-    {
-      key: "company",
-      label: (
-        <Dropdown menu={{ items: dropdownItemsCompany }} trigger={["click"]}>
-          <Link onClick={(e) => e.preventDefault()}>
-            <Space>
-              Company
-              <DownOutlined />
-            </Space>
-          </Link>
-        </Dropdown>
-      ),
+    // {
+    //   key: "company",
+    //   label: (
+    //     <Dropdown menu={{ items: dropdownItemsCompany }} trigger={["click"]}>
+    //       <Link onClick={(e) => e.preventDefault()}>
+    //         <Space>
+    //           Company
+    //           <DownOutlined />
+    //         </Space>
+    //       </Link>
+    //     </Dropdown>
+    //   ),
+    // },
+    // {
+    //   key: "services",
+    //   label: (
+    //     <Dropdown menu={{ items: dropdownItemsServices }} trigger={["click"]}>
+    //       <Link onClick={(e) => e.preventDefault()}>
+    //         <Space>
+    //           Services
+    //           <DownOutlined />
+    //         </Space>
+    //       </Link>
+    //     </Dropdown>
+    //   ),
+    // },
+     {
+      key: "newExpense",
+      label: <Link to="/newExpense">New Expense</Link>,
     },
-    {
-      key: "services",
-      label: (
-        <Dropdown menu={{ items: dropdownItemsServices }} trigger={["click"]}>
-          <Link onClick={(e) => e.preventDefault()}>
-            <Space>
-              Services
-              <DownOutlined />
-            </Space>
-          </Link>
-        </Dropdown>
-      ),
+     {
+      key: "information",
+      label: <Link to="/information">Chassis Information</Link>,
     },
     {
       key: "contactUs",
       label: <Link to="/contactUs">Contact Us</Link>,
     },
-    {
-      key: "blog",
-      label: <Link to="/blog">Blog</Link>,
+     {
+      key: "reports",
+      label: <Link to="/reports">Reports</Link>,
     },
     {
       key: "submitTicket",
       label: <Link to="/submit-a-ticket">Submit A Ticket</Link>,
     },
-    {
-      key: "profile",
-      label: (
-        <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
-          <Link onClick={(e) => e.preventDefault()}>
-            <Space>
-              <FaRegUserCircle />
-              <DownOutlined />
-            </Space>
-          </Link>
-        </Dropdown>
-      ),
-    },
+    // {
+    //   key: "profile",
+    //   label: (
+    //     <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
+    //       <Link onClick={(e) => e.preventDefault()}>
+    //         <Space>
+    //           <FaRegUserCircle />
+    //           <DownOutlined />
+    //         </Space>
+    //       </Link>
+    //     </Dropdown>
+    //   ),
+    // },
   ];
 
   return (
-    <div className="bg-[#2E4CB9] text-white">
+    <div className=" ">
       {/* Desktop Navbar */}
       <nav className="flex items-center lg:justify-center justify-between gap-28 px-6 py-3">
-        <img className="w-[50px]" src={Logo} alt="Logo" />
+        <img className="w-[80px]" src={Logo} alt="Logo" />
         <ul className="hidden md:flex lg:space-x-16 space-x-6">
           {items.map((item) => (
             <li key={item.key} className="list-none">
