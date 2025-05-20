@@ -124,19 +124,19 @@ export const Navbar = () => {
       key: "submitTicket",
       label: <Link to="/submit-a-ticket">Submit A Ticket</Link>,
     },
-    // {
-    //   key: "profile",
-    //   label: (
-    //     <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
-    //       <Link onClick={(e) => e.preventDefault()}>
-    //         <Space>
-    //           <FaRegUserCircle />
-    //           <DownOutlined />
-    //         </Space>
-    //       </Link>
-    //     </Dropdown>
-    //   ),
-    // },
+    {
+      key: "profile",
+      label: (
+        <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
+          <Link onClick={(e) => e.preventDefault()}>
+            <Space>
+              <FaRegUserCircle />
+              <DownOutlined />
+            </Space>
+          </Link>
+        </Dropdown>
+      ),
+    },
   ];
 
   return (
