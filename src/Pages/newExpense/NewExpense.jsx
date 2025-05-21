@@ -35,7 +35,7 @@ const NewExpense = () => {
 
             <div className='flex gap-4'>
                 <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>New Expense</h1>
+                    <h1 className='text-3xl font-semibold '>New Repair</h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -43,7 +43,7 @@ const NewExpense = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Company Name"
+                                label="Date"
                                 name="date"
                                 rules={[{ required: true, message: "Please input your company name!" }]}
                             >
@@ -93,9 +93,9 @@ const NewExpense = () => {
                             </Form.Item>
 
                             <Form.Item
-                                label="Email"
-                                name="email"
-                                rules={[{ required: true, message: "Please input your email!" }]}
+                                label="Drop off Date"
+                                name="date"
+                                rules={[{ required: true, message: "Please input date!" }]}
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'

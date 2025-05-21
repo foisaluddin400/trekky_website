@@ -6,26 +6,26 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 const dateFormat = 'YYYY-MM-DD';
-const Information = () => {
+const UpdateExistMaintainanceOrder = () => {
     const [form] = Form.useForm();
     const handleSubmit = (values) => {
         console.log(values)
     };
 
     return (
-        <div className='container m-auto'>
+        <div className='container m-auto py-7'>
 
-            <div className='flex gap-4'>
-                <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>Chassis information</h1>
+            <div className=' gap-4 '>
+                <div className=''>
+                    <h1 className='text-3xl font-semibold '>Update Existing Maintenance Order</h1>
                 </div>
-                <div className='w-full max-w-4xl'>
+                <div className=' max-w-4xl m-auto pt-8'>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
 
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Fuel Type"
+                                label="RV Nickname"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Type!" }]}
                             >
@@ -33,7 +33,7 @@ const Information = () => {
                             </Form.Item>
 
                             <Form.Item
-                                label="Add Belt"
+                                label="Class"
                                 name="AddBelt"
                                 rules={[{ required: true, message: "Please input your Add Belt!" }]}
                             >
@@ -57,14 +57,14 @@ const Information = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Add another Belt"
+                                label="Manufacturer"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add another Belt!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another Belt" />
                             </Form.Item>
                             <Form.Item
-                                label="Add Oil Filter"
+                                label="Model Name"
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
@@ -74,7 +74,7 @@ const Information = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Add another oil Filter"
+                                label="Floorplan"
                                 name="filter"
                                 rules={[{ required: true, message: "Please input your Add another oil Filter" }]}
                             >
@@ -82,7 +82,7 @@ const Information = () => {
                             </Form.Item>
 
                             <Form.Item
-                                label="Mileage"
+                                label="Interior color Scheme"
                                 name="mileage"
                                 rules={[{ required: true, message: "Please input your mileage!" }]}
                             >
@@ -172,4 +172,4 @@ const Information = () => {
     )
 }
 
-export default Information
+export default UpdateExistMaintainanceOrder

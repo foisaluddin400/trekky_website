@@ -1,5 +1,6 @@
 import React from "react";
 import ss from '../../assets/Home/ss.jpg'
+import { Link } from "react-router-dom";
 const InsuranceInfo = () => {
     return (
         <div className="container m-auto flex py-11">
@@ -27,12 +28,12 @@ const InsuranceInfo = () => {
                 </div>
 
                 <div className="flex gap-6">
-                    <button className=" border border-black px-12 py-3 rounded-md text-lg font-medium hover:bg-cyan-500 transition">
+                    <Link to={'/insuranceCompanyInfoForm'}><button className=" border border-black px-12 py-3 rounded-md text-lg font-medium ">
                         Insurance Info
-                    </button>
-                    <button className=" border border-black px-12 py-3 rounded-md text-lg font-medium hover:bg-red-600 transition">
+                    </button></Link>
+                    <Link to={'/updatedingInsurance'}><button className=" border border-black px-12 py-3 rounded-md text-lg font-medium ">
                         Update exiting insurance
-                    </button>
+                    </button></Link>
                 </div>
 
             

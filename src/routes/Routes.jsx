@@ -29,6 +29,11 @@ import InsuranceCompanyInfo from "../Pages/insuranceInfo/InsuranceCompanyInfo";
 import UpdatingCompanyInfo from "../Pages/insuranceInfo/UpdatingCompanyInfo";
 import RvSold from "../Pages/rvSold/RvSold";
 import RvSoldInformationForm from "../Pages/rvSold/RvSoldInformationForm";
+import AddRv from "../Pages/addRv/AddRv";
+import UpdateExistMaintainanceOrder from "../Pages/addRv/UpdateExistMaintainanceOrder";
+import CampgroundReview from "../Pages/campgroundReview/CampgroundReview";
+import ViewAllTrip from "../Pages/campgroundReview/ViewAllTrip";
+import TripDetails from "../Pages/campgroundReview/TripDetails";
 
 export const router = createBrowserRouter([
     {
@@ -40,7 +45,7 @@ export const router = createBrowserRouter([
                 element: <HomePage></HomePage>,
             },
             {
-                path: '/newExpense',
+                path: '/newRepair',
                 element: <NewExpense></NewExpense>
             },
             {
@@ -80,8 +85,28 @@ export const router = createBrowserRouter([
                 element: <UpdateExisting></UpdateExisting>
             },
             {
+                path: '/campgroundReview',
+                element:<CampgroundReview></CampgroundReview>
+            },
+            {
                 path: '/rvSold',
                 element: <RvSold></RvSold>
+            },
+            {
+                path: '/addRv',
+                element: <AddRv></AddRv>
+            },
+            {
+                path: '/viewAllTrip',
+                element: <ViewAllTrip></ViewAllTrip>
+            },
+            {
+                path: '/tripDetails',
+                element: <TripDetails></TripDetails>
+            },
+             {
+                path: '/updateExistMaintenance',
+                element: <UpdateExistMaintainanceOrder></UpdateExistMaintainanceOrder>
             },
             {
                 path: '/rvSoldInsurance',
