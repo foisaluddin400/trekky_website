@@ -104,11 +104,11 @@ export const Navbar = () => {
     //     </Dropdown>
     //   ),
     // },
-     {
+    {
       key: "newExpense",
       label: <Link to="/newExpense">New Expense</Link>,
     },
-     {
+    {
       key: "information",
       label: <Link to="/information">Chassis Information</Link>,
     },
@@ -116,7 +116,7 @@ export const Navbar = () => {
       key: "contactUs",
       label: <Link to="/contactUs">Contact Us</Link>,
     },
-     {
+    {
       key: "reports",
       label: <Link to="/reports">Reports</Link>,
     },
@@ -138,11 +138,12 @@ export const Navbar = () => {
       ),
     },
   ];
+  
 
   return (
-    <div className=" ">
+    <div className="container m-auto ">
       {/* Desktop Navbar */}
-      <nav className="flex items-center lg:justify-center justify-between gap-28 px-6 py-3">
+      <nav className="flex justify-between gap-28 py-3">
         <img className="w-[80px]" src={Logo} alt="Logo" />
         <ul className="hidden md:flex lg:space-x-16 space-x-6">
           {items.map((item) => (
