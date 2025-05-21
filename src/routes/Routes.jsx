@@ -34,6 +34,7 @@ import UpdateExistMaintainanceOrder from "../Pages/addRv/UpdateExistMaintainance
 import CampgroundReview from "../Pages/campgroundReview/CampgroundReview";
 import ViewAllTrip from "../Pages/campgroundReview/ViewAllTrip";
 import TripDetails from "../Pages/campgroundReview/TripDetails";
+import UpcomingMaintenance from "../Pages/upcomingMaintenance/UpcomingMaintenance";
 
 export const router = createBrowserRouter([
     {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
             {
                 path: '/campgroundReview',
                 element:<CampgroundReview></CampgroundReview>
+            },
+            {
+                path: '/upcomingMaintenance',
+                element:<UpcomingMaintenance></UpcomingMaintenance>
             },
             {
                 path: '/rvSold',
