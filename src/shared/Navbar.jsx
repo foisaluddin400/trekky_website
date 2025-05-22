@@ -63,14 +63,7 @@ export const Navbar = () => {
       ),
       key: "profilepage",
     },
-    {
-      label: (
-        <Link to="/profilePage/ongoing-tickets" rel="noopener noreferrer">
-          Ongoing Tickets
-        </Link>
-      ),
-      key: "ongoing",
-    },
+  
   ];
 
   const items = [
@@ -105,25 +98,19 @@ export const Navbar = () => {
     //   ),
     // },
     {
-      key: "newExpense",
-      label: <Link to="/newExpense">New Expense</Link>,
+      key: "newRepair",
+      label: <Link to="/newRepair">New Expense</Link>,
     },
     {
       key: "information",
       label: <Link to="/information">Chassis Information</Link>,
     },
-    {
-      key: "contactUs",
-      label: <Link to="/contactUs">Contact Us</Link>,
-    },
+    
     {
       key: "reports",
       label: <Link to="/reports">Reports</Link>,
     },
-    {
-      key: "submitTicket",
-      label: <Link to="/submit-a-ticket">Submit A Ticket</Link>,
-    },
+    
     {
       key: "profile",
       label: (
@@ -145,7 +132,7 @@ export const Navbar = () => {
       {/* Desktop Navbar */}
       <nav className="flex justify-between gap-28 py-3">
         <img className="w-[80px]" src={Logo} alt="Logo" />
-        <ul className="hidden md:flex lg:space-x-16 space-x-6">
+        <ul className="hidden md:flex lg:space-x-16 space-x-6 mt-3">
           {items.map((item) => (
             <li key={item.key} className="list-none">
               {item.label}
