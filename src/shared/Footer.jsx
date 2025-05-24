@@ -6,6 +6,7 @@ export const Footer = () => {
     <footer className="bg-black text-white py-10 mt-20">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Contact Information */}
+        
         <div>
           <img src={Logo} alt="Logo" className="w-16 mb-4" />
           <h2 className="text-lg font-bold mb-2">Contact Information</h2>
