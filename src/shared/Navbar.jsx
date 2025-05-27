@@ -122,7 +122,7 @@ export const Navbar = () => {
       {/* Desktop Navbar */}
       <nav className="flex justify-between items-center gap-28 py-4">
         <div>
-          <img className="w-[80px]" src={Logo} alt="Logo" />
+          <Link to={'/'}><img className="w-[80px]" src={Logo} alt="Logo" /></Link>
         </div>
         <ul className="hidden md:flex lg:space-x-16 space-x-6 ">
           {items.map((item) => (
