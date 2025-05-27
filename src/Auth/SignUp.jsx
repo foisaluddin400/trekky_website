@@ -134,7 +134,7 @@ const SignUp = () => {
                 </div>
           </div>
           <div className="hidden lg:block">
-            <img src={Logo} alt="" />
+            <img className="rounded-3xl" src={Logo} alt="" />
           </div>
         </div>
       </div>

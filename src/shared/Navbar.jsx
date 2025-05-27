@@ -130,11 +130,11 @@ export const Navbar = () => {
               {item.label}
             </li>
           ))}
-          <div className="flex gap-5 ">
+          <div className="flex gap-5 items-center">
 
             <div className="flex gap-4">
-              <button className="border border-[#F9B038] py-1 px-4 rounded">Login</button>
-              <button className="bg-[#F9B038] py-1 px-4 rounded">Sign Up</button>
+              <Link to={'/auth/login'}><button className="border border-[#F9B038] py-1 px-4 rounded">Login</button></Link>
+              <Link to={'/auth/signUp'}><button className="bg-[#F9B038] py-1 px-4 rounded">Sign Up</button></Link>
             </div>
 
 
