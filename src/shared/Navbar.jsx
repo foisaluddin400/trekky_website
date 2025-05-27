@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Drawer } from "antd";
 import Logo from "../assets/Home/hero.png";
+import profile from "../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 
@@ -63,7 +64,7 @@ export const Navbar = () => {
       ),
       key: "profilepage",
     },
-  
+
   ];
 
   const items = [
@@ -98,46 +99,61 @@ export const Navbar = () => {
     //   ),
     // },
     {
+      key: "newExpense",
+      label: <Link to="/newExpense">New Expense</Link>,
+    },
+    {
       key: "newRepair",
-      label: <Link to="/newRepair">New Expense</Link>,
+      label: <Link to="/newRepair">New Repair</Link>,
+    },
+    {
+      key: "reports",
+      label: <Link to="/reports">Favorite Reports</Link>,
     },
     {
       key: "information",
       label: <Link to="/information">Chassis Information</Link>,
     },
-    
-    {
-      key: "reports",
-      label: <Link to="/reports">Reports</Link>,
-    },
-    
-    {
-      key: "profile",
-      label: (
-        <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
-          <Link onClick={(e) => e.preventDefault()}>
-            <Space>
-              <FaRegUserCircle />
-              <DownOutlined />
-            </Space>
-          </Link>
-        </Dropdown>
-      ),
-    },
   ];
-  
+
 
   return (
     <div className="container m-auto ">
       {/* Desktop Navbar */}
-      <nav className="flex justify-between gap-28 py-3">
-        <img className="w-[80px]" src={Logo} alt="Logo" />
-        <ul className="hidden md:flex lg:space-x-16 space-x-6 mt-3">
+      <nav className="flex justify-between items-center gap-28 py-4">
+        <div>
+          <img className="w-[80px]" src={Logo} alt="Logo" />
+        </div>
+        <ul className="hidden md:flex lg:space-x-16 space-x-6 ">
           {items.map((item) => (
-            <li key={item.key} className="list-none">
+            <li key={item.key} className="list-none mt-3">
               {item.label}
             </li>
           ))}
+          <div className="flex gap-5 ">
+
+            <div className="flex gap-4">
+              <button className="border border-[#F9B038] py-1 px-4 rounded">Login</button>
+              <button className="bg-[#F9B038] py-1 px-4 rounded">Sign Up</button>
+            </div>
+
+
+            <div>
+              <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
+                <Link onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <img className="w-[40px] h-[40px] rounded-full object-cover" src={profile} alt="profile" />
+                    <div>
+                      <h1>Foisal</h1>
+                      <p>foisal@gmail.com</p>
+                    </div>
+                  </Space>
+                </Link>
+              </Dropdown>
+            </div>
+
+
+          </div>
         </ul>
         <button
           className="md:hidden text-2xl"

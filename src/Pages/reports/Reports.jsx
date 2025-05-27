@@ -35,7 +35,7 @@ const Reports = () => {
 
             <div className='flex gap-4 my-11'>
                 <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>New Expense</h1>
+                    <h1 className='text-3xl font-semibold '>Favorite Reports</h1>
                 </div>
                 <div className='max-w-6xl bg-[#F9B038] shadow-xl p-7 px-20'>
                     <div >

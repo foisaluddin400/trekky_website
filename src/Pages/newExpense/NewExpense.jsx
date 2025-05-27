@@ -35,7 +35,7 @@ const NewExpense = () => {
 
             <div className='flex gap-4'>
                 <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>New Repair</h1>
+                    <h1 className='text-3xl font-semibold '>New Expense</h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">

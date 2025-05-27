@@ -10,11 +10,11 @@ import { StructuredCabilingPage } from "../Pages/ServicesPage/StructuredCabiling
 import { BreakFixServicesPage } from "../Pages/ServicesPage/BreakFixServicesPage";
 import { SubmitTicketPage } from "../Pages/SubmitTicketPage.jsx/SubmitTicketPage";
 import { BlogPage } from "../Pages/BlogPage/BlogPage";
-import { Login } from "../Auth/Login";
+import  Login  from "../Auth/Login";
 import { ForgotPassword } from "../Auth/ForgotPassword";
 import { Verification } from "../Auth/Verification";
 import { NewPassword } from "../Auth/NewPassword";
-import { SignUp } from "../Auth/SignUp";
+import  SignUp  from "../Auth/SignUp";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import { OngoingTicketPage } from "../Pages/ProfilePage/OngoingTicketPage";
 import NewExpense from "../Pages/newExpense/NewExpense";
@@ -35,6 +35,7 @@ import CampgroundReview from "../Pages/campgroundReview/CampgroundReview";
 import ViewAllTrip from "../Pages/campgroundReview/ViewAllTrip";
 import TripDetails from "../Pages/campgroundReview/TripDetails";
 import UpcomingMaintenance from "../Pages/upcomingMaintenance/UpcomingMaintenance";
+import NewRepair from "../Pages/newRepair/NewRepair";
 
 export const router = createBrowserRouter([
     {
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
                 element: <HomePage></HomePage>,
             },
             {
-                path: '/newRepair',
+                path: '/newExpense',
                 element: <NewExpense></NewExpense>
             },
             {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
             {
                 path: '/myreports',
                 element: <MyReport></MyReport>
+            },
+             {
+                path: '/newRepair',
+                element: <NewRepair></NewRepair>
             },
             {
                 path: '/addMembership',

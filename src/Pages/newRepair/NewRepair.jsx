@@ -25,27 +25,27 @@ const props = {
         console.log('Dropped files', e.dataTransfer.files);
     },
 };
-const UpdateExisting = () => {
+const NewRepair = () => {
     const [form] = Form.useForm();
     const handleSubmit = (values) => {
         console.log(values)
     };
-    //sss
     return (
         <div className='container m-auto'>
+
             <div className='flex gap-4'>
                 <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>Update Existing</h1>
+                    <h1 className='text-3xl font-semibold '>New Repair</h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
 
- 
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Renewal Date"
-                                name="renewal"
-                                rules={[{ required: true, message: "Please input Renewal Date!" }]}
+                                label="Date"
+                                name="date"
+                                rules={[{ required: true, message: "Please input your company name!" }]}
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
@@ -54,10 +54,48 @@ const UpdateExisting = () => {
                                     maxDate={dayjs('2020-10-31', dateFormat)}
                                 />
                             </Form.Item>
+
                             <Form.Item
-                                label="Expiration Date"
-                                name="ExpirationDate"
-                                rules={[{ required: true, message: "Please input Expiration Date!" }]}
+                                label="Vendor"
+                                name="vendor"
+                                rules={[{ required: true, message: "Please input your vendor!" }]}
+                            >
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Eddlie" />
+                            </Form.Item>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Form.Item
+                                label="City/State"
+                                name="city"
+                                rules={[{ required: true, message: "Please select your city!" }]}
+
+                            >
+
+
+                                <ConfigProvider
+                                    theme={{
+                                        token: {
+                                            colorPrimary: '#1d4ed8',
+                                            borderRadius: 8,
+                                            controlHeight: 40,
+
+                                        },
+                                    }}
+                                >
+                                    <Select placeholder="Select Inquiry" className="w-full">
+                                        <Option value="General_Inquiry">USA</Option>
+                                        <Option value="Service_Request">JAPAN</Option>
+                                        <Option value="Partnership_Inquiry">BANGLADESH</Option>
+                                    </Select>
+                                </ConfigProvider>
+
+
+                            </Form.Item>
+
+                            <Form.Item
+                                label="Drop off Date"
+                                name="date"
+                                rules={[{ required: true, message: "Please input date!" }]}
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
@@ -71,20 +109,27 @@ const UpdateExisting = () => {
                             <Form.Item
                                 label="Cost"
                                 name="cost"
-                                rules={[{ required: true, message: "Please input cost!" }]}
+                                rules={[{ required: true, message: "Please input your cost!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="cost" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type cost" />
                             </Form.Item>
 
                             <Form.Item
-                                label="Update Membership Number"
-                                name="MembershipNumber"
-                                rules={[{ required: true, message: "Please input Update Membership Number!" }]}
+                                label="Mileage"
+                                name="mileage"
+                                rules={[{ required: true, message: "Please input your mileage!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type Update Membership Number" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type mileage" />
                             </Form.Item>
                         </div>
 
+                        <Form.Item
+                            label="Repair"
+                            name="repair"
+                            rules={[{ required: true, message: "Please input your Repair!" }]}
+                        >
+                            <Input className='w-full bg-transparent border border-black py-2' placeholder="Type Repair" />
+                        </Form.Item>
 
 
 
@@ -120,4 +165,4 @@ const UpdateExisting = () => {
     )
 }
 
-export default UpdateExisting
+export default NewRepair
