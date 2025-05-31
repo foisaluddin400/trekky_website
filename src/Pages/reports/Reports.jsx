@@ -1,9 +1,11 @@
 import { Button, ConfigProvider, DatePicker, Form, Input, Select } from 'antd'
 import Dragger from 'antd/es/upload/Dragger';
-import React from 'react'
-import { InboxOutlined } from '@ant-design/icons';
+import React, { useState } from 'react'
+import { DeleteOutlined, EyeOutlined, InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import AddReports from './AddReports';
+import { Link } from 'react-router-dom';
 dayjs.extend(customParseFormat);
 const dateFormat = 'YYYY-MM-DD';
 const props = {
@@ -27,6 +29,7 @@ const props = {
 };
 const Reports = () => {
     const [form] = Form.useForm();
+    const [openAddModal, setOpenAddModal] = useState(false);
     const handleSubmit = (values) => {
         console.log(values)
     };
@@ -35,23 +38,27 @@ const Reports = () => {
 
             <div className='flex gap-4 my-11'>
                 <div className='w-[300px]'>
-                    <h1 className='text-3xl font-semibold '>Favorite Reports</h1>
+                    <h1 className='text-3xl font-semibold '>Reports</h1>
                 </div>
-                <div className='max-w-6xl bg-[#F9B038] shadow-xl p-7 px-20'>
-                    <div >
+                <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl p-7 px-20'>
+                    {/* <div >
                         <Form form={form} onFinish={handleSubmit} layout="vertical">
                             <div className='' >
-                                <label className='text-xl font-semibold' htmlFor="Upload">Upload</label>
-                                <Dragger  {...props}>
-                                    <p className="ant-upload-drag-icon">
-                                        <InboxOutlined />
-                                    </p>
-                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                    <p className="ant-upload-hint">
-                                        Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                        banned files.
-                                    </p>
-                                </Dragger>
+                                <Form.Item
+                                    label="Name"
+                                    name="name"
+                                    rules={[{ required: true, message: "Please input your name!" }]}
+                                >
+                                    <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Email"
+                                    name="email"
+                                    rules={[{ required: true, message: "Please input your name!" }]}
+                                >
+                                    <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
+                                </Form.Item>
+
                                 <Form.Item
                                     label="Description"
                                     name="feedback"
@@ -67,9 +74,36 @@ const Reports = () => {
                                 </button>
                             </Form.Item>
                         </Form>
+                    </div> */}
+                    <div className='flex justify-end mb-5'>
+                        <button onClick={() => setOpenAddModal(true)} className='border border-black p-2'>Add Reports</button>
+                    </div>
+                    <div className='space-y-3'>
+                        <div className='border-b pb-3 flex justify-between'>
+                            <h1 >1 : Report 1</h1>
+                            <div className='flex gap-2'> <Link to={'/myreports'}><button><EyeOutlined></EyeOutlined></button></Link><button><DeleteOutlined></DeleteOutlined></button></div>
+                        </div>
+                        <div className='border-b pb-3 flex justify-between'>
+                            <h1 >1 : Report 1</h1>
+                            <div className='flex gap-2'> <Link to={'/myreports'}><button><EyeOutlined></EyeOutlined></button></Link><button><DeleteOutlined></DeleteOutlined></button></div>
+                        </div>
+                        <div className='border-b pb-3 flex justify-between'>
+                            <h1 >1 : Report 1</h1>
+                            <div className='flex gap-2'> <Link to={'/myreports'}><button><EyeOutlined></EyeOutlined></button></Link><button><DeleteOutlined></DeleteOutlined></button></div>
+                        </div>
+                       <div className='border-b pb-3 flex justify-between'>
+                            <h1 >1 : Report 1</h1>
+                            <div className='flex gap-2'> <Link to={'/myreports'}><button><EyeOutlined></EyeOutlined></button></Link><button><DeleteOutlined></DeleteOutlined></button></div>
+                        </div>
+                       <div className='border-b pb-3 flex justify-between'>
+                            <h1 >1 : Report 1</h1>
+                            <div className='flex gap-2'> <Link to={'/myreports'}><button><EyeOutlined></EyeOutlined></button></Link><button><DeleteOutlined></DeleteOutlined></button></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <AddReports setOpenAddModal={setOpenAddModal}
+        openAddModal={openAddModal}></AddReports>
         </div>
     )
 }

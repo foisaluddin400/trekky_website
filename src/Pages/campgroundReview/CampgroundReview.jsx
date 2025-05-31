@@ -1,98 +1,67 @@
-
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from 'antd'
-import Dragger from 'antd/es/upload/Dragger';
-import React, { useState } from "react";
-import { InboxOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import NewTrip from './NewTrip';
 import Progress from './Progress';
 import UpdateState from './UpdateState';
 import ViewTrips from './ViewTrips';
-dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD';
-const props = {
-    name: 'file',
-    multiple: true,
-    action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
-    onChange(info) {
-        const { status } = info.file;
-        if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-    onDrop(e) {
-        console.log('Dropped files', e.dataTransfer.files);
-    },
-};
+
 const CampgroundReview = () => {
-    const [activeTab, setActiveTab] = useState("newTrip");
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState("newTrip");
 
-    const renderContent = () => {
-        const [form] = Form.useForm();
-        const handleSubmit = (values) => {
-            console.log(values)
-        };
-        switch (activeTab) {
-            case "progress":
-                return <Progress></Progress>;
-            case "newTrip":
-                return <NewTrip></NewTrip>;
-            case "updateState":
-                return <UpdateState></UpdateState>;
-            case "viewTrips":
-                return <ViewTrips></ViewTrips>;
-            default:
-                return null;
-        }
-    };
+  // Sync tab state with URL query param on load and when URL changes
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get("tab");
+    if (tabParam) {
+      setActiveTab(tabParam);
+    }
+  }, [location.search]);
 
-    return (
-        <div className=" container m-auto">
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    const params = new URLSearchParams(location.search);
+    params.set("tab", tab);
+    window.history.pushState(null, "", `?${params.toString()}`);
+  };
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case "progress":
+        return <Progress />;
+      case "newTrip":
+        return <NewTrip />;
+      case "updateState":
+        return <UpdateState />;
+      case "viewTrips":
+        return <ViewTrips />;
+      default:
+        return null;
+    }
+  };
 
-            <div className="flex gap-4 mb-4">
-                <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${activeTab === "progress" ? "bg-[#F9B038] text-black" : "border border-black text-black"
-                        }`}
-                    onClick={() => setActiveTab("progress")}
-                >
-                    Progress
-                </button>
-                <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${activeTab === "newTrip" ? "bg-[#F9B038] text-black" : "border border-black text-black"
-                        }`}
-                    onClick={() => setActiveTab("newTrip")}
-                >
-                    New Trip
-                </button>
-                <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${activeTab === "updateState" ? "bg-[#F9B038] text-black" : "border border-black text-black"
-                        }`}
-                    onClick={() => setActiveTab("updateState")}
-                >
-                    Update State
-                </button>
-                <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${activeTab === "viewTrips" ? "bg-[#F9B038] text-black" : "border border-black text-black"
-                        }`}
-                    onClick={() => setActiveTab("viewTrips")}
-                >
-                    View Trips
-                </button>
-            </div>
+  return (
+    <div className="container m-auto">
+      <div className="flex gap-4 mb-4">
+        {["progress", "newTrip", "updateState", "viewTrips"].map((tab) => (
+          <button
+            key={tab}
+            className={`px-4 py-2 rounded-md text-sm font-medium ${
+              activeTab === tab
+                ? "bg-[#F9B038] text-black"
+                : "border border-black text-black"
+            }`}
+            onClick={() => handleTabChange(tab)}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
+      </div>
 
-            {/* Content for active tab */}
-            {renderContent()}
-
-
-        </div>
-    );
+      {/* Render tab content */}
+      {renderContent()}
+    </div>
+  );
 };
 
 export default CampgroundReview;

@@ -1,11 +1,11 @@
 import { Button, ConfigProvider, DatePicker, Form, Input, Select } from 'antd'
 import Dragger from 'antd/es/upload/Dragger';
-import React from 'react'
+import React, { useState } from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD';
+const dateFormat = 'MM/DD/YYYY';
 const props = {
     name: 'file',
     multiple: true,
@@ -28,8 +28,25 @@ const props = {
 const NewExpense = () => {
     const [form] = Form.useForm();
     const handleSubmit = (values) => {
-        console.log(values)
+        const rawMileage = values.qty.replace(/,/g, '');
+        console.log({ ...values, qty: rawMileage });
     };
+
+    const [qty, setMileage] = useState('');
+
+
+    const formatWithCommas = (value) => {
+        const onlyNumbers = value.replace(/[^\d]/g, '');
+        return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+
+    const handleChange = (e) => {
+        const input = e.target.value;
+        const formatted = formatWithCommas(input);
+        setMileage(formatted);
+        form.setFieldsValue({ qty: formatted });
+    };
+
     return (
         <div className='container m-auto'>
 
@@ -43,35 +60,10 @@ const NewExpense = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Date"
-                                name="date"
-                                rules={[{ required: true, message: "Please input your company name!" }]}
+                                label="Expense Type"
+                                name="expense"
+                                rules={[{ required: true, message: "Please input Expense Type!" }]}
                             >
-                                <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
-                                />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Vendor"
-                                name="vendor"
-                                rules={[{ required: true, message: "Please input your vendor!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Eddlie" />
-                            </Form.Item>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="City/State"
-                                name="city"
-                                rules={[{ required: true, message: "Please select your city!" }]}
-
-                            >
-
-
                                 <ConfigProvider
                                     theme={{
                                         token: {
@@ -83,26 +75,44 @@ const NewExpense = () => {
                                     }}
                                 >
                                     <Select placeholder="Select Inquiry" className="w-full">
-                                        <Option value="General_Inquiry">USA</Option>
-                                        <Option value="Service_Request">JAPAN</Option>
-                                        <Option value="Partnership_Inquiry">BANGLADESH</Option>
+                                        <Option value="General_Inquiry">Select</Option>
+                                        <Option value="Service_Request">Part</Option>
+                                        <Option value="Partnership_Inquiry">Qz</Option>
                                     </Select>
                                 </ConfigProvider>
-
-
                             </Form.Item>
-
                             <Form.Item
-                                label="Drop off Date"
+                                label="Date"
                                 name="date"
-                                rules={[{ required: true, message: "Please input date!" }]}
+                                rules={[{ required: true, message: "Please input your company name!" }]}
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
                                 />
+                            </Form.Item>
+
+                            
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <Form.Item
+                                label="Vendor"
+                                name="vendor"
+                                rules={[{ required: true, message: "Please input your vendor!" }]}
+                            >
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Eddlie" />
+                            </Form.Item>
+
+                            <Form.Item
+                                label="City/State"
+                                name="city"
+                                rules={[{ required: true, message: "Please input city/state!" }]}
+                            >
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/stape" />
                             </Form.Item>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -111,25 +121,23 @@ const NewExpense = () => {
                                 name="cost"
                                 rules={[{ required: true, message: "Please input your cost!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type cost" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="$" />
                             </Form.Item>
-
                             <Form.Item
-                                label="Mileage"
-                                name="mileage"
-                                rules={[{ required: true, message: "Please input your mileage!" }]}
+                                label="QTY"
+                                name="qty"
+                                rules={[{ required: true, message: 'Please input your mileage!' }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type mileage" />
+                                <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder='QTY'
+                                    value={qty}
+                                    onChange={handleChange}
+                                />
                             </Form.Item>
                         </div>
 
-                        <Form.Item
-                            label="Repair"
-                            name="repair"
-                            rules={[{ required: true, message: "Please input your Repair!" }]}
-                        >
-                            <Input className='w-full bg-transparent border border-black py-2' placeholder="Type Repair" />
-                        </Form.Item>
+
 
 
 
@@ -145,8 +153,8 @@ const NewExpense = () => {
                                 </p>
                             </Dragger>
                             <Form.Item
-                                label="Description"
-                                name="feedback"
+                                label="Massage"
+                                name="massage"
                                 rules={[{ required: true, message: "Please input description!" }]}
                             >
                                 <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />

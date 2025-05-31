@@ -5,7 +5,7 @@ import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD';
+const dateFormat = 'MM/DD/YYYY';
 const props = {
     name: 'file',
     multiple: true,
@@ -49,9 +49,10 @@ const NewRepair = () => {
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
                                 />
                             </Form.Item>
 
@@ -67,29 +68,9 @@ const NewRepair = () => {
                             <Form.Item
                                 label="City/State"
                                 name="city"
-                                rules={[{ required: true, message: "Please select your city!" }]}
-
+                                rules={[{ required: true, message: "Please input city/state!" }]}
                             >
-
-
-                                <ConfigProvider
-                                    theme={{
-                                        token: {
-                                            colorPrimary: '#1d4ed8',
-                                            borderRadius: 8,
-                                            controlHeight: 40,
-
-                                        },
-                                    }}
-                                >
-                                    <Select placeholder="Select Inquiry" className="w-full">
-                                        <Option value="General_Inquiry">USA</Option>
-                                        <Option value="Service_Request">JAPAN</Option>
-                                        <Option value="Partnership_Inquiry">BANGLADESH</Option>
-                                    </Select>
-                                </ConfigProvider>
-
-
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/stape" />
                             </Form.Item>
 
                             <Form.Item

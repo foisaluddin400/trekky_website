@@ -88,7 +88,7 @@ const WelcomeEdiie = () => {
             <Link to={'/upcomingMaintenance'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
-              <p className='text-lg font-semibold text-center pt-5'>Upcomming Maintenance</p></Link>
+              <p className='text-lg font-semibold text-center pt-5'>Upcoming Maintenance</p></Link>
           </div>
           <div className='bg-[#F9B038] py-6 rounded-lg'>
             <Link to={'/updateExistMaintenance'}><div className='flex justify-center'>
@@ -106,7 +106,7 @@ const WelcomeEdiie = () => {
             <Link to={'/addMembership'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
-              <p className='text-lg font-semibold text-center pt-5'>Update repair order</p></Link>
+              <p className='text-lg font-semibold text-center pt-5'>Update Repair Order</p></Link>
           </div>
           <div className='bg-[#F9B038] py-6 rounded-lg'>
             <Link to={'/addMembership'}><div className='flex justify-center'>
@@ -131,7 +131,7 @@ const WelcomeEdiie = () => {
             <Link to={'/campgroundReview'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
-              <p className='text-lg font-semibold text-center pt-5'>Campground Reviewa</p></Link>
+              <p className='text-lg font-semibold text-center pt-5'>Campground Reviews</p></Link>
           </div>
 
           <div className='bg-[#F9B038] py-6 rounded-lg'>

@@ -58,9 +58,9 @@ const UpdateState = () => {
                         }}
                     >
                         <Select placeholder="Select Inquiry" className="w-full">
-                            <Option value="General_Inquiry">USA</Option>
-                            <Option value="Service_Request">JAPAN</Option>
-                            <Option value="Partnership_Inquiry">BANGLADESH</Option>
+                            <Option value="General_Inquiry">Camped</Option>
+                            <Option value="Service_Request">Traveled Though</Option>
+                            <Option value="Partnership_Inquiry">Planning to Visit</Option>
                         </Select>
                     </ConfigProvider>
 

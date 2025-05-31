@@ -3,6 +3,7 @@ import car from '../../assets/Home/car.png'
 import car1 from '../../assets/Home/car1.png'
 import car2 from '../../assets/Home/car2.png'
 import { Link } from 'react-router-dom'
+import { BiEdit } from 'react-icons/bi'
 const ViewTrips = () => {
     const rvData = [
         {
@@ -65,24 +66,27 @@ const ViewTrips = () => {
                 {rvData.map((rv) => (
                     <div
                         key={rv.id}
-                        className="flex bg-[#F9B038] border-b gap-4 p-2  "
+                        className=" flex justify-between bg-[#F9B038] border-b gap-4 p-2  "
                     >
-                        <img
-                            src={rv.image}
-                            alt={rv.name}
-                            className="w-[100px] h-[100px] object-cover rounded"
-                        />
-                        <div className=" ">
-                            <div className="text-xl py-2 font-semibold text-gray-900 ">
-                                <p>
-                                    {rv.name}
-                                </p>
+                        <div className='flex'>
+                            <img
+                                src={rv.image}
+                                alt={rv.name}
+                                className="w-[100px] h-[100px] object-cover rounded"
+                            />
+                            <div className=" ">
+                                <div className="text-xl py-2 font-semibold text-gray-900 ">
+                                    <p>
+                                        {rv.name}
+                                    </p>
 
+                                </div>
+
+                                <p className=" text-gray-500">{rv.vin}</p>
+                                <p className=" text-gray-500">{rv.serial}</p>
                             </div>
-                            
-                            <p className=" text-gray-500">{rv.vin}</p>
-                            <p className=" text-gray-500">{rv.serial}</p>
                         </div>
+                        <Link to={'/campgroundReview?tab=updateState'}><button className='text-xl'><BiEdit></BiEdit></button></Link>
                     </div>
                 ))}
             </div>

@@ -17,44 +17,6 @@ export const Navbar = () => {
     setDrawerOpen(false);
   };
 
-  const dropdownItemsCompany = [
-    {
-      label: (
-        <Link to="/company/about-us" rel="noopener noreferrer">
-          About Us
-        </Link>
-      ),
-      key: "about-us",
-    },
-    {
-      label: (
-        <Link to="/company/tech-pertners" rel="noopener noreferrer">
-          Tech Partners
-        </Link>
-      ),
-      key: "techPartners",
-    },
-  ];
-
-  const dropdownItemsServices = [
-    {
-      label: (
-        <Link to="/services/Structure-Cabling" rel="noopener noreferrer">
-          Structure Cabling (Copper And Fiber)
-        </Link>
-      ),
-      key: "structured",
-    },
-    {
-      label: (
-        <Link to="/services/Break-FixServices" rel="noopener noreferrer">
-          Break/Fix Services
-        </Link>
-      ),
-      key: "BreakFixServices",
-    },
-  ];
-
   const dropdownItemsProfile = [
     {
       label: (
@@ -72,32 +34,7 @@ export const Navbar = () => {
       key: "home",
       label: <Link to="/">Home</Link>,
     },
-    // {
-    //   key: "company",
-    //   label: (
-    //     <Dropdown menu={{ items: dropdownItemsCompany }} trigger={["click"]}>
-    //       <Link onClick={(e) => e.preventDefault()}>
-    //         <Space>
-    //           Company
-    //           <DownOutlined />
-    //         </Space>
-    //       </Link>
-    //     </Dropdown>
-    //   ),
-    // },
-    // {
-    //   key: "services",
-    //   label: (
-    //     <Dropdown menu={{ items: dropdownItemsServices }} trigger={["click"]}>
-    //       <Link onClick={(e) => e.preventDefault()}>
-    //         <Space>
-    //           Services
-    //           <DownOutlined />
-    //         </Space>
-    //       </Link>
-    //     </Dropdown>
-    //   ),
-    // },
+   
     {
       key: "newExpense",
       label: <Link to="/newExpense">New Expense</Link>,
@@ -108,7 +45,7 @@ export const Navbar = () => {
     },
     {
       key: "reports",
-      label: <Link to="/reports">Favorite Reports</Link>,
+      label: <Link to="/favouriteReports">Favorite Reports</Link>,
     },
     {
       key: "information",
@@ -133,7 +70,7 @@ export const Navbar = () => {
           <div className="flex gap-5 items-center">
 
             <div className="flex gap-4">
-              <Link to={'/auth/login'}><button className="border border-[#F9B038] py-1 px-4 rounded">Login</button></Link>
+              <Link to={'/auth/login'} state={{ showModal: true }}><button className="border border-[#F9B038] py-1 px-4 rounded">Login</button></Link>
               <Link to={'/auth/signUp'}><button className="bg-[#F9B038] py-1 px-4 rounded">Sign Up</button></Link>
             </div>
 

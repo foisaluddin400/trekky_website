@@ -121,16 +121,16 @@ const SignUp = () => {
                   className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                   disabled={loading}
                 >
-                  {loading ? "Logging in..." : "Submit"}
+                  {loading ? "Logging in..." : "Sign Up"}
                 </button>
               </Form.Item>
             </Form>
             
                 <h1 className="text-gray-400 text-center mt-5">----Or Login with----</h1>
 
-                <div className="grid grid-cols-2 gap-3 mt-5">
-                  <button className="border border-[#27E2F5] w-full flex justify-center py-2 rounded text-4xl"><FcGoogle /></button>
-                  <button className="border border-[#27E2F5] w-full flex justify-center py-2 rounded text-4xl"><FaApple /></button>
+                 <div className="grid grid-cols-2 gap-3 mt-5">
+                  <button className="border flex gap-2 justify-center border-[#27E2F5] w-full py-2 rounded text-xl"><FcGoogle className="mt-1"/>Sign In with Google</button>
+                  <button className="border border-[#27E2F5] w-full flex gap-1 justify-center py-2 rounded text-xl"><FaApple className="mt-1"/>Sign In With Apple</button>
                 </div>
           </div>
           <div className="hidden lg:block">

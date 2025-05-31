@@ -1,6 +1,6 @@
-import { Checkbox, Form, Input, message } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Checkbox, Form, Input, message, Modal } from "antd";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Logo from "../assets/Home/hero.png";
 import { FcGoogle } from "react-icons/fc";
@@ -11,7 +11,24 @@ import { FaApple } from "react-icons/fa";
 const Login = () => {
 
 
-  const [loading, setLoading] = useState(false); // Loading state for submit button
+const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    // Check if route state requests to show modal
+    if (location.state?.showModal) {
+      setModalVisible(true);
+
+      // Auto close modal after 5 seconds
+      const timer = setTimeout(() => {
+        setModalVisible(false);
+      }, 3000);
+
+      // Clean up timer on unmount or if modal closes early
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
 
   const onFinish = async (values) => {
     // setLoading(true);
@@ -37,7 +54,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+     <>
+      <Modal
+       centered
+        visible={modalVisible}
+        footer={null}
+        onCancel={() => setModalVisible(false)}
+      >
+        <h1 className="text-center pb-3 text-3xl">Our app is available! You can download it now.</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus aspernatur facilis numquam tempora voluptatibus rerum ex dolorem corporis quaerat iste, beatae nisi cum repellat dolore, officiis nostrum consectetur doloremque! Accusantium, voluptatum consequuntur dignissimos inventore repellat voluptas ipsa eius commodi hic error corrupti, deserunt enim. Veritatis nostrum aliquam illo quibusdam commodi.</p>
+        <button className="bg-[#27E2F5] w-full py-2 mt-4">Let's Go</button>
+      </Modal>
+
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="w-full max-w-[1500px] m-auto">
         <div className="md:flex md:justify-center lg:grid grid-cols-2">
           <div className="  lg:w-full md:px-16 px-5  ">
@@ -81,22 +110,22 @@ const Login = () => {
                   className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                   disabled={loading}
                 >
-                  {loading ? "Logging in..." : "Submit"}
+                  {loading ? "Logging in..." : "Login"}
                 </button>
               </Form.Item>
             </Form>
-              <button
+              <Link to={'/auth/signUp'}><button
                   type="submit"
                   className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                  
                 >
                 Create An Account
-                </button>
+                </button></Link>
                 <h1 className="text-gray-400 text-center mt-5">----Or Login with----</h1>
 
                 <div className="grid grid-cols-2 gap-3 mt-5">
-                  <button className="border border-[#27E2F5] w-full flex justify-center py-2 rounded text-4xl"><FcGoogle /></button>
-                  <button className="border border-[#27E2F5] w-full flex justify-center py-2 rounded text-4xl"><FaApple /></button>
+                  <button className="border flex gap-2 justify-center border-[#27E2F5] w-full py-2 rounded text-xl"><FcGoogle className="mt-1"/>Sign In with Google</button>
+                  <button className="border border-[#27E2F5] w-full flex gap-1 justify-center py-2 rounded text-xl"><FaApple className="mt-1"/>Sign In With Apple</button>
                 </div>
           </div>
           <div className="hidden lg:block">
@@ -105,6 +134,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

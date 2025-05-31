@@ -36,6 +36,7 @@ import ViewAllTrip from "../Pages/campgroundReview/ViewAllTrip";
 import TripDetails from "../Pages/campgroundReview/TripDetails";
 import UpcomingMaintenance from "../Pages/upcomingMaintenance/UpcomingMaintenance";
 import NewRepair from "../Pages/newRepair/NewRepair";
+import FavouriteReport from "../Pages/reports/FavouriteReport";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             {
                 path: '/reports',
                 element: <Reports></Reports>
+            },
+            {
+                path: '/favouriteReports',
+                element: <FavouriteReport></FavouriteReport>
             },
             {
                 path: '/myreports',
