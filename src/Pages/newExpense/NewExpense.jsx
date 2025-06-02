@@ -33,6 +33,14 @@ const NewExpense = () => {
     };
 
     const [qty, setMileage] = useState('');
+    const [cost, setCost] = useState('');
+    const handleCostChange = (e) => {
+        const input = e.target.value;
+        const formatted = formatWithCommas(input);
+        setCost(formatted);
+        form.setFieldsValue({ cost: formatted });
+    };
+
 
 
     const formatWithCommas = (value) => {
@@ -50,8 +58,8 @@ const NewExpense = () => {
     return (
         <div className='container m-auto'>
 
-            <div className='flex gap-4'>
-                <div className='w-[300px]'>
+            <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
+                <div className='lg:w-[300px] pb-7 lg:pb-0'>
                     <h1 className='text-3xl font-semibold '>New Expense</h1>
                 </div>
                 <div className='max-w-4xl '>
@@ -95,7 +103,7 @@ const NewExpense = () => {
                                 />
                             </Form.Item>
 
-                            
+
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -121,8 +129,14 @@ const NewExpense = () => {
                                 name="cost"
                                 rules={[{ required: true, message: "Please input your cost!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="$" />
+                                <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder="$"
+                                    value={cost}
+                                    onChange={handleCostChange}
+                                />
                             </Form.Item>
+
                             <Form.Item
                                 label="QTY"
                                 name="qty"

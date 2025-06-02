@@ -36,11 +36,11 @@ const FavouriteReport = () => {
     return (
         <div className='container m-auto'>
 
-            <div className='flex gap-4 my-11'>
-                <div className='w-[300px]'>
+            <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
+                <div className='lg:w-[300px] pb-7 lg:pb-0'>
                     <h1 className='text-3xl font-semibold '>Favorite Reports</h1>
                 </div>
-                <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl p-7 px-20'>
+                <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl p-7 md:px-20'>
                   
                     <div className='space-y-3'>
                         <div className='border-b pb-3 flex justify-between'>

@@ -15,8 +15,8 @@ const Information = () => {
     return (
         <div className='container m-auto'>
 
-            <div className='flex gap-4'>
-                <div className='w-[300px]'>
+            <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
+                <div className='lg:w-[300px] pb-7 lg:pb-0'>
                     <h1 className='text-3xl font-semibold '>Chassis information</h1>
                 </div>
                 <div className='w-full max-w-4xl'>

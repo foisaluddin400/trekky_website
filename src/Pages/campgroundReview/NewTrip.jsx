@@ -6,7 +6,8 @@ import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD';
+const dateFormat = 'MM/DD/YYYY';
+const dateFormatt = 'MM/DD/YYYY';
 const props = {
     name: 'file',
     multiple: true,
@@ -55,11 +56,12 @@ const NewTrip = () => {
                         rules={[{ required: true, message: "Please input date!" }]}
                     >
                         <DatePicker
-                            className='w-full bg-transparent border border-black py-2'
-                            defaultValue={dayjs('2019-09-03', dateFormat)}
-                            minDate={dayjs('2019-08-01', dateFormat)}
-                            maxDate={dayjs('2020-10-31', dateFormat)}
-                        />
+                                    className='w-full bg-transparent border border-black py-2'
+                                    format={dateFormatt}
+                                    defaultValue={dayjs('09/03/2019', dateFormatt)}
+                                    minDate={dayjs('08/01/2019', dateFormatt)}
+                                    maxDate={dayjs('10/31/2020', dateFormatt)}
+                                />
                     </Form.Item>
 
                     <Form.Item
@@ -67,12 +69,13 @@ const NewTrip = () => {
                         name="start"
                         rules={[{ required: true, message: "Please input date!" }]}
                     >
-                        <DatePicker
-                            className='w-full bg-transparent border border-black py-2'
-                            defaultValue={dayjs('2019-09-03', dateFormat)}
-                            minDate={dayjs('2019-08-01', dateFormat)}
-                            maxDate={dayjs('2020-10-31', dateFormat)}
-                        />
+                         <DatePicker
+                                    className='w-full bg-transparent border border-black py-2'
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
+                                />
                     </Form.Item>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -138,7 +141,7 @@ const NewTrip = () => {
                         name="trip"
                         rules={[{ required: true, message: "Please input your cost!" }]}
                     >
-                        <Input className='w-full bg-transparent border border-black py-2' placeholder="Type cost" />
+                        <Input className='w-full bg-transparent border border-black py-2' placeholder="Trip Type" />
                     </Form.Item>
 
                 

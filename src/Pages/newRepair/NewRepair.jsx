@@ -1,11 +1,12 @@
 import { Button, ConfigProvider, DatePicker, Form, Input, Select } from 'antd'
 import Dragger from 'antd/es/upload/Dragger';
-import React from 'react'
+import React, { useState } from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 const dateFormat = 'MM/DD/YYYY';
+const dateFormatt = 'MM/DD/YYYY';
 const props = {
     name: 'file',
     multiple: true,
@@ -27,14 +28,26 @@ const props = {
 };
 const NewRepair = () => {
     const [form] = Form.useForm();
+    const [cost, setCost] = useState('');
+ const formatWithCommas = (value) => {
+        const onlyNumbers = value.replace(/[^\d]/g, '');
+        return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+const handleCostChange = (e) => {
+    const input = e.target.value;
+    const formatted = formatWithCommas(input);
+    setCost(formatted);
+    form.setFieldsValue({ cost: formatted });
+};
+
     const handleSubmit = (values) => {
         console.log(values)
     };
     return (
         <div className='container m-auto'>
 
-            <div className='flex gap-4'>
-                <div className='w-[300px]'>
+            <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
+                <div className='lg:w-[300px] pb-7 lg:pb-0'>
                     <h1 className='text-3xl font-semibold '>New Repair</h1>
                 </div>
                 <div className='max-w-4xl '>
@@ -75,14 +88,15 @@ const NewRepair = () => {
 
                             <Form.Item
                                 label="Drop off Date"
-                                name="date"
+                                name="dropdate"
                                 rules={[{ required: true, message: "Please input date!" }]}
                             >
                                 <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
+                                    format={dateFormatt}
+                                    defaultValue={dayjs('09/03/2019', dateFormatt)}
+                                    minDate={dayjs('08/01/2019', dateFormatt)}
+                                    maxDate={dayjs('10/31/2020', dateFormatt)}
                                 />
                             </Form.Item>
                         </div>
@@ -92,7 +106,12 @@ const NewRepair = () => {
                                 name="cost"
                                 rules={[{ required: true, message: "Please input your cost!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type cost" />
+                                <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder="$"
+                                    value={cost}
+                                    onChange={handleCostChange}
+                                />
                             </Form.Item>
 
                             <Form.Item

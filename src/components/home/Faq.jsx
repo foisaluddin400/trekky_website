@@ -101,7 +101,7 @@ const Faq = () => {
     return (
         <div>
 
-            <div className=" container m-auto px-20 py-5 bg-[#F9B038] ">
+            <div className=" container m-auto md:px-20 py-5 bg-[#F9B038] ">
                 <div className='max-w-4xl m-auto'>
                     <div className='pb-6 text-center'>
                     <h1 className="text-3xl font-semibold ">Frequently Asked</h1>

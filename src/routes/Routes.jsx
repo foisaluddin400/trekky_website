@@ -37,6 +37,8 @@ import TripDetails from "../Pages/campgroundReview/TripDetails";
 import UpcomingMaintenance from "../Pages/upcomingMaintenance/UpcomingMaintenance";
 import NewRepair from "../Pages/newRepair/NewRepair";
 import FavouriteReport from "../Pages/reports/FavouriteReport";
+import NewMaintenace from "../Pages/newMaintenace/NewMaintenace";
+import TireInformation from "../Pages/tireInformation/TireInformation";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: '/favouriteReports',
                 element: <FavouriteReport></FavouriteReport>
+            },
+             {
+                path: '/tireInformation',
+                element: <TireInformation></TireInformation>
             },
             {
                 path: '/myreports',
@@ -98,6 +104,10 @@ export const router = createBrowserRouter([
             {
                 path: '/campgroundReview',
                 element:<CampgroundReview></CampgroundReview>
+            },
+              {
+                path: '/newMaintenance',
+                element:<NewMaintenace></NewMaintenace>
             },
             {
                 path: '/upcomingMaintenance',

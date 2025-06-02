@@ -61,7 +61,7 @@ export const Navbar = () => {
         <div>
           <Link to={'/'}><img className="w-[80px]" src={Logo} alt="Logo" /></Link>
         </div>
-        <ul className="hidden md:flex lg:space-x-16 space-x-6 ">
+        <ul className="hidden lg:flex lg:space-x-9 space-x-6 ">
           {items.map((item) => (
             <li key={item.key} className="list-none mt-3">
               {item.label}
@@ -93,7 +93,7 @@ export const Navbar = () => {
           </div>
         </ul>
         <button
-          className="md:hidden text-2xl"
+          className="lg:hidden text-2xl"
           onClick={showDrawer}
         >
           <MenuOutlined />
