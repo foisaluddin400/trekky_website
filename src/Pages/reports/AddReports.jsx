@@ -41,7 +41,6 @@ const AddReports = ({ openAddModal, setOpenAddModal }) => {
 
         // try {
         //   const res= await adds(formData).unwrap();
-
         //   setLoading(false);
         //   message.success(res?.message);
         //   setOpenAddModal(false);
@@ -59,41 +58,41 @@ const AddReports = ({ openAddModal, setOpenAddModal }) => {
             onCancel={handleCancel}
             footer={null}
             width={500}
-            
+
         >
             <div className="mb-6 mt-2 ">
                 <h2 className="text-center font-semibold text-xl mb-4">Add Reports</h2>
 
                 <div >
-                        <Form form={form} onFinish={handleSubmit} layout="vertical">
-                            <div className='' >
-                                <label className='text-xl font-semibold' htmlFor="Upload">Upload</label>
-                                <Dragger  {...props}>
-                                    <p className="ant-upload-drag-icon">
-                                        <InboxOutlined />
-                                    </p>
-                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                    <p className="ant-upload-hint">
-                                        Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                        banned files.
-                                    </p>
-                                </Dragger>
-                                <Form.Item
-                                    label="Description"
-                                    name="feedback"
-                                    rules={[{ required: true, message: "Please input description!" }]}
-                                >
-                                    <Input.TextArea className='w-full bg-transparent border border-black py-2' rows={4} placeholder="Type Here..." />
-                                </Form.Item>
-                            </div>
-
-                            <Form.Item className=" pt-7">
-                                <button type="primary" htmlType="submit" className="w-full border border-black py-2">
-                                    Save
-                                </button>
+                    <Form form={form} onFinish={handleSubmit} layout="vertical">
+                        <div className='' >
+                            <label className='text-xl font-semibold' htmlFor="Upload">Upload</label>
+                            <Dragger  {...props}>
+                                <p className="ant-upload-drag-icon">
+                                    <InboxOutlined />
+                                </p>
+                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                <p className="ant-upload-hint">
+                                    Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+                                    banned files.
+                                </p>
+                            </Dragger>
+                            <Form.Item
+                                label="Description"
+                                name="feedback"
+                                rules={[{ required: true, message: "Please input description!" }]}
+                            >
+                                <Input.TextArea className='w-full bg-transparent border border-black py-2' rows={4} placeholder="Type Here..." />
                             </Form.Item>
-                        </Form>
-                    </div>
+                        </div>
+
+                        <Form.Item className=" pt-7">
+                            <button type="primary" htmlType="submit" className="w-full border border-black py-2">
+                                Save
+                            </button>
+                        </Form.Item>
+                    </Form>
+                </div>
             </div>
         </Modal>
     )

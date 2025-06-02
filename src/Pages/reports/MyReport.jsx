@@ -3,8 +3,8 @@ import { HiHeart } from "react-icons/hi";
 
 const MyReport = () => {
     return (
-        <div className="container m-auto flex py-11">
-            <div className='w-[300px]'>
+        <div className="container m-auto  lg:flex gap-4 lg:mt-11 mt-6 px-3">
+            <div className='lg:w-[300px] pb-7 lg:pb-0'>
                 <h1 className='text-3xl font-semibold '>Report Details</h1>
             </div>
             <div className=" bg-[#F9B038] flex flex-col items-center justify-center w-full h-[70vh] gap-8 px-4">

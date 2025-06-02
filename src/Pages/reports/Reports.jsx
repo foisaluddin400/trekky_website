@@ -40,7 +40,7 @@ const Reports = () => {
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
                     <h1 className='text-3xl font-semibold '>Reports</h1>
                 </div>
-                <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl p-7 px-20'>
+                <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl p-3 md:px-20'>
                     {/* <div >
                         <Form form={form} onFinish={handleSubmit} layout="vertical">
                             <div className='' >

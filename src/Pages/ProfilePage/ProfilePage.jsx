@@ -49,7 +49,7 @@ const ProfilePage = () => {
   return (
     <div className="container m-auto">
 
-      <div className="bg-[#F9B038] border-l-[60px] border-white shadow-2xl rounded-3xl my-16 py-6 px-4 lg-px-0">
+      <div className="bg-[#F9B038] md:border-l-[40px] border-t-[10px] md:border-t-0 border-white shadow-2xl md:rounded-3xl rounded-xl my-16 py-6 mx-3 md:mx-0 lg:px-0">
         <div className=" max-w-7xl m-auto  py-9 px-10 rounded-3xl  gap-6">
           <div className="flex justify-center items-center gap-5">
             <div>
@@ -121,7 +121,7 @@ const ProfilePage = () => {
         <div className="max-w-xl m-auto px-4">
           <div className=" ">
             {tab === "Profile" ? (
-              <div className="max-w-[481px] mx-auto rounded-lg p-6">
+              <div className="max-w-[481px] mx-auto rounded-lg md:p-6">
                 <h1 className="text-center text-secondary leading-7 text-2xl font-medium mb-7">
                   Edit Profile
                 </h1>
@@ -223,7 +223,7 @@ const ProfilePage = () => {
                 </Form>
               </div>
             ) : (
-              <div className="max-w-[481px] mx-auto rounded-lg p-6">
+              <div className="max-w-[481px] mx-auto rounded-lg md:p-6">
                 <h1 className="text-center text-secondary leading-7 text-2xl font-medium mb-7">
                   Change Password
                 </h1>

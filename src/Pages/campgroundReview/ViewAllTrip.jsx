@@ -118,10 +118,10 @@ const ViewAllTrip = () => {
     <div className='container m-auto'>
         <div>
             <div className='flex justify-between py-2'>
-                <h1 className="text-xl font-semibold ">Vew All Trip</h1>
+                <h1 className="text-xl font-semibold px-3 lg:px-0">Vew All Trip</h1>
                 
             </div>
-            <div className=" grid grid-cols-4 gap-2">
+            <div className=" md:grid lg:grid-cols-4 md:grid-cols-2 gap-2">
                 {rvData.map((rv) => (
                     <div
                         key={rv.id}

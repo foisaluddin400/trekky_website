@@ -40,7 +40,7 @@ const SignUp = () => {
     <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="w-full max-w-[1500px] m-auto">
         <div className="md:flex md:justify-center lg:grid grid-cols-2">
-          <div className="  lg:w-full md:px-16 px-5  ">
+          <div className="  lg:w-full md:px-16   ">
             
             <h2 className="text-xl font-bold mb-2 text-gray-800">
               Sign Up to your account

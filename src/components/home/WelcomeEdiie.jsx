@@ -59,7 +59,7 @@ const WelcomeEdiie = () => {
         {/* <h1 className='text-xl font-semibold'>Manage Your RV Effortlessly</h1>
         <p className=' pt-2'>Welcome to your all-in-one RV management hub! From tracking your maintenance schedules and repairs to reviewing campgrounds and adding your RV details, we've made it easy for you to stay organized. Whether you're updating your insurance information or preparing for your next trip, all the tools you need are right here. Start managing your RV experience like a pro!</p> */}
 
-        <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4 py-5 px-2 lg:px-0'>
+        <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4 py-5 px-3 lg:px-0'>
           <div className='bg-[#F9B038] py-6 rounded-lg'>
             <Link to={'/addMembership'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />

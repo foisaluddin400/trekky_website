@@ -41,7 +41,7 @@ const CampgroundReview = () => {
   };
 
   return (
-    <div className="container m-auto">
+    <div className="container m-auto px-3 lg:px-0 mt-6">
       <div className="flex gap-4 mb-4">
         {["progress", "newTrip", "updateState", "viewTrips"].map((tab) => (
           <button

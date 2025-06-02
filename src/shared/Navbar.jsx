@@ -57,7 +57,7 @@ export const Navbar = () => {
   return (
     <div className="container m-auto ">
       {/* Desktop Navbar */}
-      <nav className="flex justify-between items-center gap-28 py-4">
+      <nav className="flex justify-between items-center gap-28 py-4 px-3 lg:px-0">
         <div>
           <Link to={'/'}><img className="w-[80px]" src={Logo} alt="Logo" /></Link>
         </div>
