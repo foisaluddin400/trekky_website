@@ -30,12 +30,6 @@ const UpcomingMaintenance = () => {
                                     <Input.TextArea className='w-full bg-[#F9B038] border border-black py-2' rows={4} placeholder="Type Here..." />
                                 </Form.Item>
                             </div>
-
-                            <Form.Item className=" ">
-                                <button type="primary" htmlType="submit" className="w-full bg-[#F9B038] py-2">
-                                    Save
-                                </button>
-                            </Form.Item>
                         </Form>
                     </div>
                 </div>
