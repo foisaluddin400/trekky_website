@@ -25,7 +25,7 @@ const props = {
         console.log('Dropped files', e.dataTransfer.files);
     },
 };
-//sdfsd
+//sdfs
 const RvSoldInformationForm = () => {
     const [form] = Form.useForm();
     const handleSubmit = (values) => {
