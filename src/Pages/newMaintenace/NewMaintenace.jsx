@@ -48,7 +48,7 @@ const NewMaintenace = () => {
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3 '>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>New Maintenance Scheadule</h1>
+                    <h1 className='text-3xl font-semibold '>New Maintenance Schedule</h1>
                 </div>
                 <div className='max-w-4xl w-full'>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -79,7 +79,7 @@ const NewMaintenace = () => {
                      
                            
                             <Form.Item
-                                label="Drop off Date"
+                                label="Service Interval"
                                 name="dropdate"
                                 rules={[{ required: true, message: "Please input date!" }]}
                             >
@@ -93,30 +93,7 @@ const NewMaintenace = () => {
                             </Form.Item>
 
                             
-                        <Form.Item
-                            label="Initial"
-                            name="initial"
-                            rules={[{ required: true, message: "Please input Expense Type!" }]}
-                        >
-                            <ConfigProvider
-                                theme={{
-                                    token: {
-                                        colorPrimary: '#1d4ed8',
-                                        borderRadius: 8,
-                                        controlHeight: 40,
-
-                                    },
-                                }}
-                            >
-                                <Select placeholder="Select Inquiry" className="w-full">
-                                    <Option value="General_Inquiry">Select</Option>
-                                    <Option value="Service_Request">Part</Option>
-                                    <Option value="Partnership_Inquiry">Qz</Option>
-                                </Select>
-                            </ConfigProvider>
-                        </Form.Item>
                      
-                   
                         
 
                      
@@ -125,11 +102,11 @@ const NewMaintenace = () => {
                      
                           
                             <Form.Item
-                                label="Description"
+                                label="Notes"
                                 name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
+                                rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
                             </Form.Item>
                 
 

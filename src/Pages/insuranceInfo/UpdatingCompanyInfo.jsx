@@ -5,7 +5,7 @@ import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD';
+const dateFormat = 'MM/DD/YYYY';
 const props = {
     name: 'file',
     multiple: true,
@@ -34,8 +34,8 @@ const UpdatingCompanyInfo = () => {
         <div className='container m-auto'>
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
-                <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Update Company Info </h1>
+                <div className='lg:w-[350px] pb-7 lg:pb-0'>
+                    <h1 className='text-3xl font-semibold '>Update Insurance Info </h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -47,11 +47,12 @@ const UpdatingCompanyInfo = () => {
                                 name="renewal"
                                 rules={[{ required: true, message: "Please input Renewal Date!" }]}
                             >
-                                <DatePicker
+                              <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
                                 />
                             </Form.Item>
                             <Form.Item
@@ -59,11 +60,12 @@ const UpdatingCompanyInfo = () => {
                                 name="ExpirationDate"
                                 rules={[{ required: true, message: "Please input Expiration Date!" }]}
                             >
-                                <DatePicker
+                               <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
-                                    defaultValue={dayjs('2019-09-03', dateFormat)}
-                                    minDate={dayjs('2019-08-01', dateFormat)}
-                                    maxDate={dayjs('2020-10-31', dateFormat)}
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
                                 />
                             </Form.Item>
                         </div>
@@ -100,11 +102,11 @@ const UpdatingCompanyInfo = () => {
                                 </p>
                             </Dragger>
                             <Form.Item
-                                label="Description"
+                                label="Notes"
                                 name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
+                                rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
                             </Form.Item>
                         </div>
 

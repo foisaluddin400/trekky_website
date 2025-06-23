@@ -7,49 +7,14 @@ import main from '../../assets/Home/main.png'
 import { Link } from 'react-router-dom'
 import { Dropdown, Space } from 'antd'
 const WelcomeEdiie = () => {
-   const dropdownItemsProfile = [
-      {
-        label: (
-          <div>
-            Enter current mileage
-          </div>
-        ),
-        key: "profilepage",
-      },
-       {
-        label: (
-          <div>
-            Update mileage
-          </div>
-        ),
-        key: "profdilepage",
-      },
   
-    ];
   return (
     <div className='container m-auto py-6 pt-11'>
       {/* <h1 className='text-6xl font-bold text-[#484848]'>Welcome Eddie!</h1>
       <p className='max-w-2xl pt-4'>Welcome to My RV Vault. Get started by tracking your latest expenses, managing repairs, or reviewing your checklists. We've got everything you need to maintain your RV life in one place!"</p> */}
 
       <div className='flex justify-center gap-4'>
-        <div>
-          <div className='flex gap-3 bg-black p-3 items-center text-white'>
-          <h1>2025 Cornerstone <br />
-            VIN#554454UJVD </h1>
-          <button className='bg-[#F9B038] px-5 py-3'>Select Other RV</button>
-        </div>
-        <div className='bg-black flex gap-3 items-center text-white mt-3 p-3'>
-          <button className='bg-[#F9B038] px-11 py-3'>53,5343</button>
-          <h1>Current Mileage</h1>
-          <span><Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
-                <Link onClick={(e) => e.preventDefault()}>
-                  <Space>
-                    :
-                  </Space>
-                </Link>
-              </Dropdown></span>
-        </div>
-        </div>
+       
       </div>
       {/* <div className='flex justify-center py-5'>
         <img src={main} alt="" />
@@ -103,7 +68,7 @@ const WelcomeEdiie = () => {
               <p className='text-lg font-semibold text-center pt-5'>New Repair</p></Link>
           </div>
           <div className='bg-[#F9B038] py-6 rounded-lg'>
-            <Link to={'/addMembership'}><div className='flex justify-center'>
+            <Link to={'/UpdateRepairsOrder'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Update Repair Order</p></Link>

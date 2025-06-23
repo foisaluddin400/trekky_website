@@ -83,7 +83,7 @@ const handleCostChange = (e) => {
                                 name="city"
                                 rules={[{ required: true, message: "Please input city/state!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/stape" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/state" />
                             </Form.Item>
 
                             <Form.Item
@@ -145,11 +145,11 @@ const handleCostChange = (e) => {
                                 </p>
                             </Dragger>
                             <Form.Item
-                                label="Description"
+                                label="Notes"
                                 name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
+                                rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
                             </Form.Item>
                         </div>
 

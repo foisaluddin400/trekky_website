@@ -29,17 +29,17 @@ const props = {
 const UpdateExisting = () => {
     const [form] = Form.useForm();
     const [cost, setCost] = useState('');
- const formatWithCommas = (value) => {
+    const formatWithCommas = (value) => {
         const onlyNumbers = value.replace(/[^\d]/g, '');
         return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
 
     const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
-};
+        const input = e.target.value;
+        const formatted = formatWithCommas(input);
+        setCost(formatted);
+        form.setFieldsValue({ cost: formatted });
+    };
 
     const handleSubmit = (values) => {
         console.log(values)
@@ -48,8 +48,8 @@ const UpdateExisting = () => {
     return (
         <div className='container m-auto'>
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
-                <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Update Existing</h1>
+                <div className='lg:w-[400px] pb-7 lg:pb-0'>
+                    <h1 className='text-3xl font-semibold '>Update Existing Merprisum</h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -84,18 +84,18 @@ const UpdateExisting = () => {
                             </Form.Item>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           <Form.Item
-    label="Cost"
-    name="cost"
-    rules={[{ required: true, message: "Please input your cost!" }]}
->
-    <Input
-        className='w-full bg-transparent border border-black py-2'
-        placeholder="$"
-        value={cost}
-        onChange={handleCostChange}
-    />
-</Form.Item>
+                            <Form.Item
+                                label="Cost"
+                                name="cost"
+                                rules={[{ required: true, message: "Please input your cost!" }]}
+                            >
+                                <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder="$"
+                                    value={cost}
+                                    onChange={handleCostChange}
+                                />
+                            </Form.Item>
 
 
                             <Form.Item
@@ -122,11 +122,11 @@ const UpdateExisting = () => {
                                 </p>
                             </Dragger>
                             <Form.Item
-                                label="Description"
+                                label="Notes"
                                 name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
+                                rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
                             </Form.Item>
                         </div>
 

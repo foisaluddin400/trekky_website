@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 const dateFormat = 'MM/DD/YYYY';
-
 const props = {
     name: 'file',
     multiple: true,
@@ -26,15 +25,15 @@ const props = {
         console.log('Dropped files', e.dataTransfer.files);
     },
 };
-
-const AddMembershipForm = () => {
+const UpdateRepairOrder = () => {
     const [form] = Form.useForm();
-    const [cost, setCost] = useState('');
-     const formatWithCommas = (value) => {
-        const onlyNumbers = value.replace(/[^\d]/g, '');
-        return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const handleSubmit = (values) => {
+        const rawMileage = values.qty.replace(/,/g, '');
+        console.log({ ...values, qty: rawMileage });
     };
 
+    const [qty, setMileage] = useState('');
+    const [cost, setCost] = useState('');
     const handleCostChange = (e) => {
         const input = e.target.value;
         const formatted = formatWithCommas(input);
@@ -42,15 +41,26 @@ const AddMembershipForm = () => {
         form.setFieldsValue({ cost: formatted });
     };
 
-    const handleSubmit = (values) => {
-        console.log(values)
+
+
+    const formatWithCommas = (value) => {
+        const onlyNumbers = value.replace(/[^\d]/g, '');
+        return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
+
+    const handleChange = (e) => {
+        const input = e.target.value;
+        const formatted = formatWithCommas(input);
+        setMileage(formatted);
+        form.setFieldsValue({ qty: formatted });
+    };
+
     return (
         <div className='container m-auto'>
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Add Membership</h1>
+                    <h1 className='text-3xl font-semibold '>Update Repair order</h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -58,49 +68,32 @@ const AddMembershipForm = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Name"
-                                name="name"
-                                rules={[{ required: true, message: "Please input your name!" }]}
+                                label="Vendor"
+                                name="vendor"
+                                rules={[{ required: true, message: "Please input your vendor!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="xxxxx" />
+                            </Form.Item>
+                            <Form.Item
+                                label="Date"
+                                name="date"
+                                rules={[{ required: true, message: "Please input your company name!" }]}
+                            >
+                                <DatePicker
+                                    className='w-full bg-transparent border border-black py-2'
+                                    format={dateFormat}
+                                    defaultValue={dayjs('09/03/2019', dateFormat)}
+                                    minDate={dayjs('08/01/2019', dateFormat)}
+                                    maxDate={dayjs('10/31/2020', dateFormat)}
+                                />
                             </Form.Item>
 
-                            <Form.Item
-                                label="Date Purchase"
-                                name="DatePuschase"
-                                rules={[{ required: true, message: "Please input your Date Purchase!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Date Purchase" />
-                            </Form.Item>
+
                         </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Website Link"
-                                name="link"
-                                rules={[{ required: true, message: "Please input your website!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type link" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Phone Number"
-                                name="phone"
-                                rules={[{ required: true, message: "Please input your Phone Number!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type phone" />
-                            </Form.Item>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Account Number"
-                                name="account"
-                                rules={[{ required: true, message: "Please input your account!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type account" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Amount"
+                                label="Cost"
                                 name="cost"
                                 rules={[{ required: true, message: "Please input your cost!" }]}
                             >
@@ -112,23 +105,51 @@ const AddMembershipForm = () => {
                                 />
                             </Form.Item>
 
+                            <Form.Item
+                                label="Vendor Tiket or invice number"
+                                name="qty"
+                                rules={[{ required: true, message: 'Please input vendor Tiket!' }]}
+                            >
+                               <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder='xxxx'
+                                 
+                                    
+                                />
+                            </Form.Item>
                         </div>
 
-                        <Form.Item
-                            label="Membership Expiration"
-                            name="repair"
-                            rules={[{ required: true, message: "Please input your expiration!" }]}
-                        >
-                             <DatePicker
+
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <Form.Item
+                                label="Current maileage"
+                                name="current"
+                                rules={[{ required: true, message: "Please input your vendor!" }]}
+                            >
+                                <Input
+                                    className='w-full bg-transparent border border-black py-2'
+                                    placeholder='xxx'
+                                 
+                                    
+                                />
+                            </Form.Item>
+
+                            <Form.Item
+                                label="Pick-up-date"
+                                name="date"
+                                rules={[{ required: true, message: "Please input city/state!" }]}
+                            >
+                               <DatePicker
                                     className='w-full bg-transparent border border-black py-2'
                                     format={dateFormat}
                                     defaultValue={dayjs('09/03/2019', dateFormat)}
                                     minDate={dayjs('08/01/2019', dateFormat)}
                                     maxDate={dayjs('10/31/2020', dateFormat)}
                                 />
-                        </Form.Item>
-
-
+                            </Form.Item>
+                        </div>
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4' >
                             <Dragger {...props}>
@@ -143,10 +164,10 @@ const AddMembershipForm = () => {
                             </Dragger>
                             <Form.Item
                                 label="Notes"
-                                name="feedback"
+                                name="note"
                                 rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes...." />
                             </Form.Item>
                         </div>
 
@@ -162,4 +183,4 @@ const AddMembershipForm = () => {
     )
 }
 
-export default AddMembershipForm
+export default UpdateRepairOrder

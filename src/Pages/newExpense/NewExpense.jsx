@@ -84,8 +84,10 @@ const NewExpense = () => {
                                 >
                                     <Select placeholder="Select Inquiry" className="w-full">
                                         <Option value="General_Inquiry">Select</Option>
-                                        <Option value="Service_Request">Part</Option>
-                                        <Option value="Partnership_Inquiry">Qz</Option>
+                                        <Option value="Service_Request">DEF</Option>
+                                        <Option value="Partnership_Inquiry">Fuel</Option>
+                                        <Option value="Partnership_Inquiry">Oil</Option>
+                                        <Option value="Partnership_Inquiry">Other</Option>
                                     </Select>
                                 </ConfigProvider>
                             </Form.Item>
@@ -120,7 +122,7 @@ const NewExpense = () => {
                                 name="city"
                                 rules={[{ required: true, message: "Please input city/state!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/stape" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type city/state" />
                             </Form.Item>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -138,13 +140,13 @@ const NewExpense = () => {
                             </Form.Item>
 
                             <Form.Item
-                                label="QTY"
+                                label="Qty"
                                 name="qty"
                                 rules={[{ required: true, message: 'Please input your mileage!' }]}
                             >
                                 <Input
                                     className='w-full bg-transparent border border-black py-2'
-                                    placeholder='QTY'
+                                    placeholder='Qty'
                                     value={qty}
                                     onChange={handleChange}
                                 />
@@ -167,11 +169,11 @@ const NewExpense = () => {
                                 </p>
                             </Dragger>
                             <Form.Item
-                                label="Massage"
-                                name="massage"
-                                rules={[{ required: true, message: "Please input description!" }]}
+                                label="Notes"
+                                name="note"
+                                rules={[{ required: true, message: "Please input Notes!" }]}
                             >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
+                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes...." />
                             </Form.Item>
                         </div>
 

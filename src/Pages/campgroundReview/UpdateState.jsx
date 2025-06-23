@@ -71,7 +71,7 @@ const UpdateState = () => {
 
 
                 <Form.Item
-                    label="Camped in traveled thriugh planned"
+                    label="Camped in traveled through planned"
                     name="feedback"
                     rules={[{ required: true, message: "Please input description!" }]}
                 >

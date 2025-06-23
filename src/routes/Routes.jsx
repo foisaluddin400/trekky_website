@@ -39,6 +39,11 @@ import NewRepair from "../Pages/newRepair/NewRepair";
 import FavouriteReport from "../Pages/reports/FavouriteReport";
 import NewMaintenace from "../Pages/newMaintenace/NewMaintenace";
 import TireInformation from "../Pages/tireInformation/TireInformation";
+import UpdateRepairOrder from "../Pages/newRepair/UpdateRepairOrder";
+import AddBelt from "../Pages/information/AddBelt";
+import AddAnOilFilter from "../Pages/information/AddAnOilFilter";
+import AddAnFueltFilter from "../Pages/information/AddAnFueltFilter";
+import AddOtherBelt from "../Pages/information/AddOtherBelt";
 
 export const router = createBrowserRouter([
     {
@@ -56,6 +61,22 @@ export const router = createBrowserRouter([
             {
                 path: '/information',
                 element: <Information></Information>
+            },
+            {
+                path: '/information/addBelt',
+                element: <AddBelt></AddBelt>
+            },
+            {
+                path: '/information/addOiltFilter',
+                element: <AddAnOilFilter></AddAnOilFilter>
+            },
+            {
+                path: '/information/addFuelFilter',
+                element: <AddAnFueltFilter></AddAnFueltFilter>
+            },
+            {
+                path: '/information/addOtherBeltFilter',
+                element: <AddOtherBelt></AddOtherBelt>
             },
             {
                 path: '/reports',
@@ -76,6 +97,10 @@ export const router = createBrowserRouter([
              {
                 path: '/newRepair',
                 element: <NewRepair></NewRepair>
+            },
+            {
+                path: '/UpdateRepairsOrder',
+                element: <UpdateRepairOrder></UpdateRepairOrder>
             },
             {
                 path: '/addMembership',

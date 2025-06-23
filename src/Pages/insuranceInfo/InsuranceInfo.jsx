@@ -11,7 +11,7 @@ const InsuranceInfo = () => {
                 <div className="text-center text-gray-800 space-y-3 text-lg md:text-xl font-semibold">
                     <div className="flex justify-center">
                         <div>
-                            <h1>Add Membership</h1>
+                            <h1>Memberships</h1>
                         <img className="w-[150px] h-[150px] rounded-full object-cover" src={ss} alt="" />
                         </div>
                     </div>
@@ -19,7 +19,7 @@ const InsuranceInfo = () => {
                    <h1>Jon Smith</h1>
                     <div className="flex justify-center gap-4">
                         <span>Last Updated :</span>
-                        <span className="font-normal">21-24-2025</span>
+                        <span className="font-normal">05-24-2025</span>
                     </div>
                     <div className="flex justify-center gap-4">
                         <span>Report Type :</span>

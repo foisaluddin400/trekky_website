@@ -4,6 +4,7 @@ import React from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { Link } from 'react-router-dom';
 dayjs.extend(customParseFormat);
 const dateFormat = 'YYYY-MM-DD';
 const Information = () => {
@@ -25,142 +26,74 @@ const Information = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Fuel Type"
+                                label="Mfg"
                                 name="type"
-                                rules={[{ required: true, message: "Please input your Fuel Type!" }]}
+                                rules={[{ required: true, message: "Please input Mfg!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Fuel Type" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Add Belt"
-                                name="AddBelt"
-                                rules={[{ required: true, message: "Please input your Add Belt!" }]}
-                            >
-                                <ConfigProvider
-                                    theme={{
-                                        token: {
-                                            colorPrimary: '#1d4ed8',
-                                            borderRadius: 8,
-                                            controlHeight: 40,
-
-                                        },
-                                    }}
-                                >
-                                    <Select placeholder="Select Inquiry" className="w-full">
-                                        <Option value="General_Inquiry">Select</Option>
-                                        <Option value="Service_Request">Part</Option>
-                                        <Option value="Partnership_Inquiry">Qz</Option>
-                                    </Select>
-                                </ConfigProvider>
-                            </Form.Item>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Add another Belt"
-                                name="type"
-                                rules={[{ required: true, message: "Please input your Fuel Add another Belt!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another Belt" />
-                            </Form.Item>
-                            <Form.Item
-                                label="Add Oil Filter"
-                                name="type"
-                                rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Oil Filter" />
-                            </Form.Item>
-
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Add another oil Filter"
-                                name="filter"
-                                rules={[{ required: true, message: "Please input your Add another oil Filter" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another oil Filter" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Mileage"
-                                name="mileage"
-                                rules={[{ required: true, message: "Please input your mileage!" }]}
-                            >
-                                <ConfigProvider
-                                    theme={{
-                                        token: {
-                                            colorPrimary: '#1d4ed8',
-                                            borderRadius: 8,
-                                            controlHeight: 40,
-
-                                        },
-                                    }}
-                                >
-                                    <Select placeholder="Select Inquiry" className="w-full">
-                                        <Option value="General_Inquiry">Select</Option>
-                                        <Option value="Service_Request">Part</Option>
-                                        <Option value="Partnership_Inquiry">Qz</Option>
-                                    </Select>
-                                </ConfigProvider>
-                            </Form.Item>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Mtg"
-                                name="type"
-                                rules={[{ required: true, message: "Please input your Mtg!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Mtg" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Mfg" />
                             </Form.Item>
                             <Form.Item
                                 label="Model"
                                 name="type"
-                                rules={[{ required: true, message: "Please input your MOdel" }]}
+                                rules={[{ required: true, message: "Please input Model!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Model" />
                             </Form.Item>
 
                         </div>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label="Name"
                                 name="type"
-                                rules={[{ required: true, message: "Please input your Fuel Name!" }]}
+                                rules={[{ required: true, message: "Please input Name!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
                             </Form.Item>
                             <Form.Item
                                 label="Serial ID"
                                 name="type"
-                                rules={[{ required: true, message: "Please input your Serial ID!" }]}
+                                rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Serial ID" />
                             </Form.Item>
 
                         </div>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label="Engine Model"
-                                name="type"
-                                rules={[{ required: true, message: "Please input your Engine Model!" }]}
+                                name="filter"
+                                rules={[{ required: true, message: "Please input Engine Model" }]}
                             >
                                 <Input className='w-full bg-transparent border border-black py-2' placeholder="Engine Model" />
                             </Form.Item>
                             <Form.Item
                                 label="Horsepower"
-                                name="type"
-                                rules={[{ required: true, message: "Please input your horsepower!" }]}
+                                name="filter"
+                                rules={[{ required: true, message: "Please input Horsepower" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Horse Prower" />
+                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Horsepower" />
                             </Form.Item>
+
 
                         </div>
 
 
-                        <Form.Item className=" pt-3">
+
+
+
+                        <div >
+                            <div className='flex gap-4'>
+                               <Link className='w-full' to={'/information/addBelt'}> <button className='w-full bg-[#F9B038] p-3 rounded'>Add a belt</button></Link>
+                                <Link className='w-full' to={'/information/addOiltFilter'}><button className='w-full bg-[#F9B038] p-3 rounded'>Add An Oil Filter</button></Link>
+                            </div>
+                            <div className='flex gap-4 pt-5'>
+                                <Link className='w-full' to={'/information/addFuelFilter'}><button className='w-full bg-[#F9B038] p-3 rounded'>Add a Fuel Filter</button></Link>
+                               <Link className='w-full' to={'/information/addOtherBeltFilter'}> <button className='w-full bg-[#F9B038] p-3 rounded'>Add other belt or filter</button></Link>
+                            </div>
+                        </div>
+
+
+                        <Form.Item className=" pt-9">
                             <button type="primary" htmlType="submit" className="w-full bg-[#F9B038] py-2">
                                 Save
                             </button>

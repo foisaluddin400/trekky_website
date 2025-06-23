@@ -29,125 +29,47 @@ const InsuranceCompanyInfo = () => {
     const [form] = Form.useForm();
     const [cost, setCost] = useState('');
 
-     const formatWithCommas = (value) => {
+    const formatWithCommas = (value) => {
         const onlyNumbers = value.replace(/[^\d]/g, '');
         return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
-const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
-};
+    const handleCostChange = (e) => {
+        const input = e.target.value;
+        const formatted = formatWithCommas(input);
+        setCost(formatted);
+        form.setFieldsValue({ cost: formatted });
+    };
 
     const handleSubmit = (values) => {
         console.log(values)
     };
+    const companies = ["Allstate", "Progressive", "Reserve"];
     return (
         <div className='container m-auto'>
 
-            <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
+            <div className=' gap-4  px-3'>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Insurance Company Info</h1>
+                    <h1 className='text-3xl font-semibold '>Insurance Info</h1>
                 </div>
-                <div className='max-w-4xl '>
-                    <Form form={form} onFinish={handleSubmit} layout="vertical">
-
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Name"
-                                name="name"
-                                rules={[{ required: true, message: "Please input your name!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Date Puschased"
-                                name="DatePuschased"
-                                rules={[{ required: true, message: "Please input your Date Puschased!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Date Puschased" />
-                            </Form.Item>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Website Link"
-                                name="link"
-                                rules={[{ required: true, message: "Please input your website!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type link" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Phone Number"
-                                name="phone"
-                                rules={[{ required: true, message: "Please input your Phone Number!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type phone" />
-                            </Form.Item>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Form.Item
-                                label="Account Number"
-                                name="account"
-                                rules={[{ required: true, message: "Please input your account!" }]}
-                            >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type account" />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Amount"
-                                name="cost"
-                                rules={[{ required: true, message: "Please input your cost!" }]}
-                            >
-                                <Input
-                                    className='w-full bg-transparent border border-black py-2'
-                                    placeholder="$"
-                                    value={cost}
-                                    onChange={handleCostChange}
+                <div className="space-y-5 pt-5 max-w-[900px] m-auto">
+                    {companies.map((company, index) => (
+                        <div key={index}>
+                            <label className="block mb-1 text-black font-medium">{company}</label>
+                            <div className="flex flex-col md:flex-row gap-3">
+                                <input
+                                    type="text"
+                                    defaultValue={company}
+                                    className="border border-black px-4 bg-transparent py-2 rounded-md w-full md:w-1/3"
                                 />
-                            </Form.Item>
-
+                                <button className="border border-black px-4 py-2 rounded-md w-full md:w-1/3">
+                                    Update Policy
+                                </button>
+                                <button className="bg-red-500 text-white px-4 py-2 rounded-md w-full md:w-1/4">
+                                    Delete Policy
+                                </button>
+                            </div>
                         </div>
-
-                        <Form.Item
-                            label="Membership Expairation"
-                            name="repair"
-                            rules={[{ required: true, message: "Please input your Repair!" }]}
-                        >
-                            <Input className='w-full bg-transparent border border-black py-2' placeholder="Type Repair" />
-                        </Form.Item>
-
-
-
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4' >
-                            <Dragger {...props}>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">
-                                    Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                    banned files.
-                                </p>
-                            </Dragger>
-                            <Form.Item
-                                label="Description"
-                                name="feedback"
-                                rules={[{ required: true, message: "Please input description!" }]}
-                            >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
-                            </Form.Item>
-                        </div>
-
-                        <Form.Item className=" pt-7">
-                            <button type="primary" htmlType="submit" className="w-full bg-[#F9B038] py-2">
-                                Save
-                            </button>
-                        </Form.Item>
-                    </Form>
+                    ))}
                 </div>
             </div>
         </div>
