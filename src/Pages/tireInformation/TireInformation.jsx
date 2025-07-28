@@ -70,12 +70,12 @@ const TireInformation = () => {
         console.log(values)
     };
     return (
-        <div className="container m-auto ">
+        <div className="container m-auto text-[#F9B038]">
             <h1 className='text-3xl font-semibold pb-7'>Tire Information</h1>
             <div className="flex items-center space-x-4">
                 {tireData.map((tire, idx) => (
                     <React.Fragment key={tire.title}>
-                        <div className="text-black text-left text-sm w-48">
+                        <div className="text-[#F9B038] text-left text-sm w-48 ">
                             <h3 className="font-semibold mb-1">{tire.title}</h3>
                             <p>Name: {tire.name}</p>
                             <p>Size: {tire.size}</p>
@@ -96,24 +96,31 @@ const TireInformation = () => {
                 <Form form={form} onFinish={handleSubmit} layout="vertical">
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl' >
-                        <Dragger {...props}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p className="ant-upload-hint">
-                                Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                banned files.
-                            </p>
-                        </Dragger>
-                        <Form.Item
-                            label="Massage"
-                            name="massage"
-                            rules={[{ required: true, message: "Please input description!" }]}
-                        >
-                            <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Here..." />
-                        </Form.Item>
+                       <Dragger {...props}>
+                <p className="ant-upload-drag-icon ">
+                  <InboxOutlined />
+                </p>
+                <p className=" text-[#F9B038]">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="text-[#F9B038]">
+                  Support for a single or bulk upload. Strictly prohibited from
+                  uploading company data or other banned files.
+                </p>
+              </Dragger>
+                         <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Notes</span>}
+                name="feedback"
+                rules={[{ required: true, message: "Please input Notes!" }]}
+              >
+                <Input.TextArea
+                  className="w-full bg-[#F9B038] border border-transparent py-2"
+                  rows={4}
+                  placeholder="Type Notes..."
+                />
+              </Form.Item>
                     </div>
+
 
                     <div className='flex justify-center gap-3'>
                         <Form.Item className=" pt-7">

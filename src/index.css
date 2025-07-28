@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root{
-    background-color: #27E2F5;
+    background-color: #35549B;
 }
 
 :where(.css-dev-only-do-not-override-7ny38l).ant-collapse-ghost >.ant-collapse-item {
@@ -34,4 +34,32 @@
 :where(.css-dev-only-do-not-override-1ay42y).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
     border: 1px solid black;
     background: transparent;
+}
+
+
+:where(.css-dev-only-do-not-override-7t2xvq).ant-collapse-ghost >.ant-collapse-item
+
+ {
+    border: 1px solid black;
+margin: 10px;
+border-radius: 8px;
+}
+
+:where(.css-dev-only-do-not-override-7t2xvq).ant-collapse>.ant-collapse-item:first-child, :where(.css-dev-only-do-not-override-7t2xvq).ant-collapse>.ant-collapse-item:first-child>.ant-collapse-header {
+    border-radius: 8px;
+   
+}
+
+:where(.css-dev-only-do-not-override-7t2xvq).ant-collapse>.ant-collapse-item:last-child, :where(.css-dev-only-do-not-override-7t2xvq).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header {
+    border-radius: 8px;
+    
+}
+
+:where(.css-dev-only-do-not-override-7t2xvq).ant-collapse .ant-collapse-item:last-child {
+    border-bottom: 1px solid black;
+}
+
+:where(.css-dev-only-do-not-override-1sawdwi).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid #F9B038;
+    background: rgba(255, 0, 0, 0);
 }

@@ -36,7 +36,7 @@ const RvSoldInformationForm = () => {
 
             <div className='flex gap-4'>
                 <div className='w-[400px]'>
-                    <h1 className='text-3xl font-semibold '>Insurance Company Info</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Insurance Company Info</h1>
                 </div>
 
                 <div className='w-full max-w-4xl'>

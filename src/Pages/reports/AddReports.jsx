@@ -61,7 +61,7 @@ const AddReports = ({ openAddModal, setOpenAddModal }) => {
 
         >
             <div className="mb-6 mt-2 ">
-                <h2 className="text-center font-semibold text-xl mb-4">Add Reports</h2>
+                <h2 className="text-center font-semibold text-xl mb-4 text-[#F9B038]">Add Reports</h2>
 
                 <div >
                     <Form form={form} onFinish={handleSubmit} layout="vertical">

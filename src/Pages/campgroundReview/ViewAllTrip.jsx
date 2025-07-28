@@ -118,7 +118,7 @@ const ViewAllTrip = () => {
     <div className='container m-auto'>
         <div>
             <div className='flex justify-between py-2'>
-                <h1 className="text-xl font-semibold px-3 lg:px-0">Vew All Trip</h1>
+                <h1 className="text-xl font-semibold px-3 lg:px-0 text-[#F9B038]">Vew All Trip</h1>
                 
             </div>
             <div className=" md:grid lg:grid-cols-4 md:grid-cols-2 gap-2">

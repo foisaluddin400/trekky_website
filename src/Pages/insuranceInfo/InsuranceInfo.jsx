@@ -5,7 +5,7 @@ const InsuranceInfo = () => {
     return (
         <div className="container m-auto flex py-11">
             <div className='w-[300px]'>
-                <h1 className='text-3xl font-semibold '>Insurance Info</h1>
+                <h1 className='text-3xl font-semibold text-[#F9B038]'>Insurance Info</h1>
             </div>
             <div className=" bg-[#F9B038] flex flex-col items-center justify-center w-full h-[70vh] gap-8 px-4">
                 <div className="text-center text-gray-800 space-y-3 text-lg md:text-xl font-semibold">

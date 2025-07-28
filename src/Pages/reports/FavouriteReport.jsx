@@ -38,7 +38,7 @@ const FavouriteReport = () => {
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Favorite Reports</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Favorite Reports</h1>
                 </div>
                 <div className='max-w-6xl bg-[#F9B038] w-full shadow-xl md:p-7 p-3 md:px-20'>
                   

@@ -36,27 +36,27 @@ const NewTrip = () => {
         <div className='max-w-4xl m-auto'>
             <Form form={form} onFinish={handleSubmit} layout="vertical">
                 <Form.Item
-                    label="Title"
+                    label={<span style={{ color: "#F9B038" }}>Title</span>}
                     name="title"
                     rules={[{ required: true, message: "Please input Title!" }]}
                 >
-                    <Input className='w-full bg-transparent border border-black py-2' placeholder="title" />
+                    <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="title" />
                 </Form.Item>
                 <Form.Item
-                        label="Description"
+                        label={<span style={{ color: "#F9B038" }}>Description</span>}
                         name="feedback"
                         rules={[{ required: true, message: "Please input description!" }]}
                     >
-                        <Input.TextArea className='w-full bg-transparent border border-black py-2' rows={4} placeholder="Type Here..." />
+                        <Input.TextArea className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' rows={4} placeholder="Type Here..." />
                     </Form.Item>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                    <Form.Item
-                        label="End Date (Optional)"
+                         label={<span style={{ color: "#F9B038" }}>End Date (Optional)</span>}
                         name="pick"
                         rules={[{ required: true, message: "Please input date!" }]}
                     >
                         <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
+                                    className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2'
                                     format={dateFormatt}
                                     defaultValue={dayjs('09/03/2019', dateFormatt)}
                                     minDate={dayjs('08/01/2019', dateFormatt)}
@@ -65,12 +65,12 @@ const NewTrip = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label="Start Date"
+                         label={<span style={{ color: "#F9B038" }}>Start Date</span>}
                         name="start"
                         rules={[{ required: true, message: "Please input date!" }]}
                     >
                          <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
+                                    className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2'
                                     format={dateFormat}
                                     defaultValue={dayjs('09/03/2019', dateFormat)}
                                     minDate={dayjs('08/01/2019', dateFormat)}
@@ -80,7 +80,7 @@ const NewTrip = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                    <Form.Item
-                        label="City/State"
+                         label={<span style={{ color: "#F9B038" }}>City/State</span>}
                         name="city"
                         rules={[{ required: true, message: "Please select your city!" }]}
 
@@ -108,7 +108,7 @@ const NewTrip = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label="Visit Status"
+                         label={<span style={{ color: "#F9B038" }}>Visit Status</span>}
                         name="city"
                         rules={[{ required: true, message: "Please select visit Status!" }]}
 
@@ -137,25 +137,27 @@ const NewTrip = () => {
                 </div>
                
                     <Form.Item
-                        label="Trip Type"
+                         label={<span style={{ color: "#F9B038" }}>Trip Type</span>}
                         name="trip"
                         rules={[{ required: true, message: "Please input your cost!" }]}
                     >
-                        <Input className='w-full bg-transparent border border-black py-2' placeholder="Trip Type" />
+                        <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Trip Type" />
                     </Form.Item>
 
                 
 
-                    <Dragger {...props}>
-                        <p className="ant-upload-drag-icon">
-                            <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p className="ant-upload-hint">
-                            Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                            banned files.
-                        </p>
-                    </Dragger>
+                     <Dragger {...props}>
+                <p className="ant-upload-drag-icon ">
+                  <InboxOutlined />
+                </p>
+                <p className=" text-[#F9B038]">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="text-[#F9B038]">
+                  Support for a single or bulk upload. Strictly prohibited from
+                  uploading company data or other banned files.
+                </p>
+              </Dragger>
                    
          
 

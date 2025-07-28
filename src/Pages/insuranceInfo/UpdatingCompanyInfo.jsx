@@ -35,7 +35,7 @@ const UpdatingCompanyInfo = () => {
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
                 <div className='lg:w-[350px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Update Insurance Info </h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Update Insurance Info </h1>
                 </div>
                 <div className='max-w-4xl '>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -43,12 +43,12 @@ const UpdatingCompanyInfo = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Renewal Date"
+                                label={<span style={{ color: "#F9B038" }}>Renewal Date</span>}
                                 name="renewal"
                                 rules={[{ required: true, message: "Please input Renewal Date!" }]}
                             >
                               <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
+                                    className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2'
                                     format={dateFormat}
                                     defaultValue={dayjs('09/03/2019', dateFormat)}
                                     minDate={dayjs('08/01/2019', dateFormat)}
@@ -56,12 +56,12 @@ const UpdatingCompanyInfo = () => {
                                 />
                             </Form.Item>
                             <Form.Item
-                                label="Expiration Date"
+                                label={<span style={{ color: "#F9B038" }}>Expiration Date</span>}
                                 name="ExpirationDate"
                                 rules={[{ required: true, message: "Please input Expiration Date!" }]}
                             >
                                <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
+                                    className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2'
                                     format={dateFormat}
                                     defaultValue={dayjs('09/03/2019', dateFormat)}
                                     minDate={dayjs('08/01/2019', dateFormat)}
@@ -71,45 +71,50 @@ const UpdatingCompanyInfo = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Cost"
+                                label={<span style={{ color: "#F9B038" }}>Cost</span>}
                                 name="cost"
                                 rules={[{ required: true, message: "Please input cost!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="cost" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="cost" />
                             </Form.Item>
 
                             <Form.Item
-                                label="Update Membership Number"
+                                label={<span style={{ color: "#F9B038" }}>Update Membership Number</span>}
                                 name="MembershipNumber"
                                 rules={[{ required: true, message: "Please input Update Membership Number!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Type Update Membership Number" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Type Update Membership Number" />
                             </Form.Item>
                         </div>
 
 
 
 
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4' >
-                            <Dragger {...props}>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">
-                                    Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                                    banned files.
-                                </p>
-                            </Dragger>
-                            <Form.Item
-                                label="Notes"
-                                name="feedback"
-                                rules={[{ required: true, message: "Please input Notes!" }]}
-                            >
-                                <Input.TextArea className='w-full bg-[#F9B038] border border-transparent py-2' rows={4} placeholder="Type Notes..." />
-                            </Form.Item>
-                        </div>
-
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+              <Dragger {...props}>
+                <p className="ant-upload-drag-icon ">
+                  <InboxOutlined />
+                </p>
+                <p className=" text-[#F9B038]">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="text-[#F9B038]">
+                  Support for a single or bulk upload. Strictly prohibited from
+                  uploading company data or other banned files.
+                </p>
+              </Dragger>
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Notes</span>}
+                name="feedback"
+                rules={[{ required: true, message: "Please input Notes!" }]}
+              >
+                <Input.TextArea
+                  className="w-full bg-[#F9B038] border border-transparent py-2"
+                  rows={4}
+                  placeholder="Type Notes..."
+                />
+              </Form.Item>
+            </div>
                         <Form.Item className=" pt-7">
                             <button type="primary" htmlType="submit" className="w-full bg-[#F9B038] py-2">
                                 Save

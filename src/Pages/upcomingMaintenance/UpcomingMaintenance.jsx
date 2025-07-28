@@ -8,7 +8,7 @@ const UpcomingMaintenance = () => {
     };
     return (
         <div className='container m-auto'>
-            <h1 className='text-xl font-semibold py-2'>Upcoming Maintenance </h1>
+            <h1 className='text-xl font-semibold py-2 text-[#F9B038]'>Upcoming Maintenance </h1>
             <div
                 className="relative bg-cover bg-center py-16 "
                 style={{ backgroundImage: `url(${back})` }}
@@ -19,15 +19,15 @@ const UpcomingMaintenance = () => {
                     <div className='text-white'>
                         <Form form={form} onFinish={handleSubmit} layout="vertical">
                             <div className='' >
-                                <label className='text-xl font-semibold text-white' htmlFor="Upload">Upload</label>
+                                <label className='text-xl font-semibold text-[#F9B038]' htmlFor="Upload">Upload</label>
 
                                 <Form.Item
-                                    label="Description"
+                                    label={<span style={{ color: "#F9B038" }}>Description</span>}
                                
                                     name="feedback"
                                     rules={[{ required: true, message: "Please input description!" }]}
                                 >
-                                    <Input.TextArea className='w-full bg-[#F9B038] border border-black py-2' rows={4} placeholder="Type Here..." />
+                                    <Input.TextArea className='w-[300px] bg-[#F9B038] border border-black py-2' rows={4} placeholder="Type Here..." />
                                 </Form.Item>
                             </div>
                         </Form>

@@ -49,19 +49,19 @@ const InsuranceCompanyInfo = () => {
 
             <div className=' gap-4  px-3'>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Insurance Info</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Insurance Info</h1>
                 </div>
                 <div className="space-y-5 pt-5 max-w-[900px] m-auto">
                     {companies.map((company, index) => (
                         <div key={index}>
-                            <label className="block mb-1 text-black font-medium">{company}</label>
+                            <label className="block mb-1 text-[#F9B038] font-medium">{company}</label>
                             <div className="flex flex-col md:flex-row gap-3">
                                 <input
                                     type="text"
                                     defaultValue={company}
-                                    className="border border-black px-4 bg-transparent py-2 rounded-md w-full md:w-1/3"
+                                    className="border border-[#F9B038] text-[#F9B038] px-4 bg-transparent py-2 rounded-md w-full md:w-1/3"
                                 />
-                                <button className="border border-black px-4 py-2 rounded-md w-full md:w-1/3">
+                                <button className="border border-[#F9B038] text-[#F9B038] px-4 py-2 rounded-md w-full md:w-1/3">
                                     Update Policy
                                 </button>
                                 <button className="bg-red-500 text-white px-4 py-2 rounded-md w-full md:w-1/4">

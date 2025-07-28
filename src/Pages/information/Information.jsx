@@ -18,7 +18,7 @@ const Information = () => {
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3'>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>Chassis information</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Chassis information</h1>
                 </div>
                 <div className='w-full max-w-4xl'>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -26,52 +26,52 @@ const Information = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Mfg"
+                                label={<span style={{ color: "#F9B038" }}>Mfg</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input Mfg!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Mfg" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Mfg" />
                             </Form.Item>
                             <Form.Item
-                                label="Model"
+                                label={<span style={{ color: "#F9B038" }}>Model</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input Model!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Model" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Model" />
                             </Form.Item>
 
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Name"
+                                label={<span style={{ color: "#F9B038" }}>Name</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input Name!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Name" />
                             </Form.Item>
                             <Form.Item
-                                label="Serial ID"
+                                label={<span style={{ color: "#F9B038" }}>Serial ID</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Serial ID" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Serial ID" />
                             </Form.Item>
 
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Engine Model"
+                                label={<span style={{ color: "#F9B038" }}>Engine Model</span>}
                                 name="filter"
                                 rules={[{ required: true, message: "Please input Engine Model" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Engine Model" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Engine Model" />
                             </Form.Item>
                             <Form.Item
-                                label="Horsepower"
+                                label={<span style={{ color: "#F9B038" }}>Horsepower</span>}
                                 name="filter"
                                 rules={[{ required: true, message: "Please input Horsepower" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Horsepower" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Horsepower" />
                             </Form.Item>
 
 

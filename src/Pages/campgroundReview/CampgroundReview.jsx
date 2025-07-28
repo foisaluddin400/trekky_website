@@ -49,7 +49,7 @@ const CampgroundReview = () => {
             className={`px-4 py-2 rounded-md text-sm font-medium ${
               activeTab === tab
                 ? "bg-[#F9B038] text-black"
-                : "border border-black text-black"
+                : "border border-[#F9B038] text-[#F9B038] "
             }`}
             onClick={() => handleTabChange(tab)}
           >

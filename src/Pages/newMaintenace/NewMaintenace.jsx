@@ -48,21 +48,21 @@ const NewMaintenace = () => {
 
             <div className='lg:flex gap-4 lg:mt-11 mt-6 px-3 '>
                 <div className='lg:w-[300px] pb-7 lg:pb-0'>
-                    <h1 className='text-3xl font-semibold '>New Maintenance Schedule</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>New Maintenance Schedule</h1>
                 </div>
                 <div className='max-w-4xl w-full'>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
 
 
                         <Form.Item
-                            label="Component"
+                            label={<span style={{ color: "#F9B038" }}>Component</span>}
                             name="component"
                             rules={[{ required: true, message: "Please input Expense Type!" }]}
                         >
                             <ConfigProvider
                                 theme={{
                                     token: {
-                                        colorPrimary: '#1d4ed8',
+                                        colorPrimary: '#F9B038',
                                         borderRadius: 8,
                                         controlHeight: 40,
 
@@ -79,12 +79,12 @@ const NewMaintenace = () => {
                      
                            
                             <Form.Item
-                                label="Service Interval"
+                                label={<span style={{ color: "#F9B038" }}>Service Interval</span>}
                                 name="dropdate"
                                 rules={[{ required: true, message: "Please input date!" }]}
                             >
                                 <DatePicker
-                                    className='w-full bg-transparent border border-black py-2'
+                                    className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2'
                                     format={dateFormatt}
                                     defaultValue={dayjs('09/03/2019', dateFormatt)}
                                     minDate={dayjs('08/01/2019', dateFormatt)}
@@ -102,7 +102,7 @@ const NewMaintenace = () => {
                      
                           
                             <Form.Item
-                                label="Notes"
+                                label={<span style={{ color: "#F9B038" }}>Notes</span>}
                                 name="feedback"
                                 rules={[{ required: true, message: "Please input Notes!" }]}
                             >

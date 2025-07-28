@@ -17,7 +17,7 @@ const UpdateExistMaintainanceOrder = () => {
 
             <div className=' gap-4 '>
                 <div className=''>
-                    <h1 className='text-3xl font-semibold '>Update Existing Maintenance Order</h1>
+                    <h1 className='text-3xl font-semibold text-[#F9B038]'>Update Existing Maintenance Order</h1>
                 </div>
                 <div className=' max-w-4xl m-auto pt-8'>
                     <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -25,22 +25,23 @@ const UpdateExistMaintainanceOrder = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="RV Nickname"
+                                label={<span style={{ color: "#F9B038" }}>RV Nickname</span>}
+                                
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Type!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Fuel Type" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Fuel Type" />
                             </Form.Item>
 
                             <Form.Item
-                                label="Class"
+                                label={<span style={{ color: "#F9B038" }}>Class</span>}
                                 name="AddBelt"
                                 rules={[{ required: true, message: "Please input your Add Belt!" }]}
                             >
                                 <ConfigProvider
                                     theme={{
                                         token: {
-                                            colorPrimary: '#1d4ed8',
+                                            colorPrimary: '#F9B038',
                                             borderRadius: 8,
                                             controlHeight: 40,
 
@@ -57,39 +58,39 @@ const UpdateExistMaintainanceOrder = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Manufacturer"
+                                label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add another Belt!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another Belt" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add another Belt" />
                             </Form.Item>
                             <Form.Item
-                                label="Model Name"
+                                label={<span style={{ color: "#F9B038" }}>Model Name</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Oil Filter" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add Oil Filter" />
                             </Form.Item>
 
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Floorplan"
+                               label={<span style={{ color: "#F9B038" }}>Floorplan</span>}
                                 name="filter"
                                 rules={[{ required: true, message: "Please input your Add another oil Filter" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add another oil Filter" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add another oil Filter" />
                             </Form.Item>
 
                             <Form.Item
-                                label="Interior color Scheme"
+                                label={<span style={{ color: "#F9B038" }}>Interior color Scheme</span>}
                                 name="mileage"
                                 rules={[{ required: true, message: "Please input your mileage!" }]}
                             >
                                 <ConfigProvider
                                     theme={{
                                         token: {
-                                            colorPrimary: '#1d4ed8',
+                                            colorPrimary: '#F9B038',
                                             borderRadius: 8,
                                             controlHeight: 40,
 
@@ -107,54 +108,54 @@ const UpdateExistMaintainanceOrder = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Mtg"
+                                label={<span style={{ color: "#F9B038" }}>Mtg</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Mtg!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Add Mtg" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add Mtg" />
                             </Form.Item>
                             <Form.Item
-                                label="Model"
+                                label={<span style={{ color: "#F9B038" }}>Model</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your MOdel" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Model" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Model" />
                             </Form.Item>
 
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Name"
+                                label={<span style={{ color: "#F9B038" }}>Name</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Fuel Name!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Name" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Name" />
                             </Form.Item>
                             <Form.Item
-                                label="Serial ID"
+                                label={<span style={{ color: "#F9B038" }}>Serial ID</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Serial ID!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Serial ID" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Serial ID" />
                             </Form.Item>
 
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
-                                label="Engine Model"
+                                label={<span style={{ color: "#F9B038" }}>Engine Model</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your Engine Model!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Engine Model" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Engine Model" />
                             </Form.Item>
                             <Form.Item
-                                label="Horsepower"
+                                label={<span style={{ color: "#F9B038" }}>Horsepower</span>}
                                 name="type"
                                 rules={[{ required: true, message: "Please input your horsepower!" }]}
                             >
-                                <Input className='w-full bg-transparent border border-black py-2' placeholder="Horse Prower" />
+                                <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Horse Prower" />
                             </Form.Item>
 
                         </div>

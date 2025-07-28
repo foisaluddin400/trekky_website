@@ -2,7 +2,7 @@ import React from 'react';
 
 const Progress = () => {
   return (
-    <div className="mt-4 text-lg font-semibold">
+    <div className="mt-4 text-lg font-semibold text-[#F9B038]">
       <h1>Your Progress</h1>
       {/* Map iframe centered on New York City, USA */}
       <div className="mt-8 ">
@@ -23,13 +23,13 @@ const Progress = () => {
       <div className="mt-4 text-sm">
         <p className="font-semibold mb-2">Map Legend</p>
         <ul className="space-y-1 text-gray-900">
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 text-[#F9B038]">
             <span className="w-5 h-5 bg-green-800 rounded"></span> Camped
           </li>
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 text-[#F9B038]">
             <span className="w-5 h-5 bg-orange-700 rounded"></span> Traveled Though
           </li>
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 text-[#F9B038]">
             <span className="w-5 h-5 bg-blue-500 rounded"></span> Planning to Visit
           </li>
         

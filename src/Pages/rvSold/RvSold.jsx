@@ -56,7 +56,7 @@ const RvSold = () => {
     return (
         <div className="container m-auto">
             <div>
-                <h1 className="text-3xl font-semibold py-5">RV Sold & RV Information</h1>
+                <h1 className="text-3xl font-semibold py-5 text-[#F9B038]">RV Sold & RV Information</h1>
             </div>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {rvData.map((rv) => (

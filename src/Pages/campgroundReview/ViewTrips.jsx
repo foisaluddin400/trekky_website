@@ -59,8 +59,8 @@ const ViewTrips = () => {
     return (
         <div>
             <div className='flex justify-between py-2'>
-                <h1 className="text-xl font-semibold ">Recent Trip</h1>
-                <Link to={'/viewAllTrip'}><button className='hover:border-b'>View All</button></Link>
+                <h1 className="text-xl font-semibold text-[#F9B038]">Recent Trip</h1>
+                <Link to={'/viewAllTrip'}><button className='hover:border-b text-[#F9B038]'>View All</button></Link>
             </div>
             <div className="  ">
                 {rvData.map((rv) => (

@@ -61,7 +61,7 @@ export const Navbar = () => {
 
         <ul className="hidden lg:flex lg:space-x-9 space-x-6 ">
           {items.map((item) => (
-            <li key={item.key} className="list-none mt-3">
+            <li key={item.key} className="list-none mt-3 text-[#F9B038]">
               {item.label}
             </li>
           ))}
@@ -72,12 +72,12 @@ export const Navbar = () => {
             <div className="flex gap-5 items-center ">
 
               <div className="flex gap-4">
-                <Link to={'/auth/login'} state={{ showModal: true }}><button className="border border-[#F9B038] py-1 px-4 rounded">Login</button></Link>
+                <Link to={'/auth/login'} state={{ showModal: true }}><button className="border border-[#F9B038] text-[#F9B038] py-1 px-4 rounded">Login</button></Link>
                 <Link to={'/auth/signUp'}><button className="bg-[#F9B038] py-1 px-4 rounded">Sign Up</button></Link>
               </div>
 
 
-              <div className="hidden lg:flex">
+              <div className="hidden lg:flex text-[#F9B038]">
                 <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
                   <Link onClick={(e) => e.preventDefault()}>
                     <Space>
@@ -95,7 +95,7 @@ export const Navbar = () => {
             </div>
           </div>
           <button
-            className="lg:hidden text-2xl"
+            className="lg:hidden text-2xl text-[#F9B038]"
             onClick={showDrawer}
           >
             <MenuOutlined />
@@ -107,7 +107,7 @@ export const Navbar = () => {
       <Drawer style={{ backgroundColor: '#27E2F5' }} title="" placement="right" onClose={onClose} open={drawerOpen}>
         <ul className="flex flex-col space-y-4">
           {items.map((item) => (
-            <li key={item.key} className="list-none">
+            <li key={item.key} className="list-none text-[#F9B038]">
               {item.label}
             </li>
           ))}

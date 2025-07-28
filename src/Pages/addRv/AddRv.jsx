@@ -57,10 +57,10 @@ const AddRv = () => {
     return (
         <div className="container m-auto">
             <div className='flex justify-between py-4'>
-                <h1 className="text-3xl font-semibold ">RV Sold & RV Information</h1>
+                <h1 className="text-3xl font-semibold text-[#F9B038]">RV Sold & RV Information</h1>
                 <button className='bg-[#F9B038] rounded px-4 py-2'>Add</button>
             </div>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className=" grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8">
                 {rvData.map((rv) => (
                     <div
                         key={rv.id}
@@ -72,13 +72,13 @@ const AddRv = () => {
                             className="w-full h-48 object-cover rounded"
                         />
                         <div className=" ">
-                            <div className="text-xl py-2 font-semibold text-gray-900 ">
-                                <p>
+                            <div className="text-xl py-2 font-semibold text-[#F9B038] ">
+                                <p >
                                      {rv.name}
                                 </p>
                                
                             </div>
-                            <p className=" text-gray-500">{rv.status}</p>
+                            <p className=" text-[#F9B038]">{rv.status}</p>
                         </div>
                     </div>
                 ))}
