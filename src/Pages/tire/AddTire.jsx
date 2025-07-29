@@ -60,9 +60,9 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
                 name="Manufacturer"
-                rules={[
-                  { required: true, message: "Please input Manufacturer!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Manufacturer!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -73,12 +73,12 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date Purchase</span>}
                 name="DatePuschase"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Date Purchase!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Date Purchase!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -90,7 +90,7 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Tire Size</span>}
                 name="size"
-                rules={[{ required: true, message: "Please input Tire Size!" }]}
+                // rules={[{ required: true, message: "Please input Tire Size!" }]}
               >
                 <Input
                   type="number"
@@ -102,12 +102,12 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
                 name="Location"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Location!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Location!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -119,7 +119,7 @@ const AddTire = () => {
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Cost</span>}
               name="cost"
-              rules={[{ required: true, message: "Please input cost!" }]}
+            //   rules={[{ required: true, message: "Please input cost!" }]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -145,7 +145,7 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"

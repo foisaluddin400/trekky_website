@@ -72,6 +72,7 @@ import SurroundInfo from "../Pages/hvac/SurroundInfo";
 import OutdoorInfo from "../Pages/hvac/OutdoorInfo";
 import GPSInfo from "../Pages/hvac/GPSInfo";
 import DVDInfo from "../Pages/hvac/DVDInfo";
+import AddSoldRV from "../Pages/rvSold/AddSoldRV";
 
 export const router = createBrowserRouter([
   {
@@ -292,8 +293,12 @@ export const router = createBrowserRouter([
         element: <RvSold></RvSold>,
       },
       {
-        path: "/addRv",
-        element: <AddRv></AddRv>,
+        path: "/rvSold",
+        element: <RvSold></RvSold>,
+      },
+      {
+        path: "/addSoldRv",
+        element: <AddSoldRV></AddSoldRV>
       },
       {
         path: "/viewAllTrip",

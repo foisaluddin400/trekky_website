@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useNavigate } from "react-router-dom";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 
@@ -28,6 +29,7 @@ const props = {
 };
 
 const AddMembershipForm = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [cost, setCost] = useState("");
   const formatWithCommas = (value) => {
@@ -44,6 +46,7 @@ const AddMembershipForm = () => {
 
   const handleSubmit = (values) => {
     console.log(values);
+    navigate("/");
   };
   return (
     <div className="container m-auto">

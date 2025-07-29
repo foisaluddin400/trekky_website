@@ -78,7 +78,7 @@ export const Footer = () => {
                 <div className="flex justify-center">
                   <img className="w-[50px]" src={inc} alt="" />
                 </div>
-                <p>Linkdin</p>
+                <p>Linkedin</p>
               </div>
             </div>
           </div>

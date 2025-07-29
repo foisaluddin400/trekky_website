@@ -27,8 +27,8 @@ const Information = () => {
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Mfg</span>}
-                name="type"
+                label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
+                name="Manufacturer"
                 rules={[{ required: true, message: "Please input Mfg!" }]}
               >
                 <Input
@@ -38,8 +38,8 @@ const Information = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Model</span>}
-                name="type"
-                rules={[{ required: true, message: "Please input Model!" }]}
+                name="Model"
+                // rules={[{ required: true, message: "Please input Model!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -50,8 +50,8 @@ const Information = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Name</span>}
-                name="type"
-                rules={[{ required: true, message: "Please input Name!" }]}
+                name="Name"
+                // rules={[{ required: true, message: "Please input Name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -60,13 +60,13 @@ const Information = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Serial ID</span>}
-                name="type"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Fuel Add Oil Filter!",
-                  },
-                ]}
+                name="Serial"
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Fuel Add Oil Filter!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -78,9 +78,9 @@ const Information = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Engine Model</span>}
                 name="filter"
-                rules={[
-                  { required: true, message: "Please input Engine Model" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Engine Model" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -89,8 +89,8 @@ const Information = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Horsepower</span>}
-                name="filter"
-                rules={[{ required: true, message: "Please input Horsepower" }]}
+                name="Horsepower"
+                // rules={[{ required: true, message: "Please input Horsepower" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"

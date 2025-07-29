@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const props = {
@@ -27,10 +27,13 @@ const props = {
   },
 };
 const Add = () => {
+    const navigate = useNavigate();
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
-    const rawMileage = values.qty.replace(/,/g, "");
-    console.log({ ...values, qty: rawMileage });
+    // const rawMileage = values.qty.replace(/,/g, "");
+    // console.log({ ...values, qty: rawMileage });
+    console.log(values)
+    navigate("/AddNewMaintanceSchedule");
   };
 
   const [qty, setMileage] = useState("");
@@ -47,12 +50,12 @@ const Add = () => {
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const handleChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setMileage(formatted);
-    form.setFieldsValue({ qty: formatted });
-  };
+//   const handleChange = (e) => {
+//     const input = e.target.value;
+//     const formatted = formatWithCommas(input);
+//     setMileage(formatted);
+//     form.setFieldsValue({ qty: formatted });
+//   };
 
   return (
     <div className="container m-auto">
@@ -66,7 +69,7 @@ const Add = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Name</span>}
                 name="vendor"
-                rules={[{ required: true, message: "Please input Name!" }]}
+                // rules={[{ required: true, message: "Please input Name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -78,12 +81,12 @@ const Add = () => {
                   <span style={{ color: "#F9B038" }}>Date of Purchase</span>
                 }
                 name="date"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Date of Purchase!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Date of Purchase!",
+                //   },
+                // ]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -98,7 +101,7 @@ const Add = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
                 name="Location"
-                rules={[{ required: true, message: "Please input Location!" }]}
+                // rules={[{ required: true, message: "Please input Location!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -121,9 +124,9 @@ const Add = () => {
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Model Number</span>}
               name="model"
-              rules={[
-                { required: true, message: "Please input Model Number!" },
-              ]}
+            //   rules={[
+            //     { required: true, message: "Please input Model Number!" },
+            //   ]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -147,7 +150,7 @@ const Add = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"
@@ -158,7 +161,7 @@ const Add = () => {
             </div>
 
             <Form.Item className=" pt-7">
-              <Link to={"/information"}>
+              
                 <button
                   type="primary"
                   htmlType="submit"
@@ -166,7 +169,7 @@ const Add = () => {
                 >
                   Save
                 </button>
-              </Link>
+              
             </Form.Item>
           </Form>
         </div>

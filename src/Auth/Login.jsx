@@ -100,23 +100,13 @@ const Login = () => {
                     },
                   ]}
                 >
-                  <ConfigProvider
-                    theme={{
-                      Input: {
-                        activeBg: "rgb(255,0,0)",
-                      },
-                      token: {
-                        colorPrimary: "#F9B038",
-                        borderRadius: 8,
-                        controlHeight: 40,
-                      },
-                    }}
-                  >
+             
                     <Input
+                    type="email"
                       className="bg-[#F9B038] border-none py-3 hover:bg-[#F9B038] "
                       placeholder="Enter your Email"
                     />
-                  </ConfigProvider>
+             
                 </Form.Item>
 
                 <Form.Item

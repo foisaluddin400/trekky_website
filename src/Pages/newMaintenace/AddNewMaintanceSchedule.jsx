@@ -1,12 +1,14 @@
 import { Form, Input, Radio } from "antd";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddNewMaintanceSchedule = () => {
   const [form] = Form.useForm();
   const [rvType, setRvType] = useState("new"); // Default selected value
-
+const navigate = useNavigate();
   const handleSubmit = (values) => {
     console.log(values);
+    navigate("/addMembershipForm");
   };
 
   return (

@@ -143,12 +143,12 @@ const navigate = useNavigate();
                   <span style={{ color: "#F9B038" }}>Insurance Company</span>
                 }
                 name="name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Insurance Company!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Insurance Company!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -159,9 +159,9 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Website Link</span>}
                 name="name"
-                rules={[
-                  { required: true, message: "Please input Website Link!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Website Link!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -171,12 +171,12 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
                 name="phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Phone Number!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Phone Number!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -187,9 +187,9 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Effective Date</span>}
                 name="repair"
-                rules={[
-                  { required: true, message: "Please input Effective Date!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Effective Date!" },
+                // ]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -203,12 +203,12 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Renewal Date</span>}
                 name="DatePuschase"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Renewal Date!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Renewal Date!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -218,7 +218,7 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input your cost!" }]}
+                // rules={[{ required: true, message: "Please input your cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -233,9 +233,9 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Policy Number</span>}
                 name="account"
-                rules={[
-                  { required: true, message: "Please input your account!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input your account!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -260,7 +260,7 @@ const navigate = useNavigate();
               <Form.Item
                 label="Notes"
                 name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"

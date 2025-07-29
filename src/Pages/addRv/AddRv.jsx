@@ -84,7 +84,7 @@ const AddRv = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
-                name="type"
+                name="Manufacturer"
                 rules={[
                   {
                     required: true,
@@ -99,7 +99,7 @@ const AddRv = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Model Name</span>}
-                name="type"
+                name="ModelName"
                 rules={[
                   {
                     required: true,
@@ -155,12 +155,12 @@ const AddRv = () => {
                   <span style={{ color: "#F9B038" }}>Date of Purchase</span>
                 }
                 name="date"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your company name!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your company name!",
+                //   },
+                // ]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -173,7 +173,7 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Amount Paid</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input Amount!" }]}
+                // rules={[{ required: true, message: "Please input Amount!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -211,9 +211,9 @@ const AddRv = () => {
                   <span style={{ color: "#F9B038" }}>Current Mileage</span>
                 }
                 name="Currente"
-                rules={[
-                  { required: true, message: "Please input Current Mileage!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Current Mileage!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -226,12 +226,12 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Purchased Form</span>}
                 name="Purchased"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Purchased Form!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Purchased Form!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -241,7 +241,7 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>City</span>}
                 name="City"
-                rules={[{ required: true, message: "Please input City!" }]}
+                // rules={[{ required: true, message: "Please input City!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -254,12 +254,12 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>State</span>}
                 name="State"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input State!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input State!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -269,9 +269,9 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
                 name="Phone Number"
-                rules={[
-                  { required: true, message: "Please input Phone Number!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Phone Number!" },
+                // ]}
               >
                 <Input
                   type="Number"
@@ -285,12 +285,12 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Floor Plan</span>}
                 name="Floor"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Floor Plan!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Floor Plan!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -304,12 +304,12 @@ const AddRv = () => {
                   </span>
                 }
                 name="Scheme"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Interior Color Scheme!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Interior Color Scheme!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -326,12 +326,12 @@ const AddRv = () => {
                   </span>
                 }
                 name="FlSchemeoor"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Exterior Color Scheme!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input Exterior Color Scheme!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -341,9 +341,9 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Weight</span>}
                 name="Weight"
-                rules={[
-                  { required: true, message: "Please input Interior Weight!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Interior Weight!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"

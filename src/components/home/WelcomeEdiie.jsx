@@ -47,32 +47,32 @@ const WelcomeEdiie = () => {
             <Link to={'/newMaintenance'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
-              <p className='text-lg font-semibold text-center pt-5'>New Maintenance Schedule</p></Link>
+              <p className='text-lg font-semibold text-center pt-5'>Maintenance</p></Link>
           </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/upcomingMaintenance'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Upcoming Maintenance</p></Link>
-          </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          </div> */}
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/updateExistMaintenance'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Update Maintenance Order</p></Link>
-          </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          </div> */}
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/newRepair'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>New Repair</p></Link>
-          </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          </div> */}
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/UpdateRepairsOrder'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Update Repair Order</p></Link>
-          </div>
+          </div> */}
           <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/addMembership'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
@@ -85,12 +85,12 @@ const WelcomeEdiie = () => {
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Reports</p></Link>
           </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/favouriteReports'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Favorite Reports</p></Link>
-          </div>
+          </div> */}
 
           <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/campgroundReview'}><div className='flex justify-center'>
