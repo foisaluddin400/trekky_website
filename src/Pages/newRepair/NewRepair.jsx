@@ -1,192 +1,212 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
-import Dragger from "antd/es/upload/Dragger";
-import React, { useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-dayjs.extend(customParseFormat);
-const dateFormat = "MM/DD/YYYY";
-const dateFormatt = "MM/DD/YYYY";
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
+import React from "react";
+import ss from "../../assets/Home/ss.jpg";
+import { Link } from "react-router-dom";
 const NewRepair = () => {
-  const [form] = Form.useForm();
-  const [cost, setCost] = useState("");
-  const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
-    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-  const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
-  };
-
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
   return (
-    <div className="container m-auto">
-      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
-        <div className="lg:w-[300px] pb-7 lg:pb-0">
-          <h1 className="text-3xl font-semibold text-[#F9B038]">New Repair</h1>
-        </div>
-        <div className="max-w-4xl ">
-          <Form form={form} onFinish={handleSubmit} layout="vertical">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-               label={<span style={{ color: "#F9B038" }}>Date</span>}
-                name="date"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your company name!",
-                  },
-                ]}
-              >
-                <DatePicker
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  format={dateFormat}
-                  defaultValue={dayjs("09/03/2019", dateFormat)}
-                  minDate={dayjs("08/01/2019", dateFormat)}
-                  maxDate={dayjs("10/31/2020", dateFormat)}
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Vendor</span>}
-                name="vendor"
-                rules={[
-                  { required: true, message: "Please input your vendor!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Eddlie"
-                />
-              </Form.Item>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>City/State</span>}
-                name="city"
-                rules={[
-                  { required: true, message: "Please input city/state!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type city/state"
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Drop off Date</span>}
-                name="dropdate"
-                rules={[{ required: true, message: "Please input date!" }]}
-              >
-                <DatePicker
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  format={dateFormatt}
-                  defaultValue={dayjs("09/03/2019", dateFormatt)}
-                  minDate={dayjs("08/01/2019", dateFormatt)}
-                  maxDate={dayjs("10/31/2020", dateFormatt)}
-                />
-              </Form.Item>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Cost</span>}
-                name="cost"
-                rules={[{ required: true, message: "Please input your cost!" }]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="$"
-                  value={cost}
-                  onChange={handleCostChange}
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Mileage</span>}
-                name="mileage"
-                rules={[
-                  { required: true, message: "Please input your mileage!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type mileage"
-                />
-              </Form.Item>
+    <div className="container m-auto  py-8">
+      <div className="flex justify-between">
+        <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">
+          New Repair
+        </h1>
+        <Link to={"/addNewRepair"}>
+          {" "}
+          <button className=" border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md  font-medium ">
+            Add New Repair
+          </button>
+        </Link>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
             </div>
 
-            <Form.Item
-              label={<span style={{ color: "#F9B038" }}>Repair</span>}
-              name="repair"
-              rules={[{ required: true, message: "Please input your Repair!" }]}
-            >
-              <Input
-                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                placeholder="Type Repair"
-              />
-            </Form.Item>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon ">
-                  <InboxOutlined />
-                </p>
-                <p className=" text-[#F9B038]">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="text-[#F9B038]">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Notes</span>}
-                name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
-              >
-                <Input.TextArea
-                  className="w-full bg-[#F9B038] border border-transparent py-2"
-                  rows={4}
-                  placeholder="Type Notes..."
-                />
-              </Form.Item>
+            <div className=" gap-4">
+              <span>Date :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Vendor :</span>
+              <span className="font-normal">Applied Decor Self-leveling</span>
             </div>
 
-            <Form.Item className=" pt-7">
-              <button
-                type="primary"
-                htmlType="submit"
-                className="w-full bg-[#F9B038] py-2"
-              >
-                Save
+            <div className=" gap-4">
+              <span>City/State :</span>
+              <span className="font-normal">Dhaka, Bangladesh</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>QTY :</span>
+              <span className="font-normal">43</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Note :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia, aut.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateRepairsOrder"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
               </button>
-            </Form.Item>
-          </Form>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Date :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Vendor :</span>
+              <span className="font-normal">Applied Decor Self-leveling</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>City/State :</span>
+              <span className="font-normal">Dhaka, Bangladesh</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>QTY :</span>
+              <span className="font-normal">43</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Note :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia, aut.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateRepairsOrder"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Date :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Vendor :</span>
+              <span className="font-normal">Applied Decor Self-leveling</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>City/State :</span>
+              <span className="font-normal">Dhaka, Bangladesh</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>QTY :</span>
+              <span className="font-normal">43</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Note :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia, aut.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateRepairsOrder"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Date :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Vendor :</span>
+              <span className="font-normal">Applied Decor Self-leveling</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>City/State :</span>
+              <span className="font-normal">Dhaka, Bangladesh</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>QTY :</span>
+              <span className="font-normal">43</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Note :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia, aut.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateRepairsOrder"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

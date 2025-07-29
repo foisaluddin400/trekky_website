@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { Link } from "react-router-dom";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
-
 const props = {
   name: "file",
   multiple: true,
@@ -26,15 +26,15 @@ const props = {
     console.log("Dropped files", e.dataTransfer.files);
   },
 };
-
-const UpdatingCompanyInfo = () => {
+const Add = () => {
   const [form] = Form.useForm();
-  const [cost, setCost] = useState("");
-  const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
-    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const handleSubmit = (values) => {
+    const rawMileage = values.qty.replace(/,/g, "");
+    console.log({ ...values, qty: rawMileage });
   };
 
+  const [qty, setMileage] = useState("");
+  const [cost, setCost] = useState("");
   const handleCostChange = (e) => {
     const input = e.target.value;
     const formatted = formatWithCommas(input);
@@ -42,71 +42,47 @@ const UpdatingCompanyInfo = () => {
     form.setFieldsValue({ cost: formatted });
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const formatWithCommas = (value) => {
+    const onlyNumbers = value.replace(/[^\d]/g, "");
+    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
+  const handleChange = (e) => {
+    const input = e.target.value;
+    const formatted = formatWithCommas(input);
+    setMileage(formatted);
+    form.setFieldsValue({ qty: formatted });
+  };
+
   return (
     <div className="container m-auto">
-      <div className=" gap-4 lg:mt-8  px-3">
-        <div className="pb-7 lg:pb-0">
-          <h1 className="text-3xl text-[#F9B038] font-semibold ">
-            Update Insurance Info
-          </h1>
+      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
+        <div className="lg:w-[300px] pb-7 lg:pb-0">
+          <h1 className="text-3xl font-semibold text-[#F9B038]">Add</h1>
         </div>
-        <div className="max-w-4xl m-auto text-[#F9B038] mt-6">
+        <div className="max-w-4xl ">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Name</span>}
+                name="vendor"
+                rules={[{ required: true, message: "Please input Name!" }]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="Name"
+                />
+              </Form.Item>
+              <Form.Item
                 label={
-                  <span style={{ color: "#F9B038" }}>Insurance Company</span>
+                  <span style={{ color: "#F9B038" }}>Date of Purchase</span>
                 }
-                name="name"
+                name="date"
                 rules={[
                   {
                     required: true,
-                    message: "Please input Insurance Company!",
+                    message: "Please input Date of Purchase!",
                   },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Insurance Company"
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Website Link</span>}
-                name="name"
-                rules={[
-                  { required: true, message: "Please input Website Link!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Website Link"
-                />
-              </Form.Item>
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
-                name="phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Phone Number!",
-                  },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type phone"
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Effective Date</span>}
-                name="repair"
-                rules={[
-                  { required: true, message: "Please input Effective Date!" },
                 ]}
               >
                 <DatePicker
@@ -117,51 +93,43 @@ const UpdatingCompanyInfo = () => {
                   maxDate={dayjs("10/31/2020", dateFormat)}
                 />
               </Form.Item>
-
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Renewal Date</span>}
-                name="DatePuschase"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Renewal Date!",
-                  },
-                ]}
+                label={<span style={{ color: "#F9B038" }}>Location</span>}
+                name="Location"
+                rules={[{ required: true, message: "Please input Location!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Renewal Date"
+                  placeholder="Location"
                 />
               </Form.Item>
               <Form.Item
-              label={<span style={{ color: "#F9B038" }}>Cost</span>}
-              name="cost"
-              rules={[{ required: true, message: "Please input cost!" }]}
+                label={<span style={{ color: "#F9B038" }}>Cost</span>}
+                name="cost"
+                rules={[{ required: true, message: "Please input cost!" }]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="$"
+                  value={cost}
+                  onChange={handleCostChange}
+                />
+              </Form.Item>
+            </div>
+            <Form.Item
+              label={<span style={{ color: "#F9B038" }}>Model Number</span>}
+              name="model"
+              rules={[
+                { required: true, message: "Please input Model Number!" },
+              ]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                placeholder="$"
-                value={cost}
-                onChange={handleCostChange}
+                placeholder="Model Number"
               />
             </Form.Item>
-            </div>
-            
-            
-            <div className="">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Policy Number</span>}
-                name="account"
-                rules={[
-                  { required: true, message: "Please input account!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type account"
-                />
-              </Form.Item>
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <Dragger {...props}>
@@ -177,7 +145,7 @@ const UpdatingCompanyInfo = () => {
                 </p>
               </Dragger>
               <Form.Item
-                label="Notes"
+                label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="feedback"
                 rules={[{ required: true, message: "Please input Notes!" }]}
               >
@@ -190,13 +158,15 @@ const UpdatingCompanyInfo = () => {
             </div>
 
             <Form.Item className=" pt-7">
-              <button
-                type="primary"
-                htmlType="submit"
-                className="w-full bg-[#F9B038] py-2"
-              >
-                Save
-              </button>
+              <Link to={"/information"}>
+                <button
+                  type="primary"
+                  htmlType="submit"
+                  className="w-full bg-[#F9B038] py-2"
+                >
+                  Save
+                </button>
+              </Link>
             </Form.Item>
           </Form>
         </div>
@@ -205,4 +175,4 @@ const UpdatingCompanyInfo = () => {
   );
 };
 
-export default UpdatingCompanyInfo;
+export default Add;

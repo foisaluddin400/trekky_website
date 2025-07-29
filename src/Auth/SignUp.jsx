@@ -37,12 +37,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#35549B] flex items-center justify-center px-4">
       <div className="w-full max-w-[1500px] m-auto">
         <div className="md:flex md:justify-center lg:grid grid-cols-2">
           <div className="  lg:w-full md:px-16   ">
             
-            <h2 className="text-xl font-bold mb-2 text-gray-800">
+            <h2 className="text-xl font-bold mb-2 text-[#F9B038]">
               Sign Up to your account
             </h2>
 
@@ -50,67 +50,67 @@ const SignUp = () => {
               <div className="grid grid-cols-2 gap-3">
                 <Form.Item
                 name="FirstName"
-                label="First Name"
+                label={<span style={{ color: "#F9B038" }}>First Name</span>}
                 rules={[
-                  { required: true, message: "Please input your Name!" },
-                  {  message: "The input is not valid Name!" },
+                  { required: true, message: "Please input your Name!"},
+                  {  message: "The input is not valid Name!"},
                 ]}
               >
-                <Input placeholder="Enter first Name" />
+                <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter first Name" />
               </Form.Item>
               <Form.Item
                 name="lastName"
-                label="Last Name"
+                label={<span style={{ color: "#F9B038" }}>Last Name</span>}
                 rules={[
                   { required: true, message: "Please input last Name!" },
                   {  message: "The input is not last Name!" },
                 ]}
               >
-                <Input placeholder="Enter last Name" />
+                <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter last Name" />
               </Form.Item>
               </div>
                <div className="grid grid-cols-2 gap-3">
                 <Form.Item
                 name="email"
-                label="Email"
+                label={<span style={{ color: "#F9B038" }}>Email</span>}
                 rules={[
                   { required: true, message: "Please input your email!" },
                   {  message: "The input is not valid email!" },
                 ]}
               >
-                <Input placeholder="Enter first email" />
+                <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter first email" />
               </Form.Item>
               <Form.Item
                 name="number"
-                label="Phone Number"
+                label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
                 rules={[
                   { required: true, message: "Please Phone Number!" },
                   {  message: "The input is not Phone Number!" },
                 ]}
               >
-                <Input placeholder="Enter Phone Number" />
+                <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter Phone Number" />
               </Form.Item>
               </div>
 
               <Form.Item
                 name="password"
-                label="Password"
+                label={<span style={{ color: "#F9B038" }}>Password</span>}
                 rules={[{ required: true, message: "Please input your password!" }]}
               >
-                <Input.Password placeholder="Enter your password" />
+                <Input.Password className="bg-[#F9B038] border-none py-3" placeholder="Enter your password" />
               </Form.Item>
 
                <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label={<span style={{ color: "#F9B038" }}>Confirm Password</span>}
                 rules={[{ required: true, message: "Please input your Confirm password!" }]}
               >
-                <Input.Password placeholder="Enter your Confirm password" />
+                <Input.Password className="bg-[#F9B038] border-none py-3" placeholder="Enter your Confirm password" />
               </Form.Item>
 
               <div className="flex items-center justify-between mb-4">
                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox className="text-gray-700">I agree to all the Terms and Privacy Policies</Checkbox>
+                  <Checkbox className="text-[#F9B038]">I agree to all the Terms and Privacy Policies</Checkbox>
                 </Form.Item>
                 
               </div>
@@ -118,7 +118,7 @@ const SignUp = () => {
               <Form.Item>
                 <button
                   type="submit"
-                  className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className={`w-full py-3 bg-[#F9B038] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                   disabled={loading}
                 >
                   {loading ? "Logging in..." : "Sign Up"}
@@ -129,8 +129,8 @@ const SignUp = () => {
                 <h1 className="text-gray-400 text-center mt-5">----Or Login with----</h1>
 
                  <div className="grid grid-cols-2 gap-3 mt-5">
-                  <button className="border flex gap-2 justify-center border-[#27E2F5] w-full py-2 rounded text-xl"><FcGoogle className="mt-1"/>Sign In with Google</button>
-                  <button className="border border-[#27E2F5] w-full flex gap-1 justify-center py-2 rounded text-xl"><FaApple className="mt-1"/>Sign In With Apple</button>
+                  <button className="border flex gap-2 justify-center border-[#F9B038] w-full py-2 rounded text-xl"><FcGoogle className="mt-1"/>Sign In with Google</button>
+                  <button className="border border-[#F9B038] w-full flex gap-1 justify-center py-2 rounded text-xl"><FaApple className="mt-1"/>Sign In With Apple</button>
                 </div>
           </div>
           <div className="hidden lg:block">

@@ -1,45 +1,240 @@
 import React from "react";
-import ss from '../../assets/Home/ss.jpg'
+import ss from "../../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
 const AddMembership = () => {
-    return (
-        <div className="container m-auto flex py-11">
-            <div className='w-[300px]'>
-                <h1 className='text-3xl text-[#F9B038] font-semibold '>Memberships</h1>
+  return (
+    <div className="container m-auto py-8">
+      <div className="flex justify-between">
+        <h1 className="text-3xl text-[#F9B038] font-semibold pb-6">
+          Memberships
+        </h1>
+        <Link to={"/addMembershipForm"}>
+          {" "}
+          <button className=" border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md  font-medium ">
+            New Membership
+          </button>
+        </Link>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
             </div>
-            <div className=" bg-[#F9B038] flex flex-col items-center justify-center w-full h-[70vh] gap-8 px-4">
-                <div className="text-center text-gray-800 space-y-3 text-lg md:text-xl font-semibold">
-                    <div className="flex justify-center">
-                        <div>
-                            <h1>Memberships</h1>
-                            <img className="w-[150px] h-[150px] rounded-full object-cover" src={ss} alt="" />
-                        </div>
-                    </div>
 
-                    <h1>Jon Smith</h1>
-                    <div className="flex justify-center gap-4">
-                        <span>Last Updated :</span>
-                        <span className="font-normal">03-24-2025</span>
-                    </div>
-                    <div className="flex justify-center gap-4">
-                        <span>Report Type :</span>
-                        <span className="font-normal">State Visit</span>
-                    </div>
-                </div>
-
-                <div className="flex gap-6">
-                   <Link to={'/addMembershipForm'}> <button className=" border border-black px-12 py-3 rounded-md text-lg font-medium ">
-                        New Membership
-                    </button></Link>
-                    <Link to={'/UpdateExisting'}><button className=" border border-black px-12 py-3 rounded-md text-lg font-medium ">
-                        Update Existing
-                    </button></Link>
-                </div>
-
-
+            <div className=" gap-4">
+              <span>Name : </span>
+              <span className="font-normal">Premium</span>
             </div>
+            <div className=" gap-4">
+              <span>Date of Purchase : </span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Website Link :</span>
+              <span className="font-normal">Https://website.com</span>
+            </div>
+            <div className=" gap-4">
+              <span>Phone Number :</span>
+              <span className="font-normal">+88017233423</span>
+            </div>
+            <div className=" gap-4">
+              <span>Amount Paid :</span>
+              <span className="font-normal">$76567</span>
+            </div>
+            <div className=" gap-4">
+              <span>Membership Expiration :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Noter :</span>
+              <span className="font-normal">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Laudantium, ab.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateExisting"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
         </div>
-    );
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Name : </span>
+              <span className="font-normal">Premium</span>
+            </div>
+            <div className=" gap-4">
+              <span>Date of Purchase : </span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Website Link :</span>
+              <span className="font-normal">Https://website.com</span>
+            </div>
+            <div className=" gap-4">
+              <span>Phone Number :</span>
+              <span className="font-normal">+88017233423</span>
+            </div>
+            <div className=" gap-4">
+              <span>Amount Paid :</span>
+              <span className="font-normal">$76567</span>
+            </div>
+            <div className=" gap-4">
+              <span>Membership Expiration :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Noter :</span>
+              <span className="font-normal">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Laudantium, ab.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateExisting"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Name : </span>
+              <span className="font-normal">Premium</span>
+            </div>
+            <div className=" gap-4">
+              <span>Date of Purchase : </span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Website Link :</span>
+              <span className="font-normal">Https://website.com</span>
+            </div>
+            <div className=" gap-4">
+              <span>Phone Number :</span>
+              <span className="font-normal">+88017233423</span>
+            </div>
+            <div className=" gap-4">
+              <span>Amount Paid :</span>
+              <span className="font-normal">$76567</span>
+            </div>
+            <div className=" gap-4">
+              <span>Membership Expiration :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Noter :</span>
+              <span className="font-normal">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Laudantium, ab.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateExisting"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className="flex justify-center">
+              <div>
+                <img className="w-full rounded object-cover" src={ss} alt="" />
+              </div>
+            </div>
+
+            <div className=" gap-4">
+              <span>Name : </span>
+              <span className="font-normal">Premium</span>
+            </div>
+            <div className=" gap-4">
+              <span>Date of Purchase : </span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>Website Link :</span>
+              <span className="font-normal">Https://website.com</span>
+            </div>
+            <div className=" gap-4">
+              <span>Phone Number :</span>
+              <span className="font-normal">+88017233423</span>
+            </div>
+            <div className=" gap-4">
+              <span>Amount Paid :</span>
+              <span className="font-normal">$76567</span>
+            </div>
+            <div className=" gap-4">
+              <span>Membership Expiration :</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Noter :</span>
+              <span className="font-normal">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Laudantium, ab.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/UpdateExisting"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AddMembership;

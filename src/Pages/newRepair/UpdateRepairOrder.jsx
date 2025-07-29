@@ -54,28 +54,39 @@ const UpdateRepairOrder = () => {
   };
 
   return (
-    <div className="container m-auto">
+ <div className="container m-auto">
       <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
         <div className="lg:w-[300px] pb-7 lg:pb-0">
-          <h1 className="text-3xl font-semibold text-[#F9B038]">
-            Update Repair order
-          </h1>
+          <h1 className="text-3xl font-semibold text-[#F9B038]">Update New Repair</h1>
         </div>
         <div className="max-w-4xl ">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Vendor</span>}
-                name="vendor"
+            <div className="">
+              {/* <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Expense Type</span>}
+                name="expense"
                 rules={[
-                  { required: true, message: "Please input your vendor!" },
+                  { required: true, message: "Please input Expense Type!" },
                 ]}
               >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="xxxxx"
-                />
-              </Form.Item>
+                <ConfigProvider
+                  theme={{
+                    token: {
+                      colorPrimary: "#F9B038",
+                      borderRadius: 8,
+                      controlHeight: 40,
+                    },
+                  }}
+                >
+                  <Select placeholder="Select Inquiry" className="w-full">
+                    <Option value="General_Inquiry">Select</Option>
+                    <Option value="Service_Request">DEF</Option>
+                    <Option value="Partnership_Inquiry">Fuel</Option>
+                    <Option value="Partnership_Inquiry">Oil</Option>
+                    <Option value="Partnership_Inquiry">Other</Option>
+                  </Select>
+                </ConfigProvider>
+              </Form.Item> */}
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date</span>}
                 name="date"
@@ -95,12 +106,38 @@ const UpdateRepairOrder = () => {
                 />
               </Form.Item>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Cost</span>}
+                label={<span style={{ color: "#F9B038" }}>Vendor</span>}
+                name="vendor"
+                rules={[
+                  { required: true, message: "Please input vendor!" },
+                ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="Eddlie"
+                />
+              </Form.Item>
+
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>City/State</span>}
+                name="city"
+                rules={[
+                  { required: true, message: "Please input city/state!" },
+                ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="Type city/state"
+                />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Form.Item
+               label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input your cost!" }]}
+                rules={[{ required: true, message: "Please input cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -111,57 +148,22 @@ const UpdateRepairOrder = () => {
               </Form.Item>
 
               <Form.Item
-                label={
-                  <span style={{ color: "#F9B038" }}>
-                    Vendor Tiket or invice number
-                  </span>
-                }
+                label={<span style={{ color: "#F9B038" }}>Qty</span>}
                 name="qty"
                 rules={[
-                  { required: true, message: "Please input vendor Tiket!" },
+                  { required: true, message: "Please input mileage!" },
                 ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="xxxx"
+                  placeholder="Qty"
+                  value={qty}
+                  onChange={handleChange}
                 />
               </Form.Item>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={
-                  <span style={{ color: "#F9B038" }}>Current maileage</span>
-                }
-                name="current"
-                rules={[
-                  { required: true, message: "Please input your vendor!" },
-                ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="xxx"
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Pick-up-date</span>}
-                name="date"
-                rules={[
-                  { required: true, message: "Please input city/state!" },
-                ]}
-              >
-                <DatePicker
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  format={dateFormat}
-                  defaultValue={dayjs("09/03/2019", dateFormat)}
-                  minDate={dayjs("08/01/2019", dateFormat)}
-                  maxDate={dayjs("10/31/2020", dateFormat)}
-                />
-              </Form.Item>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <Dragger {...props}>
                 <p className="ant-upload-drag-icon ">
                   <InboxOutlined />

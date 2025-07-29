@@ -3,6 +3,7 @@ import Dragger from 'antd/es/upload/Dragger';
 import React from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
+const { Option } = Select;
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 const dateFormat = 'YYYY-MM-DD';
@@ -27,7 +28,7 @@ const UpdateExistMaintainanceOrder = () => {
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>RV Nickname</span>}
                                 
-                                name="type"
+                                name="Nickname"
                                 rules={[{ required: true, message: "Please input your Fuel Type!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Fuel Type" />
@@ -35,8 +36,8 @@ const UpdateExistMaintainanceOrder = () => {
 
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Class</span>}
-                                name="AddBelt"
-                                rules={[{ required: true, message: "Please input your Add Belt!" }]}
+                                name="class"
+                               
                             >
                                 <ConfigProvider
                                     theme={{
@@ -59,14 +60,14 @@ const UpdateExistMaintainanceOrder = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
-                                name="type"
+                                name="Manufacturer"
                                 rules={[{ required: true, message: "Please input your Fuel Add another Belt!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add another Belt" />
                             </Form.Item>
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Model Name</span>}
-                                name="type"
+                                name="Model"
                                 rules={[{ required: true, message: "Please input your Fuel Add Oil Filter!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add Oil Filter" />
@@ -76,7 +77,7 @@ const UpdateExistMaintainanceOrder = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                label={<span style={{ color: "#F9B038" }}>Floorplan</span>}
-                                name="filter"
+                                name="Floorplan"
                                 rules={[{ required: true, message: "Please input your Add another oil Filter" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add another oil Filter" />
@@ -84,8 +85,8 @@ const UpdateExistMaintainanceOrder = () => {
 
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Interior color Scheme</span>}
-                                name="mileage"
-                                rules={[{ required: true, message: "Please input your mileage!" }]}
+                                name="Interior"
+                               
                             >
                                 <ConfigProvider
                                     theme={{
@@ -99,8 +100,8 @@ const UpdateExistMaintainanceOrder = () => {
                                 >
                                     <Select placeholder="Select Inquiry" className="w-full">
                                         <Option value="General_Inquiry">Select</Option>
-                                        <Option value="Service_Request">Part</Option>
-                                        <Option value="Partnership_Inquiry">Qz</Option>
+                                        <Option value="Service">Part</Option>
+                                        <Option value="Partnership">Qz</Option>
                                     </Select>
                                 </ConfigProvider>
                             </Form.Item>
@@ -109,14 +110,14 @@ const UpdateExistMaintainanceOrder = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Mtg</span>}
-                                name="type"
+                                name="Mtg"
                                 rules={[{ required: true, message: "Please input your Mtg!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Add Mtg" />
                             </Form.Item>
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Model</span>}
-                                name="type"
+                                name="Model"
                                 rules={[{ required: true, message: "Please input your MOdel" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Model" />
@@ -127,14 +128,14 @@ const UpdateExistMaintainanceOrder = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Name</span>}
-                                name="type"
+                                name="Name"
                                 rules={[{ required: true, message: "Please input your Fuel Name!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Name" />
                             </Form.Item>
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Serial ID</span>}
-                                name="type"
+                                name="Serial"
                                 rules={[{ required: true, message: "Please input your Serial ID!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Serial ID" />
@@ -145,14 +146,14 @@ const UpdateExistMaintainanceOrder = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Engine Model</span>}
-                                name="type"
+                                name="Engine"
                                 rules={[{ required: true, message: "Please input your Engine Model!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Engine Model" />
                             </Form.Item>
                             <Form.Item
                                 label={<span style={{ color: "#F9B038" }}>Horsepower</span>}
-                                name="type"
+                                name="Horsepower"
                                 rules={[{ required: true, message: "Please input your horsepower!" }]}
                             >
                                 <Input className='w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2' placeholder="Horse Prower" />

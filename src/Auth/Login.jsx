@@ -1,4 +1,4 @@
-import { Checkbox, Form, Input, message, Modal } from "antd";
+import { Checkbox, ConfigProvider, Form, Input, message, Modal } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -6,15 +6,11 @@ import Logo from "../assets/Home/hero.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 
-
-
 const Login = () => {
-
-
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     // Check if route state requests to show modal
     if (location.state?.showModal) {
@@ -31,6 +27,8 @@ const Login = () => {
   }, [location.state]);
 
   const onFinish = async (values) => {
+    message.success("Login successful!");
+    navigate("/addRv");
     // setLoading(true);
     // try {
 
@@ -61,45 +59,87 @@ const Login = () => {
         footer={null}
         onCancel={() => setModalVisible(false)}
       >
-        <h1 className="text-center pb-3 text-3xl">Our app is available! You can download it now.</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus aspernatur facilis numquam tempora voluptatibus rerum ex dolorem corporis quaerat iste, beatae nisi cum repellat dolore, officiis nostrum consectetur doloremque! Accusantium, voluptatum consequuntur dignissimos inventore repellat voluptas ipsa eius commodi hic error corrupti, deserunt enim. Veritatis nostrum aliquam illo quibusdam commodi.</p>
+        <h1 className="text-center pb-3 text-3xl">
+          Our app is available! You can download it now.
+        </h1>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus
+          aspernatur facilis numquam tempora voluptatibus rerum ex dolorem
+          corporis quaerat iste, beatae nisi cum repellat dolore, officiis
+          nostrum consectetur doloremque! Accusantium, voluptatum consequuntur
+          dignissimos inventore repellat voluptas ipsa eius commodi hic error
+          corrupti, deserunt enim. Veritatis nostrum aliquam illo quibusdam
+          commodi.
+        </p>
         <button className="bg-[#27E2F5] w-full py-2 mt-4">Let's Go</button>
       </Modal>
 
-      <div className="min-h-screen bg-white flex items-center justify-center md:px-4">
+      <div className="min-h-screen bg-[#35549B] flex items-center justify-center md:px-4">
         <div className="w-full max-w-[1500px] m-auto">
           <div className="md:flex md:justify-center lg:grid grid-cols-2">
             <div className="  lg:w-full md:px-16 px-5  ">
-
-              <h2 className="text-xl font-bold mb-2 text-gray-800">
+              <h2 className="text-xl font-bold mb-2 text-[#F9B038]">
                 Sign in to your account
               </h2>
 
-              <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off" layout="vertical">
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                autoComplete="off"
+                layout="vertical"
+              >
                 <Form.Item
                   name="email"
-                  label="Email"
+                  label={<span style={{ color: "#F9B038" }}>Email</span>}
                   rules={[
                     { required: true, message: "Please input your Email!" },
-                    { type: "email", message: "The input is not valid E-mail!" },
+                    {
+                      type: "email",
+                      message: "The input is not valid E-mail!",
+                    },
                   ]}
                 >
-                  <Input placeholder="Enter your Email" />
+                  <ConfigProvider
+                    theme={{
+                      Input: {
+                        activeBg: "rgb(255,0,0)",
+                      },
+                      token: {
+                        colorPrimary: "#F9B038",
+                        borderRadius: 8,
+                        controlHeight: 40,
+                      },
+                    }}
+                  >
+                    <Input
+                      className="bg-[#F9B038] border-none py-3 hover:bg-[#F9B038] "
+                      placeholder="Enter your Email"
+                    />
+                  </ConfigProvider>
                 </Form.Item>
 
                 <Form.Item
                   name="password"
-                  label="Password"
-                  rules={[{ required: true, message: "Please input your password!" }]}
+                  label={<span style={{ color: "#F9B038" }}>Password</span>}
+                  rules={[
+                    { required: true, message: "Please input your password!" },
+                  ]}
                 >
-                  <Input.Password placeholder="Enter your password" />
+                  <Input.Password
+                    className="bg-[#F9B038] border-none py-3"
+                    placeholder="Enter your password"
+                  />
                 </Form.Item>
 
                 <div className="flex items-center justify-between mb-4">
                   <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox className="text-gray-700">Remember me</Checkbox>
+                    <Checkbox className="text-[#F9B038]">Remember me</Checkbox>
                   </Form.Item>
-                  <Link to={"/forgetpassword"} className="text-sm text-[#2F799E] hover:underline">
+                  <Link
+                    to={"/forgetpassword"}
+                    className="text-sm text-[#F9B038] hover:underline"
+                  >
                     Forget password?
                   </Link>
                 </div>
@@ -107,25 +147,38 @@ const Login = () => {
                 <Form.Item>
                   <button
                     type="submit"
-                    className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    className={`w-full py-3 bg-[#F9B038] text-black rounded focus:ring-2 focus:ring-gray-500 ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                     disabled={loading}
                   >
                     {loading ? "Logging in..." : "Login"}
                   </button>
                 </Form.Item>
               </Form>
-              <Link to={'/auth/signUp'}><button
-                type="submit"
-                className={`w-full py-3 bg-[#27E2F5] text-black rounded focus:ring-2 focus:ring-gray-500 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-
-              >
-                Create An Account
-              </button></Link>
-              <h1 className="text-gray-400 text-center mt-5">----Or Login with----</h1>
+              <Link to={"/auth/signUp"}>
+                <button
+                  type="submit"
+                  className={`w-full py-3 bg-[#F9B038] text-black rounded focus:ring-2 focus:ring-gray-500 ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  Create An Account
+                </button>
+              </Link>
+              <h1 className="text-gray-400 text-center mt-5">
+                ----Or Login with----
+              </h1>
 
               <div className="grid grid-cols-2 gap-3 mt-5">
-                <button className="border flex gap-2 justify-center border-[#27E2F5] w-full py-2 rounded text-xl"><FcGoogle className="mt-1" />Sign In with Google</button>
-                <button className="border border-[#27E2F5] w-full flex gap-1 justify-center py-2 rounded text-xl"><FaApple className="mt-1" />Sign In With Apple</button>
+                <button className="border flex gap-2 justify-center border-[#F9B038] w-full py-2 rounded text-xl">
+                  <FcGoogle className="mt-1" />
+                  Sign In with Google
+                </button>
+                <button className="border border-[#F9B038] w-full flex gap-1 justify-center py-2 rounded text-xl">
+                  <FaApple className="mt-1" />
+                  Sign In With Apple
+                </button>
               </div>
             </div>
             <div className="hidden lg:block">
