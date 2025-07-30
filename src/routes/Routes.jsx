@@ -292,9 +292,9 @@ export const router = createBrowserRouter([
         path: "/rvSold",
         element: <RvSold></RvSold>,
       },
-      {
-        path: "/rvSold",
-        element: <RvSold></RvSold>,
+    {
+        path: "/addRv",
+        element: <AddRv></AddRv>
       },
       {
         path: "/addSoldRv",
