@@ -6,9 +6,10 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
 dayjs.extend(customParseFormat);
-const dateFormat = "YYYY-MM-DD";
+const dateFormat = "MM/DD/YYYY";
+const dateFormatt = "MM/DD/YYYY";
 const AddRv = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
     console.log(values);
@@ -36,7 +37,7 @@ const AddRv = () => {
   };
 
   return (
-    <div className="container m-auto py-7">
+    <div className="container m-auto py-7 px-3 lg:px-0">
       <div className="gap-4">
         <div className="">
           <h1 className="text-3xl font-semibold text-[#F9B038]">Add RV</h1>
@@ -75,8 +76,13 @@ const AddRv = () => {
                 >
                   <Select placeholder="Select Inquiry" className="w-full">
                     <Option value="General_Inquiry">Select</Option>
-                    <Option value="Service_Request">Part</Option>
-                    <Option value="Partnership_Inquiry">Qz</Option>
+                    <Option value="Service_Request">Class A</Option>
+                    <Option value="Service_Request">Class B</Option>
+                    <Option value="Service_Request">Class C</Option>
+                    <Option value="Service_Request">Super C</Option>
+                    <Option value="Service_Request">5th Wheel</Option>
+                    <Option value="Service_Request">Camper</Option>
+                    <Option value="Partnership_Inquiry">Other</Option>
                   </Select>
                 </ConfigProvider>
               </Form.Item>
@@ -142,7 +148,6 @@ const AddRv = () => {
                 ]}
               >
                 <Input
-                  type="number"
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="Model"
                 />
@@ -154,13 +159,8 @@ const AddRv = () => {
                 label={
                   <span style={{ color: "#F9B038" }}>Date of Purchase</span>
                 }
-                name="date"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input your company name!",
-                //   },
-                // ]}
+                name="Date"
+                // rules={[{ required: true, message: "Please input date!" }]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -351,202 +351,224 @@ const AddRv = () => {
                 />
               </Form.Item>
             </div>
-            <p className="mb-2">
-              {<span style={{ color: "#F9B038" }}>Length</span>}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                name="Length"
-                // rules={[{ required: true, message: "Please input Length!" }]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
-                >
-                  <Select placeholder="Length" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="11">5 Feet</Option>
-                    <Option value="12">10 Feet</Option>
-                    <Option value="13">20 Feet</Option>
-                    <Option value="30">30 Feet</Option>
-                    <Option value="40">40 Feet</Option>
-                    <Option value="50">50 Feet</Option>
-                    <Option value="60">60 Feet</Option>
-                    <Option value="70">70 Feet</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
 
-              <Form.Item
-                name="AddBelt"
-                // rules={[
-                //   { required: true, message: "Please input your Add Belt!" },
-                // ]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
-                >
-                  <Select placeholder="Inches" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="0">0 Inches</Option>
-                    <Option value="1">1 Inches</Option>
-                    <Option value="2">2 Inches</Option>
-                    <Option value="3">3 Inches</Option>
-                    <Option value="4">4 Inches</Option>
-                    <Option value="5">5 Inches</Option>
-                    <Option value="6">6 Inches</Option>
-                    <Option value="7">7 Inches</Option>
-                    <Option value="8">8 Inches</Option>
-                    <Option value="9">9 Inches</Option>
-                    <Option value="10">10 Inches</Option>
-                    <Option value="11">11 Inches</Option>
-                    <Option value="12">12 Inches</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
+            <div className="grid grid-cols-2 gap-4">
+              <p className="mb-2">
+                {<span style={{ color: "#F9B038" }}>Length</span>}
+              </p>
+              <p className="mb-2">
+                {<span style={{ color: "#F9B038" }}>Width</span>}
+              </p>
             </div>
 
-            <p className="mb-2">
-              {<span style={{ color: "#F9B038" }}>Width</span>}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                name="Length"
-                // rules={[{ required: true, message: "Please input Length!" }]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
-                >
-                  <Select placeholder="Length" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="11">5 Feet</Option>
-                    <Option value="12">10 Feet</Option>
-                    <Option value="13">20 Feet</Option>
-                    <Option value="30">30 Feet</Option>
-                    <Option value="40">40 Feet</Option>
-                    <Option value="50">50 Feet</Option>
-                    <Option value="60">60 Feet</Option>
-                    <Option value="70">70 Feet</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Form.Item
+                    name="Length"
+                    // rules={[{ required: true, message: "Please input Length!" }]}
+                  >
+                    <ConfigProvider
+                      theme={{
+                        token: {
+                          colorPrimary: "#F9B038",
+                          borderRadius: 8,
+                          controlHeight: 40,
+                        },
+                      }}
+                    >
+                      <Select placeholder="Length" className="w-full">
+                        <Option value="General_Inquiry">Select</Option>
+                        <Option value="11">5 Feet</Option>
+                        <Option value="12">10 Feet</Option>
+                        <Option value="13">20 Feet</Option>
+                        <Option value="30">30 Feet</Option>
+                        <Option value="40">40 Feet</Option>
+                        <Option value="50">50 Feet</Option>
+                        <Option value="60">60 Feet</Option>
+                        <Option value="70">70 Feet</Option>
+                      </Select>
+                    </ConfigProvider>
+                  </Form.Item>
+                </div>
 
-              <Form.Item
-                name="AddBelt"
-                // rules={[
-                //   { required: true, message: "Please input your Add Belt!" },
-                // ]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
+                <Form.Item
+                  name="AddBelt"
+                  // rules={[
+                  //   { required: true, message: "Please input your Add Belt!" },
+                  // ]}
                 >
-                  <Select placeholder="Inches" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="0">0 Inches</Option>
-                    <Option value="1">1 Inches</Option>
-                    <Option value="2">2 Inches</Option>
-                    <Option value="3">3 Inches</Option>
-                    <Option value="4">4 Inches</Option>
-                    <Option value="5">5 Inches</Option>
-                    <Option value="6">6 Inches</Option>
-                    <Option value="7">7 Inches</Option>
-                    <Option value="8">8 Inches</Option>
-                    <Option value="9">9 Inches</Option>
-                    <Option value="10">10 Inches</Option>
-                    <Option value="11">11 Inches</Option>
-                    <Option value="12">12 Inches</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
+                  <ConfigProvider
+                    theme={{
+                      token: {
+                        colorPrimary: "#F9B038",
+                        borderRadius: 8,
+                        controlHeight: 40,
+                      },
+                    }}
+                  >
+                    <Select placeholder="Inches" className="w-full">
+                      <Option value="General_Inquiry">Select</Option>
+                      <Option value="0">0 Inches</Option>
+                      <Option value="1">1 Inches</Option>
+                      <Option value="2">2 Inches</Option>
+                      <Option value="3">3 Inches</Option>
+                      <Option value="4">4 Inches</Option>
+                      <Option value="5">5 Inches</Option>
+                      <Option value="6">6 Inches</Option>
+                      <Option value="7">7 Inches</Option>
+                      <Option value="8">8 Inches</Option>
+                      <Option value="9">9 Inches</Option>
+                      <Option value="10">10 Inches</Option>
+                      <Option value="11">11 Inches</Option>
+                      <Option value="12">12 Inches</Option>
+                    </Select>
+                  </ConfigProvider>
+                </Form.Item>
+              </div>
+
+              <div className="">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Form.Item
+                      name="Length"
+                      // rules={[{ required: true, message: "Please input Length!" }]}
+                    >
+                      <ConfigProvider
+                        theme={{
+                          token: {
+                            colorPrimary: "#F9B038",
+                            borderRadius: 8,
+                            controlHeight: 40,
+                          },
+                        }}
+                      >
+                        <Select placeholder="Length" className="w-full">
+                          <Option value="General_Inquiry">Select</Option>
+                          <Option value="11">5 Feet</Option>
+                          <Option value="12">10 Feet</Option>
+                          <Option value="13">20 Feet</Option>
+                          <Option value="30">30 Feet</Option>
+                          <Option value="40">40 Feet</Option>
+                          <Option value="50">50 Feet</Option>
+                          <Option value="60">60 Feet</Option>
+                          <Option value="70">70 Feet</Option>
+                        </Select>
+                      </ConfigProvider>
+                    </Form.Item>
+                  </div>
+
+                  <Form.Item
+                    name="AddBelt"
+                    // rules={[
+                    //   { required: true, message: "Please input your Add Belt!" },
+                    // ]}
+                  >
+                    <ConfigProvider
+                      theme={{
+                        token: {
+                          colorPrimary: "#F9B038",
+                          borderRadius: 8,
+                          controlHeight: 40,
+                        },
+                      }}
+                    >
+                      <Select placeholder="Inches" className="w-full">
+                        <Option value="General_Inquiry">Select</Option>
+                        <Option value="0">0 Inches</Option>
+                        <Option value="1">1 Inches</Option>
+                        <Option value="2">2 Inches</Option>
+                        <Option value="3">3 Inches</Option>
+                        <Option value="4">4 Inches</Option>
+                        <Option value="5">5 Inches</Option>
+                        <Option value="6">6 Inches</Option>
+                        <Option value="7">7 Inches</Option>
+                        <Option value="8">8 Inches</Option>
+                        <Option value="9">9 Inches</Option>
+                        <Option value="10">10 Inches</Option>
+                        <Option value="11">11 Inches</Option>
+                        <Option value="12">12 Inches</Option>
+                      </Select>
+                    </ConfigProvider>
+                  </Form.Item>
+                </div>
+              </div>
             </div>
 
-            <p className="mb-2">
-              {<span style={{ color: "#F9B038" }}>Height</span>}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                name="Length"
-                // rules={[{ required: true, message: "Please input Length!" }]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
-                >
-                  <Select placeholder="Length" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="11">5 Feet</Option>
-                    <Option value="12">10 Feet</Option>
-                    <Option value="13">20 Feet</Option>
-                    <Option value="30">30 Feet</Option>
-                    <Option value="40">40 Feet</Option>
-                    <Option value="50">50 Feet</Option>
-                    <Option value="60">60 Feet</Option>
-                    <Option value="70">70 Feet</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
+             <div className="grid grid-cols-2 gap-4">
+              <p className="mb-2">
+                {<span style={{ color: "#F9B038" }}>Hight</span>}
+              </p>
+              
+            </div>
 
-              <Form.Item
-                name="AddBelt"
-                // rules={[
-                //   { required: true, message: "Please input your Add Belt!" },
-                // ]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Form.Item
+                    name="Length"
+                    // rules={[{ required: true, message: "Please input Length!" }]}
+                  >
+                    <ConfigProvider
+                      theme={{
+                        token: {
+                          colorPrimary: "#F9B038",
+                          borderRadius: 8,
+                          controlHeight: 40,
+                        },
+                      }}
+                    >
+                      <Select placeholder="Length" className="w-full">
+                        <Option value="General_Inquiry">Select</Option>
+                        <Option value="11">5 Feet</Option>
+                        <Option value="12">10 Feet</Option>
+                        <Option value="13">20 Feet</Option>
+                        <Option value="30">30 Feet</Option>
+                        <Option value="40">40 Feet</Option>
+                        <Option value="50">50 Feet</Option>
+                        <Option value="60">60 Feet</Option>
+                        <Option value="70">70 Feet</Option>
+                      </Select>
+                    </ConfigProvider>
+                  </Form.Item>
+                </div>
+
+                <Form.Item
+                  name="AddBelt"
+                  // rules={[
+                  //   { required: true, message: "Please input your Add Belt!" },
+                  // ]}
                 >
-                  <Select placeholder="Inches" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="0">0 Inches</Option>
-                    <Option value="1">1 Inches</Option>
-                    <Option value="2">2 Inches</Option>
-                    <Option value="3">3 Inches</Option>
-                    <Option value="4">4 Inches</Option>
-                    <Option value="5">5 Inches</Option>
-                    <Option value="6">6 Inches</Option>
-                    <Option value="7">7 Inches</Option>
-                    <Option value="8">8 Inches</Option>
-                    <Option value="9">9 Inches</Option>
-                    <Option value="10">10 Inches</Option>
-                    <Option value="11">11 Inches</Option>
-                    <Option value="12">12 Inches</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
+                  <ConfigProvider
+                    theme={{
+                      token: {
+                        colorPrimary: "#F9B038",
+                        borderRadius: 8,
+                        controlHeight: 40,
+                      },
+                    }}
+                  >
+                    <Select placeholder="Inches" className="w-full">
+                      <Option value="General_Inquiry">Select</Option>
+                      <Option value="0">0 Inches</Option>
+                      <Option value="1">1 Inches</Option>
+                      <Option value="2">2 Inches</Option>
+                      <Option value="3">3 Inches</Option>
+                      <Option value="4">4 Inches</Option>
+                      <Option value="5">5 Inches</Option>
+                      <Option value="6">6 Inches</Option>
+                      <Option value="7">7 Inches</Option>
+                      <Option value="8">8 Inches</Option>
+                      <Option value="9">9 Inches</Option>
+                      <Option value="10">10 Inches</Option>
+                      <Option value="11">11 Inches</Option>
+                      <Option value="12">12 Inches</Option>
+                    </Select>
+                  </ConfigProvider>
+                </Form.Item>
+              </div>
+
+             
             </div>
             <Form.Item className=" pt-3">
               <button

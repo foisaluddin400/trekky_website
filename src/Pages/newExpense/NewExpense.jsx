@@ -3,7 +3,7 @@ import ss from "../../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
 const NewExpense = () => {
   return (
-    <div className="container m-auto  py-8">
+    <div className="container m-auto  py-8 px-3 lg:px-0">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">
           New Expense
@@ -15,7 +15,7 @@ const NewExpense = () => {
           </button>
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
         <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
           <div className=" text-gray-800 space-y-2  font-semibold">
             <div className="flex justify-center">

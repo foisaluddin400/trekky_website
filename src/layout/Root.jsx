@@ -5,9 +5,11 @@ import { Footer } from '../shared/Footer'
 
 export const Root = () => {
   return (
-    <div>
+    <div className=' '>
         <Navbar></Navbar>
-        <Outlet></Outlet>
+        <div className='min-h-[50vh]'>
+          <Outlet></Outlet>
+        </div>
         <Footer></Footer>
     </div>
   )

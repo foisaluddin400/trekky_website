@@ -90,12 +90,12 @@ const AddNewRepair = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date</span>}
                 name="date"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your company name!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your company name!",
+                //   },
+                // ]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -110,9 +110,9 @@ const AddNewRepair = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Vendor</span>}
                 name="vendor"
-                rules={[
-                  { required: true, message: "Please input vendor!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input vendor!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -123,9 +123,9 @@ const AddNewRepair = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>City/State</span>}
                 name="city"
-                rules={[
-                  { required: true, message: "Please input city/state!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input city/state!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -137,7 +137,7 @@ const AddNewRepair = () => {
               <Form.Item
                label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input cost!" }]}
+                // rules={[{ required: true, message: "Please input cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -150,9 +150,9 @@ const AddNewRepair = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Qty</span>}
                 name="qty"
-                rules={[
-                  { required: true, message: "Please input mileage!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input mileage!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -179,7 +179,7 @@ const AddNewRepair = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"

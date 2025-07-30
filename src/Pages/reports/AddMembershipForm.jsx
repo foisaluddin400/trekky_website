@@ -62,7 +62,7 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Name</span>}
                 name="name"
-                rules={[{ required: true, message: "Please input your name!" }]}
+                // rules={[{ required: true, message: "Please input your name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -73,12 +73,12 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date Purchase</span>}
                 name="DatePuschase"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Date Purchase!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Date Purchase!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -90,9 +90,9 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Website Link</span>}
                 name="link"
-                rules={[
-                  { required: true, message: "Please input your website!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input your website!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -103,12 +103,12 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
                 name="phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Phone Number!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Phone Number!",
+                //   },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -120,9 +120,9 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Account Number</span>}
                 name="account"
-                rules={[
-                  { required: true, message: "Please input your account!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input your account!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -133,7 +133,7 @@ const AddMembershipForm = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Amount</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input your cost!" }]}
+                // rules={[{ required: true, message: "Please input your cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -149,9 +149,9 @@ const AddMembershipForm = () => {
                 <span style={{ color: "#F9B038" }}>Membership Expiration</span>
               }
               name="repair"
-              rules={[
-                { required: true, message: "Please input your expiration!" },
-              ]}
+              // rules={[
+              //   { required: true, message: "Please input your expiration!" },
+              // ]}
             >
               <DatePicker
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -178,7 +178,7 @@ const AddMembershipForm = () => {
               <Form.Item
                 label="Notes"
                 name="feedback"
-                rules={[{ required: true, message: "Please input Notes!" }]}
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"

@@ -91,9 +91,9 @@ const AddSoldRV = () => {
                   </span>
                 }
                 name="repair"
-                rules={[
-                  { required: true, message: "Please input your expiration!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input your expiration!" },
+                // ]}
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -110,9 +110,9 @@ const AddSoldRV = () => {
                   <span style={{ color: "#F9B038" }}>Current Mileage</span>
                 }
                 name="CurrentMileage"
-                rules={[
-                  { required: true, message: "Please input Current Mileage!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "Please input Current Mileage!" },
+                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -123,7 +123,7 @@ const AddSoldRV = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Amount</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input your cost!" }]}
+                // rules={[{ required: true, message: "Please input your cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"

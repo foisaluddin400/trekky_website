@@ -24,13 +24,16 @@ const Progress = () => {
         <p className="font-semibold mb-2">Map Legend</p>
         <ul className="space-y-1 text-gray-900">
           <li className="flex items-center gap-2 text-[#F9B038]">
-            <span className="w-5 h-5 bg-green-800 rounded"></span> Camped
+            <span className="w-5 h-5 bg-green-600 rounded"></span> Camped
           </li>
           <li className="flex items-center gap-2 text-[#F9B038]">
-            <span className="w-5 h-5 bg-orange-700 rounded"></span> Traveled Though
+            <span className="w-5 h-5 bg-orange-400 rounded"></span> Traveled Though
           </li>
           <li className="flex items-center gap-2 text-[#F9B038]">
-            <span className="w-5 h-5 bg-blue-500 rounded"></span> Planning to Visit
+            <span className="w-5 h-5 bg-blue-800 rounded"></span> Planning to Visit
+          </li>
+          <li className="flex items-center gap-2 text-[#F9B038]">
+            <span className="w-5 h-5 bg-red-700 rounded"></span> Not Yet Visited
           </li>
         
         </ul>

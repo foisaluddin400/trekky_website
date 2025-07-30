@@ -24,7 +24,7 @@ const navigate = useNavigate();
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Component</span>}
               name="companyName"
-              rules={[{ required: true, message: "Please input Component!" }]}
+              // rules={[{ required: true, message: "Please input Component!" }]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -39,12 +39,12 @@ const navigate = useNavigate();
                 </span>
               }
               name="maintentance"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Maintenance to be Performed!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input Maintenance to be Performed!",
+              //   },
+              // ]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -70,7 +70,7 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Initial</span>}
                 name="Initial"
-                rules={[{ required: true, message: "Please input Initial!" }]}
+                // rules={[{ required: true, message: "Please input Initial!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -83,7 +83,7 @@ const navigate = useNavigate();
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Regular</span>}
                 name="Regular"
-                rules={[{ required: true, message: "Please input Regular!" }]}
+                // rules={[{ required: true, message: "Please input Regular!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -95,7 +95,7 @@ const navigate = useNavigate();
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Notes</span>}
               name="feedback"
-              rules={[{ required: true, message: "Please input Notes!" }]}
+              // rules={[{ required: true, message: "Please input Notes!" }]}
             >
               <Input.TextArea
                 className="w-full bg-[#F9B038] border border-transparent py-2"

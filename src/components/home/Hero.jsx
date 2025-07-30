@@ -53,7 +53,8 @@ const Hero = () => {
     <div className="lg:grid grid-cols-2 container m-auto gap-11 lg:mt-9 text-[#F9B038]">
       <img className="w-full object-cover" src={hero} alt="" />
       <div className="flex items-center px-3">
-        <div>
+       <div>
+         <div>
           <h1 className="md:text-6xl text-3xl mt-5 lg:mt-0 font-bold text-[#F9B038]">
             Welcome Eddie!
           </h1>
@@ -96,7 +97,14 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        <div className="flex items-center gap-4 mt-8">
+          <div className="w-[40px] h-[40px] bg-[#78ff43] rounded-full"></div>
+          <h1 className="text-[#F9B038]">Maintenance Up To Date</h1>
+        </div>
+       </div>
+        
       </div>
+      
 
       <Modal
         centered

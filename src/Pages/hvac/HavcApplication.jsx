@@ -12,7 +12,7 @@ const HavcApplication = () => {
   return (
     <div className='container m-auto py-6 pt-11'>
         <h1 className="text-3xl text-[#F9B038] font-semibold ">
-          Memberships
+         HAVC/Appliances/Plumbing
         </h1>
       {/* <h1 className='text-6xl font-bold text-[#484848]'>Welcome Eddie!</h1>
       <p className='max-w-2xl pt-4'>Welcome to My RV Vault. Get started by tracking your latest expenses, managing repairs, or reviewing your checklists. We've got everything you need to maintain your RV life in one place!"</p> */}

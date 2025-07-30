@@ -27,13 +27,13 @@ const props = {
   },
 };
 const Add = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
     // const rawMileage = values.qty.replace(/,/g, "");
     // console.log({ ...values, qty: rawMileage });
-    console.log(values)
-    navigate("/AddNewMaintanceSchedule");
+    console.log(values);
+    navigate("/details/AddHeater");
   };
 
   const [qty, setMileage] = useState("");
@@ -50,18 +50,20 @@ const Add = () => {
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-//   const handleChange = (e) => {
-//     const input = e.target.value;
-//     const formatted = formatWithCommas(input);
-//     setMileage(formatted);
-//     form.setFieldsValue({ qty: formatted });
-//   };
+  //   const handleChange = (e) => {
+  //     const input = e.target.value;
+  //     const formatted = formatWithCommas(input);
+  //     setMileage(formatted);
+  //     form.setFieldsValue({ qty: formatted });
+  //   };
 
   return (
     <div className="container m-auto">
       <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
         <div className="lg:w-[300px] pb-7 lg:pb-0">
-          <h1 className="text-3xl font-semibold text-[#F9B038]">Add</h1>
+          <h1 className="text-3xl font-semibold text-[#F9B038]">
+            Add Air Conditioner Information
+          </h1>
         </div>
         <div className="max-w-4xl ">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -100,18 +102,30 @@ const Add = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
-                name="Location"
-                // rules={[{ required: true, message: "Please input Location!" }]}
+                name="class"
               >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Location"
-                />
+                <ConfigProvider
+                  theme={{
+                    token: {
+                      colorPrimary: "#F9B038",
+                      borderRadius: 8,
+                      controlHeight: 40,
+                    },
+                  }}
+                >
+                  <Select placeholder="Select Location" className="w-full">
+                    <Option value="General_Inquiry">Select</Option>
+                    <Option value="Service_Request">Front</Option>
+                    <Option value="Partnership_Inquiry">Mid</Option>
+                    <Option value="Partnership_Inquiry">Rear</Option>
+                    <Option value="Partnership_Inquiry">Other</Option>
+                  </Select>
+                </ConfigProvider>
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
-                rules={[{ required: true, message: "Please input cost!" }]}
+                // rules={[{ required: true, message: "Please input cost!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -124,9 +138,9 @@ const Add = () => {
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Model Number</span>}
               name="model"
-            //   rules={[
-            //     { required: true, message: "Please input Model Number!" },
-            //   ]}
+              //   rules={[
+              //     { required: true, message: "Please input Model Number!" },
+              //   ]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -161,15 +175,13 @@ const Add = () => {
             </div>
 
             <Form.Item className=" pt-7">
-              
-                <button
-                  type="primary"
-                  htmlType="submit"
-                  className="w-full bg-[#F9B038] py-2"
-                >
-                  Save
-                </button>
-              
+              <button
+                type="primary"
+                htmlType="submit"
+                className="w-full bg-[#F9B038] py-2"
+              >
+                Save
+              </button>
             </Form.Item>
           </Form>
         </div>

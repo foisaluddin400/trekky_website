@@ -37,12 +37,12 @@ const WelcomeEdiie = () => {
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Insurance Info</p></Link>
           </div>
-          <div className='bg-[#F59B07] py-6 rounded-lg'>
+          {/* <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/addMembership'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Recalls</p></Link>
-          </div>
+          </div> */}
           <div className='bg-[#F59B07] py-6 rounded-lg'>
             <Link to={'/newMaintenance'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
@@ -74,7 +74,7 @@ const WelcomeEdiie = () => {
               <p className='text-lg font-semibold text-center pt-5'>Update Repair Order</p></Link>
           </div> */}
           <div className='bg-[#F59B07] py-6 rounded-lg'>
-            <Link to={'/addMembership'}><div className='flex justify-center'>
+            <Link to={'/checklist'}><div className='flex justify-center'>
               <img src={logo1} alt="logo" />
             </div>
               <p className='text-lg font-semibold text-center pt-5'>Checklists</p></Link>

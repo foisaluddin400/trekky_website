@@ -54,7 +54,7 @@ export const Footer = () => {
               />
               <button className="bg-[#27E2F5] rounded ml-2 p-2">Submit</button>
             </div>
-            <h2 className="text-lg text-center mt-11 font-semibold mb-4">Social Media</h2>
+            {/* <h2 className="text-lg text-center mt-11 font-semibold mb-4">Social Media</h2>
             <div className="flex space-x-5 items-center">
               <div className="text-center">
                 <div className="flex justify-center">
@@ -80,7 +80,7 @@ export const Footer = () => {
                 </div>
                 <p>Linkedin</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

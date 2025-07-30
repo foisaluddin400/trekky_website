@@ -1,97 +1,249 @@
-import React from 'react'
-import car from '../../assets/Home/car.png'
-import car1 from '../../assets/Home/car1.png'
-import car2 from '../../assets/Home/car2.png'
-import { Link } from 'react-router-dom'
-import { BiEdit } from 'react-icons/bi'
+import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import Dragger from "antd/es/upload/Dragger";
+import React, { useState } from "react";
+import { DeleteOutlined, EyeOutlined, InboxOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+import { Link } from "react-router-dom";
+import { BsHeartFill } from "react-icons/bs";
+dayjs.extend(customParseFormat);
+const dateFormat = "YYYY-MM-DD";
+const props = {
+  name: "file",
+  multiple: true,
+  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+  onChange(info) {
+    const { status } = info.file;
+    if (status !== "uploading") {
+      console.log(info.file, info.fileList);
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+  onDrop(e) {
+    console.log("Dropped files", e.dataTransfer.files);
+  },
+};
 const ViewTrips = () => {
-    const rvData = [
-        {
-            id: 1,
-            name: "Winnebago Minnie 2500FL",
-            vin: "UK",
-            serial: "542151",
-            fuelType: "Gasoline",
-            size: "27ft / 400 HP",
-            oilFilter: "OF-1234",
-            fuelFilter: "FF-5678",
-            status: "Never miss a service again. Get reminders, log expenses, and store important documents — so you can focus on the adventure, not the admin.",
-            image: car,
-        },
-        {
-            id: 2,
-            name: "Winnebago Minnie 2500FL",
-            vin: "Canada",
-            serial: "542151",
-            fuelType: "Gasoline",
-            size: "27ft / 400 HP",
-            oilFilter: "OF-1234",
-            fuelFilter: "FF-5678",
-            status: "Never miss a service again. Get reminders, log expenses, and store important documents — so you can focus on the adventure, not the admin.",
-            image: car1,
-        },
-        {
-            id: 3,
-            name: "Winnebago Minnie 2500FL",
-            vin: "USA",
-            serial: "542151",
-            fuelType: "Gasoline",
-            size: "27ft / 400 HP",
-            oilFilter: "OF-1234",
-            fuelFilter: "FF-5678",
-            status: "Never miss a service again. Get reminders, log expenses, and store important documents — so you can focus on the adventure, not the admin.",
-            image: car2,
-        },
-        {
-            id: 4,
-            name: "Winnebago Minnie 2500FL",
-            vin: "USA",
-            serial: "542151",
-            fuelType: "Gasoline",
-            size: "27ft / 400 HP",
-            oilFilter: "OF-1234",
-            fuelFilter: "FF-5678",
-            status: "Never miss a service again. Get reminders, log expenses, and store important documents — so you can focus on the adventure, not the admin.",
-            image: car1,
-        },
-
-    ];
-    return (
-        <div>
-            <div className='flex justify-between py-2'>
-                <h1 className="text-xl font-semibold text-[#F9B038]">Recent Trip</h1>
-                <Link to={'/viewAllTrip'}><button className='hover:border-b text-[#F9B038]'>View All</button></Link>
+  const [form] = Form.useForm();
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+  return (
+    <div className="container m-auto  py-8 ">
+      <div className="flex justify-between">
+        <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">View Trips</h1>{" "}
+        <div></div>
+      </div>
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className=" ">
+              <div>
+                <span>Trip Title :</span>
+                <span className="font-normal">Travel Dhaka</span>
+              </div>
             </div>
-            <div className="  ">
-                {rvData.map((rv) => (
-                    <div
-                        key={rv.id}
-                        className=" flex justify-between bg-[#F9B038] border-b gap-4 p-2  "
-                    >
-                        <div className='flex'>
-                            <img
-                                src={rv.image}
-                                alt={rv.name}
-                                className="w-[100px] h-[100px] object-cover rounded"
-                            />
-                            <div className=" ">
-                                <div className="text-xl py-2 font-semibold text-gray-900 ">
-                                    <p>
-                                        {rv.name}
-                                    </p>
-
-                                </div>
-
-                                <p className=" text-gray-500">{rv.vin}</p>
-                                <p className=" text-gray-500">{rv.serial}</p>
-                            </div>
-                        </div>
-                        <Link to={'/campgroundReview?tab=updateState'}><button className='text-xl'><BiEdit></BiEdit></button></Link>
-                    </div>
-                ))}
+            <div className=" gap-4">
+              <span>Start Date</span>
+              <span className="font-normal">03-24-2025</span>
             </div>
+            <div className=" gap-4">
+              <span>End Date</span>
+              <span className="font-normal">08-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>State :</span>
+              <span className="font-normal">Alabama</span>
+            </div>
+            <div className=" gap-4">
+              <span>Visit Status :</span>
+              <span className="font-normal">Comped</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Trip Type :</span>
+              <span className="font-normal">Travel</span>
+            </div>
+            <div className=" gap-4">
+              <span>Notes :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
+                natus?
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/campgroundReview?tab=updateState"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
         </div>
-    )
-}
+       <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className=" ">
+              <div>
+                <span>Trip Title :</span>
+                <span className="font-normal">Travel Dhaka</span>
+              </div>
+            </div>
+            <div className=" gap-4">
+              <span>Start Date</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>End Date</span>
+              <span className="font-normal">08-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>State :</span>
+              <span className="font-normal">Alabama</span>
+            </div>
+            <div className=" gap-4">
+              <span>Visit Status :</span>
+              <span className="font-normal">Comped</span>
+            </div>
 
-export default ViewTrips
+            <div className=" gap-4">
+              <span>Trip Type :</span>
+              <span className="font-normal">Travel</span>
+            </div>
+            <div className=" gap-4">
+              <span>Notes :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
+                natus?
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/campgroundReview?tab=updateState"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+       <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className=" ">
+              <div>
+                <span>Trip Title :</span>
+                <span className="font-normal">Travel Dhaka</span>
+              </div>
+            </div>
+            <div className=" gap-4">
+              <span>Start Date</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>End Date</span>
+              <span className="font-normal">08-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>State :</span>
+              <span className="font-normal">Alabama</span>
+            </div>
+            <div className=" gap-4">
+              <span>Visit Status :</span>
+              <span className="font-normal">Comped</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Trip Type :</span>
+              <span className="font-normal">Travel</span>
+            </div>
+            <div className=" gap-4">
+              <span>Notes :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
+                natus?
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/campgroundReview?tab=updateState"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
+          <div className=" text-gray-800 space-y-2  font-semibold">
+            <div className=" ">
+              <div>
+                <span>Trip Title :</span>
+                <span className="font-normal">Travel Dhaka</span>
+              </div>
+            </div>
+            <div className=" gap-4">
+              <span>Start Date</span>
+              <span className="font-normal">03-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>End Date</span>
+              <span className="font-normal">08-24-2025</span>
+            </div>
+            <div className=" gap-4">
+              <span>State :</span>
+              <span className="font-normal">Alabama</span>
+            </div>
+            <div className=" gap-4">
+              <span>Visit Status :</span>
+              <span className="font-normal">Comped</span>
+            </div>
+
+            <div className=" gap-4">
+              <span>Trip Type :</span>
+              <span className="font-normal">Travel</span>
+            </div>
+            <div className=" gap-4">
+              <span>Notes :</span>
+              <span className="font-normal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
+                natus?
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-3">
+            {" "}
+            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
+              Delete
+            </button>
+            <Link to={"/campgroundReview?tab=updateState"}>
+              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
+                Update
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewTrips;

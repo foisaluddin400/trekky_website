@@ -43,7 +43,7 @@ const CampgroundReview = () => {
   return (
     <div className="container m-auto px-3 lg:px-0 mt-6">
       <div className="flex gap-4 mb-4">
-        {["progress", "newTrip", "updateState", "viewTrips"].map((tab) => (
+        {["progress", "newTrip",  "viewTrips"].map((tab) => (
           <button
             key={tab}
             className={`px-4 py-2 rounded-md text-sm font-medium ${

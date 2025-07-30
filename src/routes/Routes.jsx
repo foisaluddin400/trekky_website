@@ -73,6 +73,26 @@ import OutdoorInfo from "../Pages/hvac/OutdoorInfo";
 import GPSInfo from "../Pages/hvac/GPSInfo";
 import DVDInfo from "../Pages/hvac/DVDInfo";
 import AddSoldRV from "../Pages/rvSold/AddSoldRV";
+import CheckList from "../Pages/checklist/CheckList";
+import AddChecklist from "../Pages/checklist/AddChecklist";
+import ChecklistDetails from "../Pages/checklist/ChecklistDetails";
+import AddHeater from "../Pages/hvac/AddHeater";
+import AddWaterPump from "../Pages/hvac/AddWaterPump";
+import AddWasherInfo from "../Pages/hvac/AddWasherInfo";
+import AddWaterHeater from "../Pages/hvac/AddWaterHeater";
+import AddToiletInfo from "../Pages/hvac/AddToiletInfo";
+import AddTvInfo from "../Pages/hvac/AddTvInfo";
+import AddDryerInfo from "../Pages/hvac/AddDryerInfo";
+import AddExhaustFansInfo from "../Pages/hvac/AddExhaustFansInfo";
+import AddVentFans from "../Pages/hvac/AddVentFans";
+import AddDishWasherInfo from "../Pages/hvac/AddDishWasherInfo";
+import AddCellingFans from "../Pages/hvac/AddCellingFans";
+import AddDvdInfo from "../Pages/hvac/AddDvdInfo";
+import AddgpsInfo from "../Pages/hvac/AddgpsInfo";
+import AddOutdoorRadio from "../Pages/hvac/AddOutdoorRadio";
+import AddSurround from "../Pages/hvac/AddSurround";
+import AddInternet from "../Pages/hvac/AddInternet";
+import AddRouter from "../Pages/hvac/AddRouter";
 
 export const router = createBrowserRouter([
   {
@@ -206,7 +226,76 @@ export const router = createBrowserRouter([
         path: "/details/Router",
         element: <RouterInfo></RouterInfo>
       },
+   {
+        path: "/details/AddHeater",
+        element: <AddHeater></AddHeater>
+      },
+       {
+        path: "/details/AddWaterPump",
+        element: <AddWaterPump></AddWaterPump>
+      },
      
+      {
+        path: "/details/AddWasherInfo",
+        element: <AddWasherInfo></AddWasherInfo>
+      },
+      {
+        path: "/details/AddWaterHeater",
+        element: <AddWaterHeater></AddWaterHeater>
+      },
+      {
+        path: "/details/AddToiletInfo",
+        element: <AddToiletInfo></AddToiletInfo>
+      },
+      {
+        path: "/details/AddTvInfo",
+        element: <AddTvInfo></AddTvInfo>
+      },
+      {
+        path: "/details/AddDryerInfo",
+        element: <AddDryerInfo></AddDryerInfo>
+      },
+      {
+        path: "/details/AddExhaustFansInfo",
+        element: <AddExhaustFansInfo></AddExhaustFansInfo>
+      },
+      {
+        path: "/details/AddVentFans",
+        element: <AddVentFans></AddVentFans>
+      },
+      {
+        path: "/details/AddDishWasherInfo",
+        element: <AddDishWasherInfo></AddDishWasherInfo>
+      },
+      {
+        path: "/details/AddCellingFans",
+        element: <AddCellingFans></AddCellingFans>
+      },
+      {
+        path: "/details/AddDvdInfo",
+        element: <AddDvdInfo></AddDvdInfo>
+      },
+      {
+        path: "/details/AddgpsInfo",
+        element: <AddgpsInfo></AddgpsInfo>
+      },
+     {
+        path: "/details/AddOutdoorRadio",
+        element: <AddOutdoorRadio></AddOutdoorRadio>
+      },
+      {
+        path: "/details/AddSurround",
+        element: <AddSurround></AddSurround>
+      },
+      {
+        path: "/details/AddInternet",
+        element: <AddInternet></AddInternet>
+      },
+      {
+        path: "/details/AddRouter",
+        element: <AddRouter></AddRouter>
+      },
+  
       {
         path: "/Add",
         element: <Add></Add>,
@@ -299,6 +388,18 @@ export const router = createBrowserRouter([
       {
         path: "/addSoldRv",
         element: <AddSoldRV></AddSoldRV>
+      },
+      {
+        path: "/checklist",
+        element: <CheckList></CheckList>
+      },
+       {
+        path: "/checklistDetails",
+        element: <ChecklistDetails></ChecklistDetails>
+      },
+       {
+        path: "/addChecklist",
+        element: <AddChecklist></AddChecklist>
       },
       {
         path: "/viewAllTrip",

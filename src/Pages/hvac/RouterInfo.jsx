@@ -48,12 +48,12 @@ const dummyData = [
 
 const RouterInfo = () => {
  return (
-    <div className="container m-auto py-8">
+    <div className="container m-auto py-8 px-3 lg:px-0">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">
           Router Information
         </h1>
-        <Link to={"/Add"}>
+        <Link to={"/details/AddRouter"}>
           <button className="border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md font-medium">
             Add
           </button>
