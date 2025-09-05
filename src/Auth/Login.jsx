@@ -5,50 +5,46 @@ import { useEffect, useState } from "react";
 import Logo from "../assets/Home/hero.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { useLoginUserMutation } from "../Pages/redux/api/userApi";
+import { useDispatch } from "react-redux";
+import { setToken } from "../Pages/redux/features/auth/authSlice";
 
 const Login = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [loginAdmin] = useLoginUserMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    // Check if route state requests to show modal
     if (location.state?.showModal) {
       setModalVisible(true);
-
-      // Auto close modal after 5 seconds
       const timer = setTimeout(() => {
         setModalVisible(false);
       }, 3000);
-
-      // Clean up timer on unmount or if modal closes early
       return () => clearTimeout(timer);
     }
   }, [location.state]);
 
   const onFinish = async (values) => {
-    message.success("Login successful!");
-    navigate("/addRv");
-    // setLoading(true);
-    // try {
+    setLoading(true);
+    try {
+      const payload = await loginAdmin(values).unwrap();
 
-    //   const payload = await loginAdmin(values).unwrap();
-
-    //   if (payload?.success) {
-    //     // localStorage.setItem("accessToken", payload?.data?.accessToken);
-    //     dispatch(setToken(payload?.data?.accessToken))
-    //     message.success("Login successful!");
-    //     navigate("/");
-    //   } else {
-    //     message.error(payload?.message || "Login failed!");
-    //   }
-    // } catch (error) {
-
-    //   message.error(error?.data?.message || "Something went wrong. Try again!");
-    // } finally {
-    //   setLoading(false);
-
-    // }
+      if (payload) {
+        console.log(payload?.success)
+        // localStorage.setItem("accessToken", payload?.data?.accessToken);
+        dispatch(setToken(payload?.accessToken));
+        message.success(payload?.message);
+        navigate("/addRv");
+      } else {
+        message.error(payload?.message || "Login failed!");
+      }
+    } catch (error) {
+      message.error(error?.data?.message || "Something went wrong. Try again!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -100,13 +96,11 @@ const Login = () => {
                     },
                   ]}
                 >
-             
-                    <Input
+                  <Input
                     type="email"
-                      className="bg-[#F9B038] border-none py-3 hover:bg-[#F9B038] "
-                      placeholder="Enter your Email"
-                    />
-             
+                    className="bg-[#F9B038] border-none py-3 hover:bg-[#F9B038] "
+                    placeholder="Enter your Email"
+                  />
                 </Form.Item>
 
                 <Form.Item
@@ -127,7 +121,7 @@ const Login = () => {
                     <Checkbox className="text-[#F9B038]">Remember me</Checkbox>
                   </Form.Item>
                   <Link
-                    to={"/forgetpassword"}
+                    to={"/auth/forgot-password"}
                     className="text-sm text-[#F9B038] hover:underline"
                   >
                     Forget password?

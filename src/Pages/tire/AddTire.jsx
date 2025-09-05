@@ -1,68 +1,97 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
-import Dragger from "antd/es/upload/Dragger";
+import { DatePicker, Form, Input, message, Select, Upload } from "antd";
+
 import React, { useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
+
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
+import { useAddTireMutation } from "../redux/api/routesApi";
+
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
+const onPreview = async (file) => {
+  let src =
+    file.url ||
+    (await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file.originFileObj);
+      reader.onload = () => resolve(reader.result);
+    }));
+  const image = new Image();
+  image.src = src;
+  const imgWindow = window.open(src);
+  imgWindow?.document.write(image.outerHTML);
 };
 
 const AddTire = () => {
   const [form] = Form.useForm();
   const [cost, setCost] = useState("");
+  const [fileList, setFileList] = useState([]);
+  const [addTire] = useAddTireMutation();
   const formatWithCommas = (value) => {
     const onlyNumbers = value.replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const navigate = useNavigate();
-  const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    navigate("/add");
+  const navigate = useNavigate();
+const handleCostChange = (e) => {
+  const input = e.target.value;
+  const onlyNumbers = input.replace(/[^\d]/g, ""); // remove non-numeric
+  const formatted = onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // add commas
+  setCost(formatted);
+  form.setFieldsValue({ cost: onlyNumbers }); // backend এ numeric value রাখবে
+};
+
+
+  const handleSubmit = async (values) => {
+    console.log("Form Values:", values?.cost);
+
+    const formData = new FormData();
+    formData.append("mfg", values.Manufacturer || "");
+    formData.append("location", values.location || "");
+    formData.append(
+      "dateOfPurchase",
+      values.effectiveDate ? dayjs(values.effectiveDate).format(dateFormat) : ""
+    );
+
+formData.append("cost", values.cost ? Number(values.cost) : "");
+
+
+
+    formData.append("notes", values.notes || "");
+
+    // Multiple image upload
+    fileList.forEach((file) => {
+      if (file.originFileObj) {
+        formData.append("images", file.originFileObj);
+      }
+    });
+
+    try {
+      const res = await addTire(formData).unwrap();
+      message.success(res?.message || "Saved successfully");
+      navigate("/add");
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong");
+    }
   };
   return (
     <div className="container m-auto">
-      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
+      <div className=" lg:mt-11 mt-6 px-3">
         <div className="lg:w-[300px] pb-7 lg:pb-0">
           <h1 className="text-3xl text-[#F9B038] font-semibold ">Add Tire</h1>
         </div>
-        <div className="max-w-4xl text-[#F9B038]">
+        <div className="max-w-4xl m-auto text-[#F9B038]">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
                 name="Manufacturer"
-                // rules={[
-                //   { required: true, message: "Please input Manufacturer!" },
-                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -72,17 +101,11 @@ const AddTire = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date Purchase</span>}
-                name="DatePuschase"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input your Date Purchase!",
-                //   },
-                // ]}
+                name="dateOfPurchase"
               >
-                <Input
+                <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Date Purchase"
+                  format={dateFormat}
                 />
               </Form.Item>
             </div>
@@ -90,7 +113,6 @@ const AddTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Tire Size</span>}
                 name="size"
-                // rules={[{ required: true, message: "Please input Tire Size!" }]}
               >
                 <Input
                   type="number"
@@ -101,13 +123,7 @@ const AddTire = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
-                name="Location"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input Location!",
-                //   },
-                // ]}
+                name="location"
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -116,36 +132,32 @@ const AddTire = () => {
               </Form.Item>
             </div>
 
-            <Form.Item
-              label={<span style={{ color: "#F9B038" }}>Cost</span>}
-              name="cost"
-            //   rules={[{ required: true, message: "Please input cost!" }]}
-            >
-              <Input
-                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                placeholder="$"
-                value={cost}
-                onChange={handleCostChange}
-              />
-            </Form.Item>
+           <Form.Item
+  label={<span style={{ color: "#F9B038" }}>Cost</span>}
+  name="cost"
+>
+  <Input
+    className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+    placeholder="$"
+    value={cost}
+    onChange={handleCostChange}
+  />
+</Form.Item>
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon ">
-                  <InboxOutlined />
-                </p>
-                <p className=" text-[#F9B038]">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="text-[#F9B038]">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onChange={onChange}
+                onPreview={onPreview}
+                multiple={true}
+              >
+                {fileList.length < 5 && "+ Upload"}
+              </Upload>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
-                name="feedback"
-                // rules={[{ required: true, message: "Please input Notes!" }]}
+                name="notes"
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"

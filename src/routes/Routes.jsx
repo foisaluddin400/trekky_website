@@ -10,9 +10,9 @@ import { BreakFixServicesPage } from "../Pages/ServicesPage/BreakFixServicesPage
 import { SubmitTicketPage } from "../Pages/SubmitTicketPage.jsx/SubmitTicketPage";
 import { BlogPage } from "../Pages/BlogPage/BlogPage";
 import Login from "../Auth/Login";
-import { ForgotPassword } from "../Auth/ForgotPassword";
-import { Verification } from "../Auth/Verification";
-import { NewPassword } from "../Auth/NewPassword";
+import  ForgotPassword  from "../Auth/ForgotPassword";
+import  Verification  from "../Auth/Verification";
+import  NewPassword  from "../Auth/NewPassword";
 import SignUp from "../Auth/SignUp";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import { OngoingTicketPage } from "../Pages/ProfilePage/OngoingTicketPage";
@@ -93,6 +93,7 @@ import AddOutdoorRadio from "../Pages/hvac/AddOutdoorRadio";
 import AddSurround from "../Pages/hvac/AddSurround";
 import AddInternet from "../Pages/hvac/AddInternet";
 import AddRouter from "../Pages/hvac/AddRouter";
+import SignVerify from "../Auth/SignVerify";
 
 export const router = createBrowserRouter([
   {
@@ -463,6 +464,10 @@ export const router = createBrowserRouter([
   {
     path: "/auth/signUp",
     element: <SignUp></SignUp>,
+  },
+    {
+    path: "/auth/signUp/verify-email",
+    element: <SignVerify></SignVerify>
   },
   {
     path: "/auth/forgot-password",

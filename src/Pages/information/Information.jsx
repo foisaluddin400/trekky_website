@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import { Button, ConfigProvider, DatePicker, Form, Input, message, Select } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useEffect } from "react";
 import {
@@ -9,14 +9,48 @@ import {
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate } from "react-router-dom";
+import { useAddChassisMutation } from "../redux/api/routesApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
 const Information = () => {
+
+const [addChassisInformation] = useAddChassisMutation()
+
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
-    navigate("/insuranceCompanyInfoForm");
+
+    const data = {
+      mfg : values.Manufacturer,
+      modelNo : values.Model,
+      name : values.Name,
+      serialId : values.Serial,
+      fuelType : values.FuelType,
+     
+    engineModel: values.engineModel || "", 
+    hp: Number(values.Horsepower) || 0, 
+    belt: values.belts?.map((item) => ({
+      name: item.beltName,
+      partNo: Number(item.partNumber),
+    })) || [],
+    oilFilter: values.Oil?.map((item) => ({
+      name: item.beltName,
+      partNo: Number(item.partNumber),
+    })) || [],
+    fuelFilter: values.Fuel?.map((item) => ({
+      name: item.beltName,
+      partNo: Number(item.partNumber),
+    })) || [],
+  };
+
+  try {
+      const res = await addChassisInformation(data).unwrap();
+      message.success(res?.message);
+         navigate("/insuranceCompanyInfoForm");
+    } catch (err) {
+      message.error(err?.data?.message);
+    }
   };
   useEffect(() => {
     form.setFieldsValue({ cooking: [""], ingredients: [""], nutrition: [""] });
@@ -93,7 +127,7 @@ const Information = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Engine Model</span>}
-                name="filter"
+                name="engineModel"
                 // rules={[
                 //   { required: true, message: "Please input Engine Model" },
                 // ]}
@@ -119,57 +153,65 @@ const Information = () => {
             <Form.List name="belts" initialValue={[{}]}>
               {(fields, { add, remove }) => (
                 <>
-                 <div className="grid grid-cols-12">
-                  <div className="col-span-11">
-                     {fields.map(({ key, name, ...restField }) => (
-                    <div
-                      key={key}
-                      className="grid grid-cols-12 gap-4 mb-3 items-center"
-                    >
-                      {/* Belt Name with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Belt Name</span>}
-                        {...restField}
-                        name={[name, "beltName"]}
-                        className="col-span-6"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Belt Name"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-11">
+                      {fields.map(({ key, name, ...restField }) => (
+                        <div
+                          key={key}
+                          className="grid grid-cols-12 gap-4 mb-3 items-center"
+                        >
+                          {/* Belt Name with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>
+                                Belt Name
+                              </span>
+                            }
+                            {...restField}
+                            name={[name, "beltName"]}
+                            className="col-span-6"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Belt Name"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Part Number with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Part Number</span>}
-                        {...restField}
-                        name={[name, "partNumber"]}
-                        className="col-span-5"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Part Number"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                          {/* Part Number with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>
+                                Part Number
+                              </span>
+                            }
+                            {...restField}
+                            name={[name, "partNumber"]}
+                            className="col-span-5"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Part Number"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Remove Button */}
-                      {fields.length > 1 && (
-                        <MinusCircleOutlined
-                          onClick={() => remove(name)}
-                          className="text-red-500 col-span-1 cursor-pointer"
-                        />
-                      )}
+                          {/* Remove Button */}
+                          {fields.length > 1 && (
+                            <MinusCircleOutlined
+                              onClick={() => remove(name)}
+                              className="text-red-500 col-span-1 cursor-pointer"
+                            />
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                  </div>
 
-                  {/* Add Belt Button */}
-                  <Form.Item>
-                    <div>
-                      <Button
-                    style={{
+                    {/* Add Belt Button */}
+                    <Form.Item>
+                      <div>
+                        <Button
+                          style={{
                             backgroundColor: "#00000000",
                             color: "#fff",
                             border: "1px solid #F9B038",
@@ -177,77 +219,82 @@ const Information = () => {
                             width: "32px",
                             borderRadius: "50%",
                           }}
-                      type="dashed"
-                      onClick={() => add()}
-                      icon={<PlusOutlined />}
-                      className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
-                    >
-                     
-                    </Button>
-                    </div>
-                  </Form.Item>
-                 </div>
+                          type="dashed"
+                          onClick={() => add()}
+                          icon={<PlusOutlined />}
+                          className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
+                        ></Button>
+                      </div>
+                    </Form.Item>
+                  </div>
                 </>
               )}
             </Form.List>
 
-
-              <h1 className="text-center text-[#F9B038] underline mb-3">Oil Filter</h1>
+            <h1 className="text-center text-[#F9B038] underline mb-3">
+              Oil Filter
+            </h1>
 
             <Form.List name="Oil" initialValue={[{}]}>
               {(fields, { add, remove }) => (
                 <>
-                 <div className="grid grid-cols-12">
-                  <div className="col-span-11">
-                     {fields.map(({ key, name, ...restField }) => (
-                    <div
-                      key={key}
-                      className="grid grid-cols-12 gap-4 mb-3 items-center"
-                    >
-                      {/* Belt Name with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Name</span>}
-                        {...restField}
-                        name={[name, "beltName"]}
-                        className="col-span-6"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Name"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-11">
+                      {fields.map(({ key, name, ...restField }) => (
+                        <div
+                          key={key}
+                          className="grid grid-cols-12 gap-4 mb-3 items-center"
+                        >
+                          {/* Belt Name with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>Name</span>
+                            }
+                            {...restField}
+                            name={[name, "beltName"]}
+                            className="col-span-6"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Name"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Part Number with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Part Number</span>}
-                        {...restField}
-                        name={[name, "partNumber"]}
-                        className="col-span-5"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Part Number"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                          {/* Part Number with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>
+                                Part Number
+                              </span>
+                            }
+                            {...restField}
+                            name={[name, "partNumber"]}
+                            className="col-span-5"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Part Number"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Remove Button */}
-                      {fields.length > 1 && (
-                        <MinusCircleOutlined
-                          onClick={() => remove(name)}
-                          className="text-red-500 col-span-1 cursor-pointer"
-                        />
-                      )}
+                          {/* Remove Button */}
+                          {fields.length > 1 && (
+                            <MinusCircleOutlined
+                              onClick={() => remove(name)}
+                              className="text-red-500 col-span-1 cursor-pointer"
+                            />
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                  </div>
 
-                  {/* Add Belt Button */}
-                  <Form.Item>
-                    <div>
-                      <Button
-                    style={{
+                    {/* Add Belt Button */}
+                    <Form.Item>
+                      <div>
+                        <Button
+                          style={{
                             backgroundColor: "#00000000",
                             color: "#fff",
                             border: "1px solid #F9B038",
@@ -255,77 +302,82 @@ const Information = () => {
                             width: "32px",
                             borderRadius: "50%",
                           }}
-                      type="dashed"
-                      onClick={() => add()}
-                      icon={<PlusOutlined />}
-                      className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
-                    >
-                     
-                    </Button>
-                    </div>
-                  </Form.Item>
-                 </div>
+                          type="dashed"
+                          onClick={() => add()}
+                          icon={<PlusOutlined />}
+                          className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
+                        ></Button>
+                      </div>
+                    </Form.Item>
+                  </div>
                 </>
               )}
             </Form.List>
 
-
-             <h1 className="text-center text-[#F9B038] underline mb-3">Fuel Filter</h1>
+            <h1 className="text-center text-[#F9B038] underline mb-3">
+              Fuel Filter
+            </h1>
 
             <Form.List name="Fuel" initialValue={[{}]}>
               {(fields, { add, remove }) => (
                 <>
-                 <div className="grid grid-cols-12">
-                  <div className="col-span-11">
-                     {fields.map(({ key, name, ...restField }) => (
-                    <div
-                      key={key}
-                      className="grid grid-cols-12 gap-4 mb-3 items-center"
-                    >
-                      {/* Belt Name with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Name</span>}
-                        {...restField}
-                        name={[name, "beltName"]}
-                        className="col-span-6"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Name"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-11">
+                      {fields.map(({ key, name, ...restField }) => (
+                        <div
+                          key={key}
+                          className="grid grid-cols-12 gap-4 mb-3 items-center"
+                        >
+                          {/* Belt Name with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>Name</span>
+                            }
+                            {...restField}
+                            name={[name, "beltName"]}
+                            className="col-span-6"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Name"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Part Number with Label */}
-                      <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Part Number</span>}
-                        {...restField}
-                        name={[name, "partNumber"]}
-                        className="col-span-5"
-                        // rules={[{ required: true, message: "Required" }]}
-                      >
-                        <Input
-                          placeholder="Enter Part Number"
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                        />
-                      </Form.Item>
+                          {/* Part Number with Label */}
+                          <Form.Item
+                            label={
+                              <span style={{ color: "#F9B038" }}>
+                                Part Number
+                              </span>
+                            }
+                            {...restField}
+                            name={[name, "partNumber"]}
+                            className="col-span-5"
+                            // rules={[{ required: true, message: "Required" }]}
+                          >
+                            <Input
+                              placeholder="Enter Part Number"
+                              className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                            />
+                          </Form.Item>
 
-                      {/* Remove Button */}
-                      {fields.length > 1 && (
-                        <MinusCircleOutlined
-                          onClick={() => remove(name)}
-                          className="text-red-500 col-span-1 cursor-pointer"
-                        />
-                      )}
+                          {/* Remove Button */}
+                          {fields.length > 1 && (
+                            <MinusCircleOutlined
+                              onClick={() => remove(name)}
+                              className="text-red-500 col-span-1 cursor-pointer"
+                            />
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                  </div>
 
-                  {/* Add Belt Button */}
-                  <Form.Item>
-                    <div>
-                      <Button
-                    style={{
+                    {/* Add Belt Button */}
+                    <Form.Item>
+                      <div>
+                        <Button
+                          style={{
                             backgroundColor: "#00000000",
                             color: "#fff",
                             border: "1px solid #F9B038",
@@ -333,48 +385,17 @@ const Information = () => {
                             width: "32px",
                             borderRadius: "50%",
                           }}
-                      type="dashed"
-                      onClick={() => add()}
-                      icon={<PlusOutlined />}
-                      className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
-                    >
-                     
-                    </Button>
-                    </div>
-                  </Form.Item>
-                 </div>
+                          type="dashed"
+                          onClick={() => add()}
+                          icon={<PlusOutlined />}
+                          className="border-[#F9B038] text-[#F9B038] mt-7 hover:border-[#d89c2f]"
+                        ></Button>
+                      </div>
+                    </Form.Item>
+                  </div>
                 </>
               )}
             </Form.List>
-
-            {/* <div>
-              <div className="flex gap-4">
-                <Link className="w-full" to={"/information/addBelt"}>
-                  {" "}
-                  <button className="w-full bg-[#F9B038] p-3 rounded">
-                    Add a belt
-                  </button>
-                </Link>
-                <Link className="w-full" to={"/information/addOiltFilter"}>
-                  <button className="w-full bg-[#F9B038] p-3 rounded">
-                    Add An Oil Filter
-                  </button>
-                </Link>
-              </div>
-              <div className="flex gap-4 pt-5">
-                <Link className="w-full" to={"/information/addFuelFilter"}>
-                  <button className="w-full bg-[#F9B038] p-3 rounded">
-                    Add a Fuel Filter
-                  </button>
-                </Link>
-                <Link className="w-full" to={"/information/addOtherBeltFilter"}>
-                  {" "}
-                  <button className="w-full bg-[#F9B038] p-3 rounded">
-                    Add other belt or filter
-                  </button>
-                </Link>
-              </div>
-            </div> */}
 
             <Form.Item className=" pt-9">
               <button

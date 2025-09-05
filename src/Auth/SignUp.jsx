@@ -5,35 +5,42 @@ import { useState } from "react";
 import Logo from "../assets/Home/hero.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { useRegisterUserMutation } from "../Pages/redux/api/userApi";
 
 
 
 const SignUp = () => {
 
-
-  const [loading, setLoading] = useState(false); // Loading state for submit button
-
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); 
+const [register] = useRegisterUserMutation()
   const onFinish = async (values) => {
-    // setLoading(true);
-    // try {
+    setLoading(true);
+    const data = {
+      name:values.name,
+      email:values.email,
+      password:values.password,
+      confirmPassword:values.confirmPassword,
+    }
+    try {
      
-    //   const payload = await loginAdmin(values).unwrap();
-    
-    //   if (payload?.success) {
-    //     // localStorage.setItem("accessToken", payload?.data?.accessToken);
-    //     dispatch(setToken(payload?.data?.accessToken))
-    //     message.success("Login successful!");
-    //     navigate("/");
-    //   } else {
-    //     message.error(payload?.message || "Login failed!");
-    //   }
-    // } catch (error) {
+      const payload = await register(data).unwrap();
+    console.log(payload)
+      if (payload?.success) {
+           localStorage.setItem("email", values?.email);
+        // dispatch(setToken(payload?.data?.accessToken))
+        message.success(payload?.message);
+        navigate("/auth/signUp/verify-email");
+      } else {
+        message.error(payload?.message || "Login failed!");
+      }
+    } catch (error) {
       
-    //   message.error(error?.data?.message || "Something went wrong. Try again!");
-    // } finally {
-    //   setLoading(false);
+      message.error(error?.data?.message || "Something went wrong. Try again!");
+    } finally {
+      setLoading(false);
       
-    // }
+    }
   };
 
   return (
@@ -47,10 +54,10 @@ const SignUp = () => {
             </h2>
 
             <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off" layout="vertical">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Form.Item
-                name="FirstName"
-                label={<span style={{ color: "#F9B038" }}>First Name</span>}
+                name="name"
+                label={<span style={{ color: "#F9B038" }}>Name</span>}
                 rules={[
                   { required: true, message: "Please input your Name!"},
                   {  message: "The input is not valid Name!"},
@@ -58,7 +65,7 @@ const SignUp = () => {
               >
                 <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter first Name" />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name="lastName"
                 label={<span style={{ color: "#F9B038" }}>Last Name</span>}
                 rules={[
@@ -67,7 +74,7 @@ const SignUp = () => {
                 ]}
               >
                 <Input className="bg-[#F9B038] border-none py-3" placeholder="Enter last Name" />
-              </Form.Item>
+              </Form.Item> */}
               </div>
                <div className="grid grid-cols-2 gap-3">
                 <Form.Item
@@ -92,20 +99,44 @@ const SignUp = () => {
               </Form.Item>
               </div>
 
-              <Form.Item
+           <Form.Item
                 name="password"
-                label={<span style={{ color: "#F9B038" }}>Password</span>}
-                rules={[{ required: true, message: "Please input your password!" }]}
+                rules={[
+                  { required: true, message: "Please set your password!" },
+                  {
+                    min: 8,
+                    max: 10,
+                    message: "Password must be 8-10 characters long!",
+                  },
+                ]}
               >
-                <Input.Password className="bg-[#F9B038] border-none py-3" placeholder="Enter your password" />
+                <Input.Password
+                  placeholder="Enter your password"
+                  className="bg-[#F9B038] border-none py-3"
+                />
               </Form.Item>
 
-               <Form.Item
-                name="confirm"
-                label={<span style={{ color: "#F9B038" }}>Confirm Password</span>}
-                rules={[{ required: true, message: "Please input your Confirm password!" }]}
+              <Form.Item
+                name="confirmPassword"
+                dependencies={["password"]}
+                rules={[
+                  { required: true, message: "Please confirm your password!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("The two passwords do not match!")
+                      );
+                    },
+                  }),
+                ]}
               >
-                <Input.Password className="bg-[#F9B038] border-none py-3" placeholder="Enter your Confirm password" />
+                <Input.Password
+                  placeholder="Re-enter your password"
+                 className="bg-[#F9B038] border-none py-3"
+                />
               </Form.Item>
 
               <div className="flex items-center justify-between mb-4">

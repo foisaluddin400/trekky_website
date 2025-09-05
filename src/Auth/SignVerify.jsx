@@ -4,7 +4,7 @@ import { useState } from "react";
 import OTPInput from "react-otp-input";
 
 
-import { useVerifyOtpMutation } from "../Pages/redux/api/userApi";
+import { useVerifyEmailMutation } from "../Pages/redux/api/userApi";
 
 import { Checkbox, ConfigProvider, Form, Input, message, Modal } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import Logo from "../assets/Home/hero.png";
 
 const SignVerify = () => {
     const [otp, setOtp] = useState("");
-const [verifyEmail] = useVerifyOtpMutation()
+const [verifyEmail] = useVerifyEmailMutation()
    const navigate = useNavigate()
   const handleVerify = async () => {
     const data = {
@@ -26,10 +26,10 @@ const [verifyEmail] = useVerifyOtpMutation()
    
 
     try {
-      const response = await verifyEmail(data).unwrap();
+      const response = await verifyEmail({data}).unwrap();
     
       message.success(response?.message);
-      navigate("/auth/update-password");
+      navigate("/auth/login");
     } catch (error) {
       console.error(error); 
       message.error(error?.data?.message );
