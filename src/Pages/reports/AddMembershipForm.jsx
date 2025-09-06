@@ -1,62 +1,114 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Select,
+  Upload,
+} from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAddMemberMutation } from "../redux/api/routesApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
+const onPreview = async (file) => {
+  let src =
+    file.url ||
+    (await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file.originFileObj);
+      reader.onload = () => resolve(reader.result);
+    }));
+  const image = new Image();
+  image.src = src;
+  const imgWindow = window.open(src);
+  imgWindow?.document.write(image.outerHTML);
 };
 
 const AddMembershipForm = () => {
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [cost, setCost] = useState("");
+  const navigate = useNavigate();
+  const [fileList, setFileList] = useState([]);
+  const [addInsurance] = useAddMemberMutation();
+
   const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
+  };
+
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
   };
 
   const handleCostChange = (e) => {
     const input = e.target.value;
-    const formatted = formatWithCommas(input);
+    const onlyNumbers = input.replace(/[^\d]/g, "");
+    const formatted = formatWithCommas(onlyNumbers);
     setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
+    form.setFieldsValue({ cost: onlyNumbers });
   };
+  const handleSubmit = async (values) => {
+    console.log("Form Values:", values?.cost);
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    navigate("/");
+    const formData = new FormData();
+    formData.append("name", values.name || "");
+    formData.append("websiteLink", values.websiteLink || "");
+    formData.append(
+      "dateOfPurchase",
+      values.dateOfPurchase
+        ? dayjs(values.dateOfPurchase).format(dateFormat)
+        : ""
+    );
+
+        formData.append(
+      "membershipExpiration",
+      values.membershipExpiration ? dayjs(values.membershipExpiration).format(dateFormat) : ""
+    );
+    formData.append("phoneNumber", values.phoneNumber || "");
+    formData.append("amountPaid", values.amountPaid ? Number(values.amountPaid) : "");
+
+    formData.append("accountNumber", values.accountNumber || "");
+    formData.append("notes", values.notes || "");
+
+    // Multiple image upload
+    fileList.forEach((file) => {
+      if (file.originFileObj) {
+        formData.append("images", file.originFileObj);
+      }
+    });
+
+    try {
+      const res = await addInsurance(formData).unwrap();
+      message.success(res?.message || "Saved successfully");
+      form.resetFields();
+      setFileList([]);
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong");
+    }
   };
   return (
     <div className="container m-auto">
-      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
-        <div className="lg:w-[300px] pb-7 lg:pb-0">
+      <div className=" lg:mt-11 mt-6 px-3">
+        <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl text-[#F9B038] font-semibold ">
             Add Membership
           </h1>
         </div>
-        <div className="max-w-4xl text-[#F9B038]">
+        <div className="max-w-4xl m-auto mt-11 text-[#F9B038]">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
@@ -72,7 +124,7 @@ const AddMembershipForm = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Date Purchase</span>}
-                name="DatePuschase"
+                name="dateOfPurchase"
                 // rules={[
                 //   {
                 //     required: true,
@@ -80,16 +132,16 @@ const AddMembershipForm = () => {
                 //   },
                 // ]}
               >
-                <Input
+                <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Date Purchase"
+                  format={dateFormat}
                 />
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Website Link</span>}
-                name="link"
+                name="websiteLink"
                 // rules={[
                 //   { required: true, message: "Please input your website!" },
                 // ]}
@@ -102,7 +154,7 @@ const AddMembershipForm = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
-                name="phone"
+                name="phoneNumber"
                 // rules={[
                 //   {
                 //     required: true,
@@ -119,7 +171,7 @@ const AddMembershipForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Account Number</span>}
-                name="account"
+                name="accountNumber"
                 // rules={[
                 //   { required: true, message: "Please input your account!" },
                 // ]}
@@ -132,14 +184,21 @@ const AddMembershipForm = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Amount</span>}
-                name="cost"
-                // rules={[{ required: true, message: "Please input your cost!" }]}
+                name="amountPaid"
+                normalize={(value) => parseNumber(value)} // Store unformatted value in form
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter a valid number",
+                  },
+                ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="$"
-                  value={cost}
-                  onChange={handleCostChange}
                 />
               </Form.Item>
             </div>
@@ -148,7 +207,7 @@ const AddMembershipForm = () => {
               label={
                 <span style={{ color: "#F9B038" }}>Membership Expiration</span>
               }
-              name="repair"
+              name="membershipExpiration"
               // rules={[
               //   { required: true, message: "Please input your expiration!" },
               // ]}
@@ -156,28 +215,26 @@ const AddMembershipForm = () => {
               <DatePicker
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                 format={dateFormat}
-                defaultValue={dayjs("09/03/2019", dateFormat)}
-                minDate={dayjs("08/01/2019", dateFormat)}
-                maxDate={dayjs("10/31/2020", dateFormat)}
               />
             </Form.Item>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon ">
-                  <InboxOutlined />
-                </p>
-                <p className=" text-[#F9B038]">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="text-[#F9B038]">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <div>
+                <h1 className="text-[#F9B038]">Upload Image</h1>
+                <Upload
+                  style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={onChange}
+                  onPreview={onPreview}
+                  multiple={true}
+                >
+                  {fileList.length < 5 && "+ Upload"}
+                </Upload>
+              </div>
               <Form.Item
                 label="Notes"
-                name="feedback"
+                name="notes"
                 // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
@@ -198,6 +255,15 @@ const AddMembershipForm = () => {
               </button>
             </Form.Item>
           </Form>
+          <Link to={"/"}>
+            <button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-[#F9B038] py-2 text-black"
+            >
+              Skip
+            </button>
+          </Link>
         </div>
       </div>
     </div>

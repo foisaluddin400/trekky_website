@@ -1,14 +1,27 @@
-import { Form, Input, Radio } from "antd";
+import { Form, Input, message, Radio } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAddMaintanceMutation } from "../redux/api/routesApi";
 
 const AddNewMaintanceSchedule = () => {
   const [form] = Form.useForm();
   const [rvType, setRvType] = useState("new"); // Default selected value
-const navigate = useNavigate();
-  const handleSubmit = (values) => {
+  const navigate = useNavigate();
+  const[addMaintance] = useAddMaintanceMutation()
+  const handleSubmit =async (values) => {
     console.log(values);
-    navigate("/addMembershipForm");
+const data = {
+
+}
+      try {
+      const res = await addMaintance(formData).unwrap();
+      message.success(res?.message || "Saved successfully");
+  
+      form.resetFields();
+      setFileList([]);
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -53,7 +66,7 @@ const navigate = useNavigate();
             </Form.Item>
 
             {/* Radio Group */}
-            <Form.Item label={<span style={{ color: "#F9B038" }}>Type</span>}>
+            <Form.Item label={<span style={{ color: "#F9B038" }}>Rv Type</span>}>
               <Radio.Group
                 name="rvType"
                 value={rvType}
@@ -114,6 +127,15 @@ const navigate = useNavigate();
               </button>
             </Form.Item>
           </Form>
+          <Link to={"/addMembershipForm"}>
+            <button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-[#F9B038] py-2 text-black"
+            >
+              Skip
+            </button>
+          </Link>
         </div>
       </div>
     </div>

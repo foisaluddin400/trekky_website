@@ -64,3 +64,26 @@ border-radius: 8px;
     background: rgba(255, 0, 0, 0);
 }
 
+/* select field */
+
+/* Target the Select input area */
+.custom-select .ant-select-selector {
+  background-color: #00000000 !important; /* Replace with your desired color */
+  border-color: #F9B038 !important; /* Match your theme */
+  color: #F9B038 !important; /* Text color to match your theme */
+}
+
+/* Target the dropdown menu */
+.custom-select .ant-select-dropdown {
+  background-color: #ffffff00 !important; /* Replace with your desired color */
+}
+
+/* Target dropdown menu items */
+.custom-select .ant-select-item-option {
+  color: #F9B038 !important; /* Text color for dropdown options */
+}
+
+/* Target selected item in dropdown */
+.custom-select .ant-select-item-option-selected {
+  background-color: #333333 !important; /* Slightly different shade for selected item */
+}

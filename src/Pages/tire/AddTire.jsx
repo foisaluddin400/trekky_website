@@ -29,24 +29,22 @@ const AddTire = () => {
   const [cost, setCost] = useState("");
   const [fileList, setFileList] = useState([]);
   const [addTire] = useAddTireMutation();
-  const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
-    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
   const navigate = useNavigate();
-const handleCostChange = (e) => {
-  const input = e.target.value;
-  const onlyNumbers = input.replace(/[^\d]/g, ""); // remove non-numeric
-  const formatted = onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // add commas
-  setCost(formatted);
-  form.setFieldsValue({ cost: onlyNumbers }); // backend এ numeric value রাখবে
-};
+  const formatWithCommas = (value) => {
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
+    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
+  };
 
   const handleSubmit = async (values) => {
     console.log("Form Values:", values?.cost);
@@ -56,12 +54,12 @@ const handleCostChange = (e) => {
     formData.append("location", values.location || "");
     formData.append(
       "dateOfPurchase",
-      values.effectiveDate ? dayjs(values.effectiveDate).format(dateFormat) : ""
+      values.dateOfPurchase
+        ? dayjs(values.dateOfPurchase).format(dateFormat)
+        : ""
     );
 
-formData.append("cost", values.cost ? Number(values.cost) : "");
-
-
+    formData.append("cost", values.cost ? Number(values.cost) : "");
 
     formData.append("notes", values.notes || "");
 
@@ -75,6 +73,8 @@ formData.append("cost", values.cost ? Number(values.cost) : "");
     try {
       const res = await addTire(formData).unwrap();
       message.success(res?.message || "Saved successfully");
+        form.resetFields();
+  setFileList([]);
       navigate("/add");
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong");
@@ -125,36 +125,77 @@ formData.append("cost", values.cost ? Number(values.cost) : "");
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
                 name="location"
               >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Location"
-                />
+                <Select
+                  className="custom-select"
+                  style={{ height: "40px" }}
+                  placeholder="Select Location"
+                >
+                  <Select.Option value="">Select</Select.Option>
+                  <Select.Option value="Front Left">Front Left</Select.Option>
+                  <Select.Option value="Front Right">Front Right</Select.Option>
+                  <Select.Option value="Mid Front Left">
+                    Mid Front Left
+                  </Select.Option>
+                  <Select.Option value="Mid Front Right">
+                    Mid Front Right
+                  </Select.Option>
+                  <Select.Option value="Mid Left Outside">
+                    Mid Left Outside
+                  </Select.Option>
+                  <Select.Option value="Mid Left Inside">
+                    Mid Left Inside
+                  </Select.Option>
+                  <Select.Option value="Mid Right Outside">
+                    Mid Right Outside
+                  </Select.Option>
+                  <Select.Option value="Mid Right Inside">
+                    Mid Right Inside
+                  </Select.Option>
+                  <Select.Option value="Mid Rear Left">
+                    Mid Rear Left
+                  </Select.Option>
+                  <Select.Option value="Mid Rear Right">
+                    Mid Rear Right
+                  </Select.Option>
+                  <Select.Option value="Rear Front">Rear Front</Select.Option>
+                </Select>
               </Form.Item>
             </div>
 
-           <Form.Item
-  label={<span style={{ color: "#F9B038" }}>Cost</span>}
-  name="cost"
->
-  <Input
-    className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-    placeholder="$"
-    value={cost}
-    onChange={handleCostChange}
-  />
-</Form.Item>
-
+            <Form.Item
+              label={<span style={{ color: "#F9B038" }}>Cost</span>}
+              name="cost"
+              normalize={(value) => parseNumber(value)}
+              getValueProps={(value) => ({
+                value: formatWithCommas(value),
+              })}
+              rules={[
+                {
+                  pattern: /^\d+$/,
+                  message: "Please enter a valid number",
+                },
+              ]}
+            >
+              <Input
+                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                placeholder="$"
+              />
+            </Form.Item>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Upload
-                listType="picture-card"
-                fileList={fileList}
-                onChange={onChange}
-                onPreview={onPreview}
-                multiple={true}
-              >
-                {fileList.length < 5 && "+ Upload"}
-              </Upload>
+              <div>
+                <h1 className="text-[#F9B038]">Upload Image</h1>
+                <Upload
+                  style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={onChange}
+                  onPreview={onPreview}
+                  multiple={true}
+                >
+                  {fileList.length < 5 && "+ Upload"}
+                </Upload>
+              </div>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="notes"

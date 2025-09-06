@@ -79,7 +79,7 @@
 // export default InsuranceCompanyInfo
 import { Button, DatePicker, Form, Input, message, Upload } from "antd";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAddInsuranceMutation } from "../redux/api/routesApi";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -109,8 +109,14 @@ const InsuranceCompanyInfo = () => {
   const [addInsurance] = useAddInsuranceMutation();
 
   const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
   };
 
   const onChange = ({ fileList: newFileList }) => {
@@ -120,11 +126,10 @@ const InsuranceCompanyInfo = () => {
   const handleCostChange = (e) => {
     const input = e.target.value;
     const onlyNumbers = input.replace(/[^\d]/g, "");
-    const formatted = onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const formatted = formatWithCommas(onlyNumbers);
     setCost(formatted);
     form.setFieldsValue({ cost: onlyNumbers });
   };
-
   const handleSubmit = async (values) => {
     console.log("Form Values:", values?.cost);
 
@@ -140,10 +145,7 @@ const InsuranceCompanyInfo = () => {
       values.renewalDate ? dayjs(values.renewalDate).format(dateFormat) : ""
     );
     formData.append("phoneNumber", values.phoneNumber || "");
-    formData.append(
-      "cost",
-      values.cost ? Number(values.cost.replace(/,/g, "")) : ""
-    );
+    formData.append("cost", values.cost ? Number(values.cost) : "");
 
     formData.append("policyNumber", values.policyNumber || "");
     formData.append("feedback", values.feedback || "");
@@ -158,7 +160,8 @@ const InsuranceCompanyInfo = () => {
     try {
       const res = await addInsurance(formData).unwrap();
       message.success(res?.message || "Saved successfully");
-      navigate("/addTire");
+        form.resetFields();
+  setFileList([]);
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong");
     }
@@ -230,12 +233,20 @@ const InsuranceCompanyInfo = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
+                normalize={(value) => parseNumber(value)} // Store unformatted value in form
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter a valid number",
+                  },
+                ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="$"
-                  value={cost}
-                  onChange={handleCostChange}
                 />
               </Form.Item>
             </div>
@@ -251,15 +262,19 @@ const InsuranceCompanyInfo = () => {
             </Form.Item>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Upload
-                listType="picture-card"
-                fileList={fileList}
-                onChange={onChange}
-                onPreview={onPreview}
-                multiple={true}
-              >
-                {fileList.length < 5 && "+ Upload"}
-              </Upload>
+              <div>
+                <h1 className="text-[#F9B038]">Upload Image</h1>
+                <Upload
+                  style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={onChange}
+                  onPreview={onPreview}
+                  multiple={true}
+                >
+                  {fileList.length < 5 && "+ Upload"}
+                </Upload>
+              </div>
 
               <Form.Item label="Notes" name="feedback">
                 <Input.TextArea
@@ -276,10 +291,20 @@ const InsuranceCompanyInfo = () => {
                 htmlType="submit"
                 className="w-full bg-[#F9B038] py-2"
               >
-                Save
+                Add
               </button>
             </Form.Item>
           </Form>
+
+          <Link to={"/addTire"}>
+            <button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-[#F9B038] py-2 text-black"
+            >
+              Skip
+            </button>
+          </Link>
         </div>
       </div>
     </div>
