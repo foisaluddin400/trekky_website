@@ -1,7 +1,10 @@
 import React from "react";
 import ss from "../../assets/Home/rv.png";
 import { Link } from "react-router-dom";
+import { useGetMemberShipQuery } from "../redux/api/routesApi";
 const AddMembership = () => {
+  const {data:memberShipData} = useGetMemberShipQuery()
+  console.log(memberShipData)
   return (
     <div className="container m-auto py-8 px-3 lg:px-0">
       <div className="flex justify-between">
@@ -11,7 +14,7 @@ const AddMembership = () => {
         <Link to={"/addMembershipForm"}>
           {" "}
           <button className=" border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md  font-medium ">
-            New Membership
+            New Membership 
           </button>
         </Link>
       </div>

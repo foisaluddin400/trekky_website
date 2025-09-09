@@ -1,20 +1,12 @@
-import {
-  Button,
-  ConfigProvider,
-  DatePicker,
-  Form,
-  Input,
-  message,
-  Select,
-  Upload,
-} from "antd";
+import { Button, ConfigProvider, DatePicker, Form, Input, message, Select, Upload } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Link, useNavigate } from "react-router-dom";
-import { useAddAirConditionMutation } from "../redux/api/routesApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAddHeaterMutation, useGetSingleHeaterQuery, useUpdateHeaterMutation } from "../redux/api/routesApi";
+import { imageUrl } from "../redux/api/baseApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -30,29 +22,17 @@ const onPreview = async (file) => {
   const imgWindow = window.open(src);
   imgWindow?.document.write(image.outerHTML);
 };
-const Add = () => {
+const UpdateHeaterInfo = () => {
+    const {id} = useParams();
+    const {data:singleData} = useGetSingleHeaterQuery({id})
+    console.log(singleData)
   const navigate = useNavigate();
+  const [addHeater] = useUpdateHeaterMutation()
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
-  const [addAirCondition] = useAddAirConditionMutation();
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
+    const [fileList, setFileList] = useState([]);
+  const handleSubmit =async (values) => {
 
-  const formatWithCommas = (value) => {
-    if (!value) return "";
-    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
-    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  const parseNumber = (value) => {
-    if (!value) return "";
-    return value.replace(/,/g, "");
-  };
-  const handleSubmit = async (values) => {
-
-    console.log(values);
-    const formData = new FormData();
+      const formData = new FormData();
     formData.append("name", values.name || "");
     formData.append("location", values.location || "");
     formData.append("modelNumber", values.modelNumber || "");
@@ -75,21 +55,74 @@ const Add = () => {
     });
 
     try {
-      const res = await addAirCondition(formData).unwrap();
+      const res = await addHeater({formData,id}).unwrap();
       message.success(res?.message || "Saved successfully");
+      
       form.resetFields();
       setFileList([]);
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong");
     }
+  
   };
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const formatWithCommas = (value) => {
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
+    return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
+  };
+  //   const handleChange = (e) => {
+  //     const input = e.target.value;
+  //     const formatted = formatWithCommas(input);
+  //     setMileage(formatted);
+  //     form.setFieldsValue({ qty: formatted });
+  //   };
+
+  useEffect(() => {
+  if (singleData?.heater) {
+    const admin = singleData?.heater;
+
+    // ✅ Form values set
+    form.setFieldsValue({
+     name: admin.name || '',
+            location: admin.location || '',
+            modelNumber: admin.modelNumber || '',
+            phoneNumber: admin.phoneNumber || "",
+            dateOfPurchase: admin.dateOfPurchase ? dayjs(admin.dateOfPurchase) : null,
+            effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+            renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+            cost: admin.cost || "",
+            notes: admin.notes || "",
+            policyNumber: admin.policyNumber || "",
+    });
+
+    // ✅ Image list set for Upload component
+    if (admin.images && admin.images.length > 0) {
+      const formattedImages = admin.images.map((img, index) => ({
+        uid: String(index),
+        name: img.split("\\").pop(), 
+        status: "done",
+        url: `${imageUrl}/${img}`, 
+      }));
+      setFileList(formattedImages);
+    }
+  }
+}, [singleData, form]);
 
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">
-            Add Air Conditioner Information
+            Update Heater Information
           </h1>
         </div>
         <div className="max-w-4xl m-auto mt-11">
@@ -98,6 +131,7 @@ const Add = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Name</span>}
                 name="name"
+                // rules={[{ required: true, message: "Please input Name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -179,6 +213,9 @@ const Add = () => {
             <Form.Item
               label={<span style={{ color: "#F9B038" }}>Model Number</span>}
               name="modelNumber"
+              //   rules={[
+              //     { required: true, message: "Please input Model Number!" },
+              //   ]}
             >
               <Input
                 className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -203,6 +240,7 @@ const Add = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="notes"
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"
@@ -222,19 +260,10 @@ const Add = () => {
               </button>
             </Form.Item>
           </Form>
-          <Link to={"/details/AddHeater"}>
-            <button
-              type="primary"
-              htmlType="submit"
-              className="w-full bg-[#F9B038] py-2 text-black"
-            >
-              Skip
-            </button>
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Add;
+export default UpdateHeaterInfo;

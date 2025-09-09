@@ -4,10 +4,14 @@ import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
 import { ChangePass } from "./ChangePass";
+import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/api/userApi";
+import { imageUrl } from "../redux/api/baseApi";
 
 const ProfilePage = () => {
 
-  // const[updateProfile] = useUpdateProfileMutation()
+  const[updateProfile] = useUpdateProfileMutation()
+  const {data:profileData} = useGetProfileQuery();
+  console.log(profileData)
   const navigate = useNavigate();
   const [image, setImage] = useState();
   const [form] = Form.useForm();
@@ -27,20 +31,30 @@ const ProfilePage = () => {
     setImage(file);
   };
 
-
+  useEffect(() => {
+    if (profileData?.user) {
+      const admin = profileData.user;
+      form.setFieldsValue({
+        name: admin.name,
+        email: admin.email,
+        phoneNumber: admin.phoneNumber || "",
+        // address: admin.address || "",
+      });
+    }
+  }, [profileData, form]);
   const onFinish = (values) => {
-    // const formData = new FormData();
-    // if (image) {
-    //   formData.append("profile_image", image);
-    // }
-    // formData.append("name", values?.fullName);
-    // formData.append("phoneNumber", values?.phoneNumber);
+    const formData = new FormData();
+    if (image) {
+      formData.append("profilePic", image);
+    }
+    formData.append("name", values?.name);
+    formData.append("phoneNumber", values?.phoneNumber);
     // formData.append("address", values?.address);
     // formData.append("designation", values?.designation);
-    // updateProfile(formData)
-    //   .unwrap()
-    //   .then((payload) => message.success(payload?.message))
-    //   .catch((error) => message.error(error?.data?.message));
+    updateProfile(formData)
+      .unwrap()
+      .then((payload) => message.success(payload?.message))
+      .catch((error) => message.error(error?.data?.message));
   };
 
 //s
@@ -63,7 +77,7 @@ const ProfilePage = () => {
                   style={{ width: 140, height: 140, borderRadius: "100%" }}
                   src={`${image
                       ? URL.createObjectURL(image)
-                      : ``
+                      : `${imageUrl}/${profileData?.user?.profilePic}`
                     }`}
                   // src={img}
                   alt=""
@@ -126,7 +140,7 @@ const ProfilePage = () => {
                 </h1>
                 <Form onFinish={onFinish} layout="vertical" form={form}>
                   <Form.Item
-                    name="fullName"
+                    name="name"
                     label={
                       <p className="text-[black] text-[16px] leading-5 font-normal">
                         User Name

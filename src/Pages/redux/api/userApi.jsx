@@ -45,7 +45,7 @@ const useApi = baseApi.injectEndpoints({
     getProfile: builder.query({
       query: () => {
         return {
-          url: "/user/user-detail",
+          url: "/user/profile",
           method: "GET",
         };
       },
@@ -95,7 +95,7 @@ const useApi = baseApi.injectEndpoints({
     updateProfile: builder.mutation({
       query: (data) => {
         return {
-          url: "/user/update-profile",
+          url: "/user/edit-profile",
           method: "PATCH",
           body: data,
         };
@@ -105,8 +105,8 @@ const useApi = baseApi.injectEndpoints({
     changePassword: builder.mutation({
       query: (data) => {
         return {
-          url: "/auth/change-password",
-          method: "PATCH",
+          url: "/user/change-password",
+          method: "PUT",
           body: data,
         };
       },

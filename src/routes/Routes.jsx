@@ -94,6 +94,13 @@ import AddSurround from "../Pages/hvac/AddSurround";
 import AddInternet from "../Pages/hvac/AddInternet";
 import AddRouter from "../Pages/hvac/AddRouter";
 import SignVerify from "../Auth/SignVerify";
+import UpdateAirConditionar from "../Pages/hvac/UpdateAirConditionar";
+import UpdateHeaterInfo from "../Pages/hvac/UpdateHeaterInfo";
+import UpdateWaterPump from "../Pages/hvac/UpdateWaterPump";
+import UpdateWasherInfo from "../Pages/hvac/UpdateWasherInfo";
+import UpdateWaterHeater from "../Pages/hvac/UpdateWaterHeater";
+import UpdateToilet from "../Pages/hvac/UpdateToilet";
+import UpdateTv from "../Pages/hvac/UpdateTv";
 
 export const router = createBrowserRouter([
   {
@@ -160,28 +167,56 @@ export const router = createBrowserRouter([
         element: <Details></Details>,
       },
         {
+        path: "/details/airConditioner/updateAirCondition/:id",
+        element: <UpdateAirConditionar></UpdateAirConditionar>
+      },
+        {
         path: "/details/Heater",
         element: <HeaterInfo></HeaterInfo>
+      },
+       {
+        path: "/details/Heater/update-heater/:id",
+        element: <UpdateHeaterInfo></UpdateHeaterInfo>
       },
       {
         path: "/details/WaterPump",
         element: <WaterPumpInfo></WaterPumpInfo>
       },
       {
+        path: "/details/WaterPump/updateWaterPump/:id",
+        element: <UpdateWaterPump></UpdateWaterPump>
+      },
+      {
         path: "/details/Washer",
         element: <WasherInfo></WasherInfo>
+      },
+       {
+        path: "/details/Washer/update-washer/:id",
+        element: <UpdateWasherInfo></UpdateWasherInfo>
       },
       {
         path: "/details/WaterHeater",
         element: <WaterHeater></WaterHeater>
       },
+        {
+        path: "/details/WaterHeater/update-water/:id",
+        element: <UpdateWaterHeater></UpdateWaterHeater>
+      },
       {
         path: "/details/Toilet",
         element: <ToiletInfo></ToiletInfo>
       },
+        {
+        path: "/details/Toilet/update-toilet/:id",
+        element: <UpdateToilet></UpdateToilet>
+      },
       {
         path: "/details/TVInfo",
         element: <TVInfo></TVInfo>
+      },
+       {
+        path: "/details/TVInfo/update-tv/:id",
+        element: <UpdateTv></UpdateTv>
       },
       {
         path: "/details/Dryer",
@@ -334,7 +369,7 @@ export const router = createBrowserRouter([
         element: <InsuranceCompanyInfo></InsuranceCompanyInfo>,
       },
       {
-        path: "/updatedingInsurance",
+        path: "/updatedingInsurance/:id",
         element: <UpdatingCompanyInfo></UpdatingCompanyInfo>,
       },
       {

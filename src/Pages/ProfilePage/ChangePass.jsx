@@ -1,29 +1,30 @@
 import { Button, Form, Input, message } from "antd";
 import React, { useState } from "react";
-// import { useChangePasswordMutation } from "../../redux/Api/userApi";
+
 import { useNavigate } from "react-router-dom";
+import { useChangePasswordMutation } from "../redux/api/userApi";
 
 export const ChangePass = () => {
-    // const [changePass] = useChangePasswordMutation()
+    const [changePass] = useChangePasswordMutation()
     const [passError, setPassError] = useState("");
     const navigate = useNavigate()
     const onFinish = (values) => {
-        // if (values?.newPassword === values.oldPassword) {
-        //   return setPassError("Your old password cannot be your new password");
-        // }
-        // if (values?.newPassword !== values?.confirmPassword) {
-        //   return setPassError("Confirm password doesn't match");
-        // } else {
-        //   setPassError("");
-        // }
-        // changePass(values)
-        //   .unwrap()
-        //   .then((payload) => {
-        //     message.success(payload?.message);
-        //     localStorage.removeItem("accessToken");
-        //     navigate("/auth/login");
-        //   })
-        //   .catch((error) => message.error(error?.data?.message));
+        if (values?.newPassword === values.oldPassword) {
+          return setPassError("Your old password cannot be your new password");
+        }
+        if (values?.newPassword !== values?.confirmPassword) {
+          return setPassError("Confirm password doesn't match");
+        } else {
+          setPassError("");
+        }
+        changePass(values)
+          .unwrap()
+          .then((payload) => {
+            message.success(payload?.message);
+            localStorage.removeItem("accessToken");
+            navigate("/auth/login");
+          })
+          .catch((error) => message.error(error?.data?.message));
     };
 
     return (

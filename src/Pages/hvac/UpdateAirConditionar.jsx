@@ -9,12 +9,13 @@ import {
   Upload,
 } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Link, useNavigate } from "react-router-dom";
-import { useAddAirConditionMutation } from "../redux/api/routesApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAddAirConditionMutation, useGetSingleAirConditionQuery, useUpdateAirConditionMutation } from "../redux/api/routesApi";
+import { imageUrl } from "../redux/api/baseApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -30,11 +31,14 @@ const onPreview = async (file) => {
   const imgWindow = window.open(src);
   imgWindow?.document.write(image.outerHTML);
 };
-const Add = () => {
+const UpdateAirConditionar = () => {
+    const {id} = useParams();
+    const {data:singleUpdate} = useGetSingleAirConditionQuery({id})
+    console.log(singleUpdate)
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
-  const [addAirCondition] = useAddAirConditionMutation();
+  const [addAirCondition] = useUpdateAirConditionMutation();
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -50,7 +54,7 @@ const Add = () => {
     return value.replace(/,/g, "");
   };
   const handleSubmit = async (values) => {
-
+    
     console.log(values);
     const formData = new FormData();
     formData.append("name", values.name || "");
@@ -75,7 +79,7 @@ const Add = () => {
     });
 
     try {
-      const res = await addAirCondition(formData).unwrap();
+      const res = await addAirCondition({formData,id}).unwrap();
       message.success(res?.message || "Saved successfully");
       form.resetFields();
       setFileList([]);
@@ -84,12 +88,43 @@ const Add = () => {
     }
   };
 
+  useEffect(() => {
+    if (singleUpdate?.airCondition) {
+      const admin = singleUpdate?.airCondition
+;
+  
+      // ✅ Form values set
+      form.setFieldsValue({
+        name: admin.name || '',
+        location: admin.location || '',
+        modelNumber: admin.modelNumber || '',
+        phoneNumber: admin.phoneNumber || "",
+        dateOfPurchase: admin.dateOfPurchase ? dayjs(admin.dateOfPurchase) : null,
+        effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+        renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+        cost: admin.cost || "",
+        notes: admin.notes || "",
+        policyNumber: admin.policyNumber || "",
+      });
+  
+      // ✅ Image list set for Upload component
+      if (admin.images && admin.images.length > 0) {
+        const formattedImages = admin.images.map((img, index) => ({
+          uid: String(index),
+          name: img.split("\\").pop(), 
+          status: "done",
+          url: `${imageUrl}/${img}`, 
+        }));
+        setFileList(formattedImages);
+      }
+    }
+  }, [singleUpdate, form]);
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">
-            Add Air Conditioner Information
+            Update Air Conditioner Information
           </h1>
         </div>
         <div className="max-w-4xl m-auto mt-11">
@@ -237,4 +272,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default UpdateAirConditionar;

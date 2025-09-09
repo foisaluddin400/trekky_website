@@ -104,7 +104,7 @@ const WaterHeater = () => {
               <button className="border py-1 px-5 border-black rounded-md font-medium">
                 Delete
               </button>
-              <Link to={`/update/${item.id}`}>
+              <Link to={`/details/WaterHeater/update-water/${item.id}`}>
                 <button className="border border-black py-1 px-5 rounded-md font-medium">
                   Update
                 </button>

@@ -126,6 +126,45 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
+    getInsuranceCompany: builder.query({
+      query: () => {
+        return {
+          url: "/insurance-company/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleInsuranceCompany: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/insurance-company/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateInsuranceCompany: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/insurance-company/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteInsuranceCompany: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/insurance-company/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
     addTire: builder.mutation({
       query: (data) => {
         return {
@@ -148,6 +187,45 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
+    getAirCondition: builder.query({
+      query: () => {
+        return {
+          url: "/air-condition/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleAirCondition: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/air-condition/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateAirCondition: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/air-condition/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteAirCondition: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/air-condition/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
     addHeater: builder.mutation({
       query: (data) => {
         return {
@@ -158,6 +236,46 @@ const routesApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["terms"],
     }),
+  getHeater: builder.query({
+      query: () => {
+        return {
+          url: "/heater/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleHeater: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/heater/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateHeater: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/heater/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteHeater: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/heater/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
 
     addWaterPump: builder.mutation({
       query: (data) => {
@@ -170,16 +288,100 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
+      getWaterPump: builder.query({
+      query: () => {
+        return {
+          url: "/water-pump/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleWaterPump: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/water-pump/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateWaterPump: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/water-pump/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteWaterPump: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/water-pump/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
     addWasher: builder.mutation({
       query: (data) => {
         return {
-          url: "/water-pump/create",
+          url: "/washer/create",
           method: "POST",
           body: data,
         };
       },
       invalidatesTags: ["terms"],
     }),
+
+      getWasher: builder.query({
+      query: () => {
+        return {
+          url: "/washer/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleWasher: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/washer/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateWasher: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/washer/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteWasher: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/washer/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+
+
+
     addWaterHeater: builder.mutation({
       query: (data) => {
         return {
@@ -201,7 +403,52 @@ const routesApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["terms"],
     }),
-     addTv: builder.mutation({
+
+
+getToilet: builder.query({
+      query: () => {
+        return {
+          url: "/toilet/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleToilet: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/toilet/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateToilet: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/toilet/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteToilet: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/toilet/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+
+
+    addTv: builder.mutation({
       query: (data) => {
         return {
           url: "/tv/create",
@@ -212,7 +459,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-       addDriyer: builder.mutation({
+    getTv: builder.query({
+      query: () => {
+        return {
+          url: "/tv/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleTv: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/tv/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateTv: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/tv/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteTv: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/tv/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addDriyer: builder.mutation({
       query: (data) => {
         return {
           url: "/dryer/create",
@@ -222,7 +509,49 @@ const routesApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["terms"],
     }),
-       addExhaustFans: builder.mutation({
+
+    getDriyer: builder.query({
+      query: () => {
+        return {
+          url: "/dryer/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleDriyer: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/dryer/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateDriyer: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/dryer/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteDriyer: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/dryer/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+    addExhaustFans: builder.mutation({
       query: (data) => {
         return {
           url: "/exhaust-fans/create",
@@ -233,7 +562,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-        addVentFans: builder.mutation({
+        getExhaustFans: builder.query({
+      query: () => {
+        return {
+          url: "/exhaust-fans/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleExhaustFans: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/exhaust-fans/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateExhaustFans: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/exhaust-fans/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteExhaustFans: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/exhaust-fans/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addVentFans: builder.mutation({
       query: (data) => {
         return {
           url: "/vent-fans/create",
@@ -243,7 +612,50 @@ const routesApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["terms"],
     }),
-     addDisherInfo: builder.mutation({
+
+    getVentFans: builder.query({
+      query: () => {
+        return {
+          url: "/vent-fans/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleVentFans: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/vent-fans/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateVentFans: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/vent-fans/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteVentFans: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/vent-fans/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+
+    addDisherInfo: builder.mutation({
       query: (data) => {
         return {
           url: "/dishwasher/create",
@@ -254,12 +666,91 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
+        getDisherInfo: builder.query({
+      query: () => {
+        return {
+          url: "/dishwasher/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleDisherInfo: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/dishwasher/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateDisherInfo: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/dishwasher/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteDisherInfo: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/dishwasher/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
     addCallingFans: builder.mutation({
       query: (data) => {
         return {
           url: "/celling-fans/create",
           method: "POST",
           body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+        getCallingFans: builder.query({
+      query: () => {
+        return {
+          url: "/celling-fans/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleCallingFans: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/celling-fans/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateCallingFans: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/celling-fans/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteCallingFans: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/celling-fans/delete/${id}`,
+          method: "DELETE",
         };
       },
       invalidatesTags: ["terms"],
@@ -277,7 +768,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-        addGps: builder.mutation({
+        getDvdInfo: builder.query({
+      query: () => {
+        return {
+          url: "/dvd/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleDvdInfo: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/dvd/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateDvdInfo: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/dvd/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteDvdInfo: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/dvd/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addGps: builder.mutation({
       query: (data) => {
         return {
           url: "/gps/create",
@@ -288,7 +819,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-     addOutdoor: builder.mutation({
+        getGps: builder.query({
+      query: () => {
+        return {
+          url: "/gps/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleGps: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/gps/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateGps: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/gps/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteGps: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/gps/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addOutdoor: builder.mutation({
       query: (data) => {
         return {
           url: "/outdoor-radio/create",
@@ -299,7 +870,7 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-      addSurroundSound: builder.mutation({
+    addSurroundSound: builder.mutation({
       query: (data) => {
         return {
           url: "/surround-sound/create",
@@ -310,7 +881,46 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-      addInternetSatettling: builder.mutation({
+   getSurroundSound: builder.query({
+      query: () => {
+        return {
+          url: "/surround-sound/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleSurroundSound: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/surround-sound/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateSurroundSound: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/surround-sound/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteSurroundSound: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/surround-sound/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    addInternetSatettling: builder.mutation({
       query: (data) => {
         return {
           url: "/internet-satellite/create",
@@ -321,7 +931,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-       addRouter: builder.mutation({
+       getInternetSatettling: builder.query({
+      query: () => {
+        return {
+          url: "/internet-satellite/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleInternetSatettling: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/internet-satellite/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateInternetSatettling: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/internet-satellite/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteInternetSatettling: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/internet-satellite/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addRouter: builder.mutation({
       query: (data) => {
         return {
           url: "/wifi-router/create",
@@ -332,7 +982,47 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-      addMaintance: builder.mutation({
+       getRouter: builder.query({
+      query: () => {
+        return {
+          url: "/wifi-router/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleRouter: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/wifi-router/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateRouter: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/wifi-router/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteRouter: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/wifi-router/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+    addMaintance: builder.mutation({
       query: (data) => {
         return {
           url: "/maintenance-schedule/create",
@@ -343,7 +1033,7 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["terms"],
     }),
 
-       addMember: builder.mutation({
+    addMember: builder.mutation({
       query: (data) => {
         return {
           url: "/membership/create",
@@ -353,8 +1043,15 @@ const routesApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["terms"],
     }),
-
-
+    getMemberShip: builder.query({
+      query: () => {
+        return {
+          url: "/membership/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
     // postPrivecy: builder.mutation({
     //     query: (data) => {
     //         return {
@@ -371,25 +1068,65 @@ const routesApi = baseApi.injectEndpoints({
 export const {
   useAddChassisMutation,
   useAddInsuranceMutation,
+  useGetSingleInsuranceCompanyQuery,
+  useUpdateInsuranceCompanyMutation,
+  useDeleteInsuranceCompanyMutation,
   useAddTireMutation,
   useAddAirConditionMutation,
+  useDeleteAirConditionMutation,
+  useGetAirConditionQuery,
+  useGetSingleAirConditionQuery,
+  useUpdateAirConditionMutation,
   useAddHeaterMutation,
+  useGetHeaterQuery,
+  useGetSingleHeaterQuery,
+  useUpdateHeaterMutation,
+  useDeleteHeaterMutation,
   useAddWaterPumpMutation,
+  useDeleteWaterPumpMutation,
+  useGetSingleWaterPumpQuery,
+  useGetWaterPumpQuery,
+  useUpdateWaterPumpMutation,
   useAddWasherMutation,
+  useGetWasherQuery,
+  useDeleteWasherMutation,
+  useGetSingleWasherQuery,
+  useUpdateWasherMutation,
   useAddWaterHeaterMutation,
   useAddToiletMutation,
+  useDeleteToiletMutation,
+  useGetSingleToiletQuery,
+  useGetToiletQuery,
+  useUpdateToiletMutation,
   useAddTvMutation,
+  useDeleteTvMutation,
+  useGetSingleTvQuery,useGetTvQuery,
+  useUpdateTvMutation,
   useAddDriyerMutation,
+  useDeleteDriyerMutation,
+  useGetDriyerQuery,useGetSingleDriyerQuery,useUpdateDriyerMutation,
   useAddExhaustFansMutation,
+  useDeleteExhaustFansMutation,
+  useGetExhaustFansQuery,useGetSingleExhaustFansQuery,useUpdateExhaustFansMutation,
   useAddVentFansMutation,
+  useDeleteVentFansMutation,useGetVentFansQuery,useGetSingleVentFansQuery, useUpdateVentFansMutation,
   useAddDisherInfoMutation,
+  useDeleteDisherInfoMutation,useGetDisherInfoQuery,useGetSingleDisherInfoQuery,useUpdateDisherInfoMutation,
   useAddCallingFansMutation,
+  useGetCallingFansQuery,useGetSingleCallingFansQuery,useUpdateCallingFansMutation,useDeleteCallingFansMutation,
   useAddDvdInfoMutation,
+  useGetDvdInfoQuery,useGetSingleDvdInfoQuery,useUpdateDvdInfoMutation,useDeleteDvdInfoMutation,
   useAddGpsMutation,
+  useGetGpsQuery,useGetSingleGpsQuery,useUpdateGpsMutation,useDeleteGpsMutation,
   useAddOutdoorMutation,
   useAddSurroundSoundMutation,
+  useGetSurroundSoundQuery,useGetSingleSurroundSoundQuery,useDeleteSurroundSoundMutation,useUpdateSurroundSoundMutation,
   useAddInternetSatettlingMutation,
+  useDeleteInternetSatettlingMutation,useGetInternetSatettlingQuery,useGetSingleInternetSatettlingQuery,useUpdateInternetSatettlingMutation,
   useAddRouterMutation,
+  useDeleteRouterMutation,useGetRouterQuery,useGetSingleRouterQuery,useUpdateRouterMutation,
   useAddMaintanceMutation,
-  useAddMemberMutation
+  useAddMemberMutation,
+  useGetMemberShipQuery,
+  useGetInsuranceCompanyQuery,
 } = routesApi;

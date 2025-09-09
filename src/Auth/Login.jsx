@@ -38,7 +38,7 @@ const Login = () => {
         message.success(payload?.message);
         navigate("/addRv");
       } else {
-        message.error(payload?.message || "Login failed!");
+        message.error(payload?.data?.message || "Login failed!");
       }
     } catch (error) {
       message.error(error?.data?.message || "Something went wrong. Try again!");
