@@ -1,39 +1,77 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Select,
+} from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
+import { useAddRvMutation } from "../redux/api/routesApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
-const dateFormatt = "MM/DD/YYYY";
 const AddRv = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const handleSubmit = (values) => {
-    console.log(values);
-    navigate("/information");
-  };
+  const [addRv] = useAddRvMutation();
 
-  const [cost, setCost] = useState("");
-  const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
+  const handleSubmit = async (values) => {
+    const toFeet = (feet, inches) =>
+    parseFloat(feet || 0) + (parseFloat(inches || 0) / 12);
+ const payload = {
+    length: toFeet(values.lengthFeet, values.lengthInches),
+    width: toFeet(values.widthFeet, values.widthInches),
+    height: toFeet(values.heightFeet, values.heightInches),
+  };
+  console.log(payload);
+
+    const data = {
+         ...payload,
+      nickname: values.nickname,
+      class: values.class,
+      manufacturer: values.manufacturer,
+      modelName: values.modelName,
+      modelYear: values.modelYear,
+      model: values.model,
+      dateOfPurchase: values.dateOfPurchase?.toISOString(), 
+      amountPaid: values.amountPaid,
+      condition: values.condition,
+      currentMileage: values.currentMileage,
+      purchasedFrom: values.purchasedFrom,
+      city: values.city,
+      state: values.state,
+      phoneNumber: values.phoneNumber,
+      floorplan: values.floorplan,
+      interiorColorScheme: values.interiorColorScheme,
+      exteriorColorScheme: values.exteriorColorScheme,
+    
+      weight: values.weight,
+    };
+
+    try {
+      const res = await addRv(data).unwrap();
+      message.success(res?.message || "RV added successfully!");
+      navigate("/information");
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong!");
+    }
   };
 
   const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const handleChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setMileage(formatted);
-    form.setFieldsValue({ qty: formatted });
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
   };
 
   return (
@@ -47,82 +85,70 @@ const AddRv = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>RV Nickname</span>}
-                name="type"
-                rules={[
-                  { required: true, message: "Please input your Fuel Type!" },
-                ]}
+                name="nickname"
+                rules={[{ required: true, message: "Enter RV Nickname" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Fuel Type"
+                  placeholder="Enter RV Nickname"
                 />
               </Form.Item>
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Class</span>}
-                name="AddBelt"
-                // rules={[
-                //   { required: true, message: "Please input your Add Belt!" },
-                // ]}
+                name="class"
               >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
+                <Select
+                  className="custom-select"
+                  style={{ height: "40px" }}
+                  placeholder="Select Class"
                 >
-                  <Select placeholder="Select Inquiry" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="Service_Request">Class A</Option>
-                    <Option value="Service_Request">Class B</Option>
-                    <Option value="Service_Request">Class C</Option>
-                    <Option value="Service_Request">Super C</Option>
-                    <Option value="Service_Request">5th Wheel</Option>
-                    <Option value="Service_Request">Camper</Option>
-                    <Option value="Partnership_Inquiry">Other</Option>
-                  </Select>
-                </ConfigProvider>
+                  <Option value="Class A">Class A</Option>
+                  <Option value="Class B">Class B</Option>
+                  <Option value="Class C">Class C</Option>
+                  <Option value="Super C">Super C</Option>
+                  <Option value="5th Wheel">5th Wheel</Option>
+                  <Option value="Camper">Camper</Option>
+                  <Option value="Other">Other</Option>
+                </Select>
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
-                name="Manufacturer"
+                name="manufacturer"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Fuel Add another Belt!",
+                    message: "Please input Manufacturer",
                   },
                 ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Add another Belt"
+                  placeholder="Manufacturer"
                 />
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Model Name</span>}
-                name="ModelName"
+                name="modelName"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Fuel Add Oil Filter!",
+                    message: "Please input Model Name",
                   },
                 ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Add Oil Filter"
+                  placeholder="Model Name"
                 />
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Model Year</span>}
-                name="ModelYear"
+                name="modelYear"
                 rules={[
                   {
                     required: true,
@@ -139,7 +165,7 @@ const AddRv = () => {
 
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Model</span>}
-                name="Model"
+                name="model"
                 rules={[
                   {
                     required: true,
@@ -159,27 +185,30 @@ const AddRv = () => {
                 label={
                   <span style={{ color: "#F9B038" }}>Date of Purchase</span>
                 }
-                name="Date"
-                // rules={[{ required: true, message: "Please input date!" }]}
+                name="dateOfPurchase"
               >
                 <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   format={dateFormat}
-                  defaultValue={dayjs("09/03/2019", dateFormat)}
-                  minDate={dayjs("08/01/2019", dateFormat)}
-                  maxDate={dayjs("10/31/2020", dateFormat)}
                 />
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Amount Paid</span>}
-                name="cost"
-                // rules={[{ required: true, message: "Please input Amount!" }]}
+                name="amountPaid"
+                normalize={(value) => parseNumber(value)}
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter Amount Paid",
+                  },
+                ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="$"
-                  value={cost}
-                  onChange={handleCostChange}
+                  placeholder="Amount Paid"
                 />
               </Form.Item>
             </div>
@@ -188,34 +217,25 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Condition</span>}
                 name="condition"
-                // rules={[{ required: true, message: "Please input Condition!" }]}
               >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
+                <Select
+                  className="custom-select"
+                  style={{ height: "40px" }}
+                  placeholder="Select Condition"
                 >
-                  <Select placeholder="Select Condition" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="Service_Request">New</Option>
-                    <Option value="Partnership_Inquiry">Used</Option>
-                  </Select>
-                </ConfigProvider>
+                  <Option value="New">New</Option>
+    <Option value="Used">Used</Option>
+    <Option value="Excellent">Excellent</Option>
+                </Select>
               </Form.Item>
               <Form.Item
                 label={
                   <span style={{ color: "#F9B038" }}>Current Mileage</span>
                 }
-                name="Currente"
-                // rules={[
-                //   { required: true, message: "Please input Current Mileage!" },
-                // ]}
+                name="currentMileage"
               >
                 <Input
+                type="number"
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="Current Mileage"
                 />
@@ -225,13 +245,7 @@ const AddRv = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Purchased Form</span>}
-                name="Purchased"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input Purchased Form!",
-                //   },
-                // ]}
+                name="purchasedFrom"
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -241,7 +255,6 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>City</span>}
                 name="City"
-                // rules={[{ required: true, message: "Please input City!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -254,12 +267,6 @@ const AddRv = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>State</span>}
                 name="State"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input State!",
-                //   },
-                // ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -268,10 +275,7 @@ const AddRv = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Phone Number</span>}
-                name="Phone Number"
-                // rules={[
-                //   { required: true, message: "Please input Phone Number!" },
-                // ]}
+                name="phoneNumber"
               >
                 <Input
                   type="Number"
@@ -284,13 +288,7 @@ const AddRv = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Floor Plan</span>}
-                name="Floor"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input Floor Plan!",
-                //   },
-                // ]}
+                name="floorplan"
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -303,13 +301,7 @@ const AddRv = () => {
                     Interior Color Scheme
                   </span>
                 }
-                name="Scheme"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input Interior Color Scheme!",
-                //   },
-                // ]}
+                name="interiorColorScheme"
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -325,13 +317,7 @@ const AddRv = () => {
                     Exterior Color Scheme
                   </span>
                 }
-                name="FlSchemeoor"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input Exterior Color Scheme!",
-                //   },
-                // ]}
+                name="exteriorColorScheme"
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
@@ -340,236 +326,145 @@ const AddRv = () => {
               </Form.Item>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Weight</span>}
-                name="Weight"
-                // rules={[
-                //   { required: true, message: "Please input Interior Weight!" },
-                // ]}
+                name="weight"
               >
                 <Input
+                type="number"
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="Interior Weight"
                 />
               </Form.Item>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <p className="mb-2">
-                {<span style={{ color: "#F9B038" }}>Length</span>}
-              </p>
-              <p className="mb-2">
-                {<span style={{ color: "#F9B038" }}>Width</span>}
-              </p>
-            </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Form.Item
-                    name="Length"
-                    // rules={[{ required: true, message: "Please input Length!" }]}
-                  >
-                    <ConfigProvider
-                      theme={{
-                        token: {
-                          colorPrimary: "#F9B038",
-                          borderRadius: 8,
-                          controlHeight: 40,
-                        },
-                      }}
-                    >
-                      <Select placeholder="Length" className="w-full">
-                        <Option value="General_Inquiry">Select</Option>
-                        <Option value="11">5 Feet</Option>
-                        <Option value="12">10 Feet</Option>
-                        <Option value="13">20 Feet</Option>
-                        <Option value="30">30 Feet</Option>
-                        <Option value="40">40 Feet</Option>
-                        <Option value="50">50 Feet</Option>
-                        <Option value="60">60 Feet</Option>
-                        <Option value="70">70 Feet</Option>
-                      </Select>
-                    </ConfigProvider>
+                  <Form.Item name="length">
+                    <Input
+                      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                      placeholder="Feet"
+                    />
                   </Form.Item>
                 </div>
 
-                <Form.Item
-                  name="AddBelt"
-                  // rules={[
-                  //   { required: true, message: "Please input your Add Belt!" },
-                  // ]}
-                >
-                  <ConfigProvider
-                    theme={{
-                      token: {
-                        colorPrimary: "#F9B038",
-                        borderRadius: 8,
-                        controlHeight: 40,
-                      },
-                    }}
-                  >
-                    <Select placeholder="Inches" className="w-full">
-                      <Option value="General_Inquiry">Select</Option>
-                      <Option value="0">0 Inches</Option>
-                      <Option value="1">1 Inches</Option>
-                      <Option value="2">2 Inches</Option>
-                      <Option value="3">3 Inches</Option>
-                      <Option value="4">4 Inches</Option>
-                      <Option value="5">5 Inches</Option>
-                      <Option value="6">6 Inches</Option>
-                      <Option value="7">7 Inches</Option>
-                      <Option value="8">8 Inches</Option>
-                      <Option value="9">9 Inches</Option>
-                      <Option value="10">10 Inches</Option>
-                      <Option value="11">11 Inches</Option>
-                      <Option value="12">12 Inches</Option>
-                    </Select>
-                  </ConfigProvider>
+                <Form.Item name="inches">
+                  <Input
+                    className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                    placeholder="Inches"
+                  />
                 </Form.Item>
               </div>
 
               <div className="">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Form.Item
-                      name="Length"
-                      // rules={[{ required: true, message: "Please input Length!" }]}
-                    >
-                      <ConfigProvider
-                        theme={{
-                          token: {
-                            colorPrimary: "#F9B038",
-                            borderRadius: 8,
-                            controlHeight: 40,
-                          },
-                        }}
-                      >
-                        <Select placeholder="Length" className="w-full">
-                          <Option value="General_Inquiry">Select</Option>
-                          <Option value="11">5 Feet</Option>
-                          <Option value="12">10 Feet</Option>
-                          <Option value="13">20 Feet</Option>
-                          <Option value="30">30 Feet</Option>
-                          <Option value="40">40 Feet</Option>
-                          <Option value="50">50 Feet</Option>
-                          <Option value="60">60 Feet</Option>
-                          <Option value="70">70 Feet</Option>
-                        </Select>
-                      </ConfigProvider>
+                    <Form.Item name="length">
+                      <Input
+                        className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                        placeholder="Feet"
+                      />
                     </Form.Item>
                   </div>
 
-                  <Form.Item
-                    name="AddBelt"
-                    // rules={[
-                    //   { required: true, message: "Please input your Add Belt!" },
-                    // ]}
-                  >
-                    <ConfigProvider
-                      theme={{
-                        token: {
-                          colorPrimary: "#F9B038",
-                          borderRadius: 8,
-                          controlHeight: 40,
-                        },
-                      }}
-                    >
-                      <Select placeholder="Inches" className="w-full">
-                        <Option value="General_Inquiry">Select</Option>
-                        <Option value="0">0 Inches</Option>
-                        <Option value="1">1 Inches</Option>
-                        <Option value="2">2 Inches</Option>
-                        <Option value="3">3 Inches</Option>
-                        <Option value="4">4 Inches</Option>
-                        <Option value="5">5 Inches</Option>
-                        <Option value="6">6 Inches</Option>
-                        <Option value="7">7 Inches</Option>
-                        <Option value="8">8 Inches</Option>
-                        <Option value="9">9 Inches</Option>
-                        <Option value="10">10 Inches</Option>
-                        <Option value="11">11 Inches</Option>
-                        <Option value="12">12 Inches</Option>
-                      </Select>
-                    </ConfigProvider>
+                  <Form.Item name="inches">
+                    <Input
+                      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                      placeholder="Inches"
+                    />
                   </Form.Item>
                 </div>
               </div>
             </div>
 
-             <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <p className="mb-2">
                 {<span style={{ color: "#F9B038" }}>Hight</span>}
               </p>
-              
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Form.Item
-                    name="Length"
-                    // rules={[{ required: true, message: "Please input Length!" }]}
-                  >
-                    <ConfigProvider
-                      theme={{
-                        token: {
-                          colorPrimary: "#F9B038",
-                          borderRadius: 8,
-                          controlHeight: 40,
-                        },
-                      }}
-                    >
-                      <Select placeholder="Length" className="w-full">
-                        <Option value="General_Inquiry">Select</Option>
-                        <Option value="11">5 Feet</Option>
-                        <Option value="12">10 Feet</Option>
-                        <Option value="13">20 Feet</Option>
-                        <Option value="30">30 Feet</Option>
-                        <Option value="40">40 Feet</Option>
-                        <Option value="50">50 Feet</Option>
-                        <Option value="60">60 Feet</Option>
-                        <Option value="70">70 Feet</Option>
-                      </Select>
-                    </ConfigProvider>
+                  <Form.Item name="length">
+                    <Input
+                      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                      placeholder="Feet"
+                    />
                   </Form.Item>
                 </div>
 
-                <Form.Item
-                  name="AddBelt"
-                  // rules={[
-                  //   { required: true, message: "Please input your Add Belt!" },
-                  // ]}
-                >
-                  <ConfigProvider
-                    theme={{
-                      token: {
-                        colorPrimary: "#F9B038",
-                        borderRadius: 8,
-                        controlHeight: 40,
-                      },
-                    }}
-                  >
-                    <Select placeholder="Inches" className="w-full">
-                      <Option value="General_Inquiry">Select</Option>
-                      <Option value="0">0 Inches</Option>
-                      <Option value="1">1 Inches</Option>
-                      <Option value="2">2 Inches</Option>
-                      <Option value="3">3 Inches</Option>
-                      <Option value="4">4 Inches</Option>
-                      <Option value="5">5 Inches</Option>
-                      <Option value="6">6 Inches</Option>
-                      <Option value="7">7 Inches</Option>
-                      <Option value="8">8 Inches</Option>
-                      <Option value="9">9 Inches</Option>
-                      <Option value="10">10 Inches</Option>
-                      <Option value="11">11 Inches</Option>
-                      <Option value="12">12 Inches</Option>
-                    </Select>
-                  </ConfigProvider>
+                <Form.Item name="inches">
+                  <Input
+                    className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                    placeholder="Inches"
+                  />
                 </Form.Item>
               </div>
+            </div> */}
+            {/* Length */}
+<div className="grid grid-cols-2 gap-4">
+  <p className="mb-2">
+    <span style={{ color: "#F9B038" }}>Length</span>
+  </p>
+</div>
+<div className="grid grid-cols-2 gap-4">
+  <Form.Item name="lengthFeet">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Feet"
+    />
+  </Form.Item>
+  <Form.Item name="lengthInches">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Inches"
+    />
+  </Form.Item>
+</div>
 
-             
-            </div>
+{/* Width */}
+<div className="grid grid-cols-2 gap-4 mt-4">
+  <p className="mb-2">
+    <span style={{ color: "#F9B038" }}>Width</span>
+  </p>
+</div>
+<div className="grid grid-cols-2 gap-4">
+  <Form.Item name="widthFeet">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Feet"
+    />
+  </Form.Item>
+  <Form.Item name="widthInches">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Inches"
+    />
+  </Form.Item>
+</div>
+
+{/* Height */}
+<div className="grid grid-cols-2 gap-4 mt-4">
+  <p className="mb-2">
+    <span style={{ color: "#F9B038" }}>Height</span>
+  </p>
+</div>
+<div className="grid grid-cols-2 gap-4">
+  <Form.Item name="heightFeet">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Feet"
+    />
+  </Form.Item>
+  <Form.Item name="heightInches">
+    <Input
+      className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+      placeholder="Inches"
+    />
+  </Form.Item>
+</div>
+
             <Form.Item className=" pt-3">
               <button
                 type="primary"

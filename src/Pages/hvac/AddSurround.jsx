@@ -55,7 +55,7 @@ const AddSurround = () => {
         : ""
     );
 
-    formData.append("price", values.cost ? Number(values.cost) : "");
+    formData.append("cost", values.cost ? Number(values.cost) : "");
 
     formData.append("notes", values.notes || "");
 

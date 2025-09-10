@@ -55,7 +55,7 @@ const AddDvdInfo = () => {
         : ""
     );
 
-    formData.append("price", values.cost ? Number(values.cost) : "");
+    formData.append("cost", values.cost ? Number(values.cost) : "");
 
     formData.append("notes", values.notes || "");
 
@@ -69,7 +69,7 @@ const AddDvdInfo = () => {
     try {
       const res = await addHeater(formData).unwrap();
       message.success(res?.message || "Saved successfully");
-      
+
       form.resetFields();
       setFileList([]);
     } catch (err) {
@@ -103,7 +103,7 @@ const AddDvdInfo = () => {
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">
-           Add DVD Information
+            Add DVD Information
           </h1>
         </div>
         <div className="max-w-4xl m-auto mt-11">
@@ -132,7 +132,7 @@ const AddDvdInfo = () => {
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Form.Item
+              <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
                 name="location"
               >
@@ -191,18 +191,18 @@ const AddDvdInfo = () => {
                 />
               </Form.Item>
             </div>
-  <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Model Number</span>}
-                name="modelNumber"
-                //   rules={[
-                //     { required: true, message: "Please input Model Number!" },
-                //   ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Model Number"
-                />
-              </Form.Item>
+            <Form.Item
+              label={<span style={{ color: "#F9B038" }}>Model Number</span>}
+              name="modelNumber"
+              //   rules={[
+              //     { required: true, message: "Please input Model Number!" },
+              //   ]}
+            >
+              <Input
+                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                placeholder="Model Number"
+              />
+            </Form.Item>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div>
                 <h1 className="text-[#F9B038]">Upload Image</h1>

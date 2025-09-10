@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import { Button, ConfigProvider, DatePicker, Form, Input, message, Select } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useState } from "react";
 import { DeleteOutlined, EyeOutlined, InboxOutlined } from "@ant-design/icons";
@@ -7,6 +7,8 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import AddReports from "./AddReports";
 import { Link } from "react-router-dom";
 import { BsHeartFill } from "react-icons/bs";
+import { imageUrl } from "../redux/api/baseApi";
+import { useDeleteReportsMutation, useGetReportsQuery } from "../redux/api/routesApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
 const props = {
@@ -29,238 +31,156 @@ const props = {
   },
 };
 const Reports = () => {
-  const [form] = Form.useForm();
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const handleSubmit = (values) => {
-    console.log(values);
+   const { data, isLoading, isError } = useGetReportsQuery();
+  const [deleteInsurance] = useDeleteReportsMutation();
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Something went wrong!</p>;
+
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      const res = await deleteInsurance(id).unwrap();
+      message.success(res?.message);
+    } catch (err) {
+      message.error(err?.data?.message);
+    }
   };
   return (
     <div className="container m-auto  py-8 px-3 lg:px-0">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">Reports</h1>{" "}
        <div>
-         <button
-          onClick={() => setOpenAddModal(true)}
-          className=" border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md  font-medium "
+         <Link to={'/addReports'}><button
+      
+          className="border border-[#F9B038] py-2 px-5 text-[#F9B038] rounded-md  font-medium "
         >
           Add Report
-        </button>
+        </button></Link>
        </div>
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
-        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
-          <div className=" text-gray-800 space-y-2  font-semibold">
-            <div className="flex  justify-between items-center">
-              <div>
-                <span>Report Title :</span>
-                <span className="font-normal">
-                  Roof Sealant Maintenance - April 2025
-                </span>
-              </div>
-              <div className="text-red-600">
-                <BsHeartFill></BsHeartFill>
-              </div>
-            </div>
-            <div className=" gap-4">
-              <span>Cost :</span>
-              <span className="font-normal">$34</span>
-            </div>
+       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+        {data?.report?.map((item) => (
+          <div
+            key={item._id}
+            className="bg-[#F59B07] py-4 w-full rounded gap-8 px-4"
+          >
+               <div className="text-gray-800 space-y-2 font-semibold">
+                         {/* Image show only if exists */}
+                         {item.images?.length > 0 && (
+                           <div className="flex justify-center">
+                             <img
+                               className="w-full rounded object-cover"
+                               src={`${imageUrl}/${item.images[0]}`}
+                               alt={item.insuranceCompany || "Insurance"}
+                             />
+                           </div>
+                         )}
+                          {item.reportTitle && (
+                           <div className="gap-4">
+                             <span>Report Title :</span>
+                             <span className="font-normal">{item.reportTitle}</span>
+                           </div>
+                         )}
+                         {item.odometerReading && (
+                           <div className="gap-4">
+                             <span>Odometer Reading :</span>
+                             <span className="font-normal">{item.odometerReading}</span>
+                           </div>
+                         )}
+                         {/* Effective Date */}
+                         {item.dateOfService && (
+                           <div className="gap-4">
+                             <span>Date Of Service :</span>
+                             <span className="font-normal">
+                               {new Date(item.dateOfService).toLocaleDateString()}
+                             </span>
+                           </div>
+                         )}
+                         {item.area && (
+                           <div className="gap-4">
+                             <span>Area :</span>
+                             <span className="font-normal">{item.area}</span>
+                           </div>
+                         )}
+           
+                         {/* Website Link */}
+                         {item.websiteLink && (
+                           <div className="gap-4">
+                             <span>Website Link :</span>
+                             <span className="font-normal">{item.websiteLink}</span>
+                           </div>
+                         )}
+           
+                         {/* Phone Number */}
+                         {item.phoneNumber && (
+                           <div className="gap-4">
+                             <span>Phone Number :</span>
+                             <span className="font-normal">{item.phoneNumber}</span>
+                           </div>
+                         )}
+           
+                         {/* Effective Date */}
+                         {item.effectiveDate && (
+                           <div className="gap-4">
+                             <span>Effective Date :</span>
+                             <span className="font-normal">
+                               {new Date(item.effectiveDate).toLocaleDateString()}
+                             </span>
+                           </div>
+                         )}
+           
+                         {/* Renewal Date */}
+                         {item.renewalDate && (
+                           <div className="gap-4">
+                             <span>Renewal Date :</span>
+                             <span className="font-normal">
+                               {new Date(item.renewalDate).toLocaleDateString()}
+                             </span>
+                           </div>
+                         )}
+           
+                         {/* Policy Number */}
+                         {item.policyNumber && (
+                           <div className="gap-4">
+                             <span>Policy Number :</span>
+                             <span className="font-normal">{item.policyNumber}</span>
+                           </div>
+                         )}
+           
+                         {/* Cost */}
+                         {item.cost && (
+                           <div className="gap-4">
+                             <span>Cost :</span>
+                             <span className="font-normal">{item.cost}</span>
+                           </div>
+                         )}
+           
+                         {/* Notes */}
+                         {item.notes && (
+                           <div className="gap-4">
+                             <span>Notes :</span>
+                             <span className="font-normal">{item.notes}</span>
+                           </div>
+                         )}
+                       </div>
 
-            <div className=" gap-4">
-              <span>Area :</span>
-              <span className="font-normal">Dhaka</span>
-            </div>
-            <div className=" gap-4">
-              <span>Date of Services :</span>
-              <span className="font-normal">03-24-2025</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Odometer Reading :</span>
-              <span className="font-normal">20,343 miles</span>
-            </div>
-            <div className=" gap-4">
-              <span>Notes :</span>
-              <span className="font-normal">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-                natus?
-              </span>
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-2 mt-3">
-            {" "}
-            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
-              Delete
-            </button>
-            <Link to={""}>
-              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
-                Update
+            <div className="flex justify-end gap-2 mt-3">
+              <button
+                onClick={() => handleDelete(item?._id)}
+                className="border py-1 px-5 border-black rounded-md font-medium"
+              >
+                Delete
               </button>
-            </Link>
-          </div>
-        </div>
-        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
-          <div className=" text-gray-800 space-y-2  font-semibold">
-            <div className="flex  justify-between items-center">
-              <div>
-                <span>Report Title :</span>
-                <span className="font-normal">
-                  Roof Sealant Maintenance - April 2025
-                </span>
-              </div>
-              <div className="text-red-600">
-                <BsHeartFill></BsHeartFill>
-              </div>
-            </div>
-            <div className=" gap-4">
-              <span>Cost :</span>
-              <span className="font-normal">$34</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Area :</span>
-              <span className="font-normal">Dhaka</span>
-            </div>
-            <div className=" gap-4">
-              <span>Date of Services :</span>
-              <span className="font-normal">03-24-2025</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Odometer Reading :</span>
-              <span className="font-normal">20,343 miles</span>
-            </div>
-            <div className=" gap-4">
-              <span>Notes :</span>
-              <span className="font-normal">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-                natus?
-              </span>
+              <Link to={`/updateReports/${item._id}`}>
+                <button className="border border-black py-1 px-5 rounded-md font-medium">
+                  Update
+                </button>
+              </Link>
             </div>
           </div>
-
-          <div className="flex justify-end gap-2 mt-3">
-            {" "}
-            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
-              Delete
-            </button>
-            <Link to={""}>
-              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
-                Update
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
-          <div className=" text-gray-800 space-y-2  font-semibold">
-            <div className="flex  justify-between items-center">
-              <div>
-                <span>Report Title :</span>
-                <span className="font-normal">
-                  Roof Sealant Maintenance - April 2025
-                </span>
-              </div>
-              <div className="text-red-600">
-                <BsHeartFill></BsHeartFill>
-              </div>
-            </div>
-            <div className=" gap-4">
-              <span>Cost :</span>
-              <span className="font-normal">$34</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Area :</span>
-              <span className="font-normal">Dhaka</span>
-            </div>
-            <div className=" gap-4">
-              <span>Date of Services :</span>
-              <span className="font-normal">03-24-2025</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Odometer Reading :</span>
-              <span className="font-normal">20,343 miles</span>
-            </div>
-            <div className=" gap-4">
-              <span>Notes :</span>
-              <span className="font-normal">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-                natus?
-              </span>
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-2 mt-3">
-            {" "}
-            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
-              Delete
-            </button>
-            <Link to={""}>
-              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
-                Update
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className=" bg-[#F59B07]  py-4 w-full rounded gap-8 px-4">
-          <div className=" text-gray-800 space-y-2  font-semibold">
-            <div className="flex  justify-between items-center">
-              <div>
-                <span>Report Title :</span>
-                <span className="font-normal">
-                  Roof Sealant Maintenance - April 2025
-                </span>
-              </div>
-              <div className="text-red-600">
-                <BsHeartFill></BsHeartFill>
-              </div>
-            </div>
-            <div className=" gap-4">
-              <span>Cost :</span>
-              <span className="font-normal">$34</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Area :</span>
-              <span className="font-normal">Dhaka</span>
-            </div>
-            <div className=" gap-4">
-              <span>Date of Services :</span>
-              <span className="font-normal">03-24-2025</span>
-            </div>
-
-            <div className=" gap-4">
-              <span>Odometer Reading :</span>
-              <span className="font-normal">20,343 miles</span>
-            </div>
-            <div className=" gap-4">
-              <span>Notes :</span>
-              <span className="font-normal">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-                natus?
-              </span>
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-2 mt-3">
-            {" "}
-            <button className=" border py-1 px-5 border-black  rounded-md  font-medium ">
-              Delete
-            </button>
-            <Link to={""}>
-              <button className=" border border-black py-1 px-5 rounded-md  font-medium ">
-                Update
-              </button>
-            </Link>
-          </div>
-        </div>
+        ))}
       </div>
-      <AddReports
-        setOpenAddModal={setOpenAddModal}
-        openAddModal={openAddModal}
-      ></AddReports>
+     
     </div>
   );
 };

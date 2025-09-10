@@ -1,16 +1,32 @@
-import { DatePicker, Form, Input, message, Select, Upload } from "antd";
-
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Select,
+  Upload,
+} from "antd";
+import Dragger from "antd/es/upload/Dragger";
 import React, { useEffect, useState } from "react";
-
+import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAddTireMutation, useGetSingleTireQuery, useUpdateTireMutation } from "../redux/api/routesApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useAddExhaustFansMutation,
+  useAddToiletMutation,
+  useAddTvMutation,
+  useAddWasherMutation,
+  useAddWaterHeaterMutation,
+  useAddWaterPumpMutation,
+  useGetSingleExhaustFansQuery,
+  useUpdateExhaustFansMutation,
+} from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
-
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
-
 const onPreview = async (file) => {
   let src =
     file.url ||
@@ -24,21 +40,51 @@ const onPreview = async (file) => {
   const imgWindow = window.open(src);
   imgWindow?.document.write(image.outerHTML);
 };
-
-const UpdateTire = () => {
-   const {id} = useParams();
-    const {data:singleUpdate} = useGetSingleTireQuery({id})
+const UpdateExhaust = () => {
+    const {id} = useParams();
+    const {data:singleUpdate} = useGetSingleExhaustFansQuery({id})
     console.log(singleUpdate)
+  const navigate = useNavigate();
+  const [addHeater] = useUpdateExhaustFansMutation();
   const [form] = Form.useForm();
-  const [cost, setCost] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [addTire] = useUpdateTireMutation();
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append("name", values.name || "");
+    formData.append("location", values.location || "");
+    formData.append("modelNumber", values.modelNumber || "");
+    formData.append(
+      "dateOfPurchase",
+      values.dateOfPurchase
+        ? dayjs(values.dateOfPurchase).format(dateFormat)
+        : ""
+    );
 
+    formData.append("cost", values.cost ? Number(values.cost) : "");
+
+    formData.append("notes", values.notes || "");
+
+    // Multiple image upload
+    fileList.forEach((file) => {
+      if (file.originFileObj) {
+        formData.append("images", file.originFileObj);
+      }
+    });
+
+    try {
+      const res = await addHeater({formData,id}).unwrap();
+      message.success(res?.message || "Saved successfully");
+      
+    //   form.resetFields();
+    //   setFileList([]);
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong");
+    }
+  };
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
-  const navigate = useNavigate();
   const formatWithCommas = (value) => {
     if (!value) return "";
     const onlyNumbers = value.toString().replace(/[^\d]/g, "");
@@ -50,54 +96,22 @@ const UpdateTire = () => {
     return value.replace(/,/g, "");
   };
 
-  const handleSubmit = async (values) => {
-    console.log("Form Values:", values?.cost);
-
-    const formData = new FormData();
-        formData.append("manufacturer", values.Manufacturer || "");
-    formData.append("tireSize", values.size || "");
-    formData.append("location", values.location || "");
-    formData.append(
-      "dateOfPurchase",
-      values.dateOfPurchase
-        ? dayjs(values.dateOfPurchase).format(dateFormat)
-        : ""
-    );
-
-    formData.append("cost", values.cost ? Number(values.cost) : "");
-
-    formData.append("note", values.notes || "");
-
-    // Multiple image upload
-    fileList.forEach((file) => {
-      if (file.originFileObj) {
-        formData.append("images", file.originFileObj);
-      }
-    });
-
-    try {
-      const res = await addTire({formData,id}).unwrap();
-      message.success(res?.message || "Saved successfully");
-        form.resetFields();
-  setFileList([]);
-    
-    } catch (err) {
-      message.error(err?.data?.message || "Something went wrong");
-    }
-  };
-
+  //   const handleChange = (e) => {
+  //     const input = e.target.value;
+  //     const formatted = formatWithCommas(input);
+  //     setMileage(formatted);
+  //     form.setFieldsValue({ qty: formatted });
+  //   };
    useEffect(() => {
-      if (singleUpdate?.tire
+      if (singleUpdate?.exhaustFans
 ) {
-        const admin = singleUpdate?.tire
-
+        const admin = singleUpdate?.exhaustFans
 
   ;
     
         // ✅ Form values set
         form.setFieldsValue({
-          Manufacturer: admin.manufacturer || '',
-          size: admin.tireSize || '',
+          name: admin.name || '',
           location: admin.location || '',
           modelNumber: admin.modelNumber || '',
           phoneNumber: admin.phoneNumber || "",
@@ -105,7 +119,7 @@ const UpdateTire = () => {
           effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
           renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
           cost: admin.cost || "",
-          notes: admin.note || "",
+          notes: admin.notes || "",
           policyNumber: admin.policyNumber || "",
         });
     
@@ -121,27 +135,32 @@ const UpdateTire = () => {
         }
       }
     }, [singleUpdate, form]);
+
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
-        <div className="lg:w-[300px] pb-7 lg:pb-0">
-          <h1 className="text-3xl text-[#F9B038] font-semibold ">Add Tire</h1>
+        <div className=" pb-7 lg:pb-0">
+          <h1 className="text-3xl font-semibold text-[#F9B038]">
+           Update Exhaust Fans Information
+          </h1>
         </div>
-        <div className="max-w-4xl m-auto text-[#F9B038]">
+        <div className="max-w-4xl m-auto mt-11">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Manufacturer</span>}
-                name="Manufacturer"
+                label={<span style={{ color: "#F9B038" }}>Name</span>}
+                name="name"
+                // rules={[{ required: true, message: "Please input Name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Manufacturer"
+                  placeholder="Name"
                 />
               </Form.Item>
-
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Date Purchase</span>}
+                label={
+                  <span style={{ color: "#F9B038" }}>Date of Purchase</span>
+                }
                 name="dateOfPurchase"
               >
                 <DatePicker
@@ -151,18 +170,7 @@ const UpdateTire = () => {
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Tire Size</span>}
-                name="size"
-              >
-                <Input
-             
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Tire Size"
-                />
-              </Form.Item>
-
-              <Form.Item
+            <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Location</span>}
                 name="location"
               >
@@ -201,28 +209,38 @@ const UpdateTire = () => {
                   <Select.Option value="Rear Front">Rear Front</Select.Option>
                 </Select>
               </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Cost</span>}
+                name="cost"
+                normalize={(value) => parseNumber(value)}
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter a valid number",
+                  },
+                ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="$"
+                />
+              </Form.Item>
             </div>
-
-            <Form.Item
-              label={<span style={{ color: "#F9B038" }}>Cost</span>}
-              name="cost"
-              normalize={(value) => parseNumber(value)}
-              getValueProps={(value) => ({
-                value: formatWithCommas(value),
-              })}
-              rules={[
-                {
-                  pattern: /^\d+$/,
-                  message: "Please enter a valid number",
-                },
-              ]}
-            >
-              <Input
-                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                placeholder="$"
-              />
-            </Form.Item>
-
+  <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Model Number</span>}
+                name="modelNumber"
+                //   rules={[
+                //     { required: true, message: "Please input Model Number!" },
+                //   ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="Model Number"
+                />
+              </Form.Item>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div>
                 <h1 className="text-[#F9B038]">Upload Image</h1>
@@ -240,6 +258,7 @@ const UpdateTire = () => {
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="notes"
+                // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea
                   className="w-full bg-[#F9B038] border border-transparent py-2"
@@ -259,10 +278,19 @@ const UpdateTire = () => {
               </button>
             </Form.Item>
           </Form>
+          <Link to={"/details/AddVentFans"}>
+            <button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-[#F9B038] py-2 text-black"
+            >
+              Skip
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default UpdateTire;
+export default UpdateExhaust;

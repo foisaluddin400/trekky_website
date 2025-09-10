@@ -42,6 +42,61 @@ const routesApi = baseApi.injectEndpoints({
     //     providesTags: ["updateProfile"],
     // }),
 
+     addRv: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/rv/add-rv",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["updateProfile"],
+    }),
+
+
+
+getRv: builder.query({
+      query: () => {
+        return {
+          url: "/rv/get-rvs",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleRv: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/rv/get-rvs/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateRv: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/rv/update-rv/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteRv: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/rv/delete-rv/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+
     addChassis: builder.mutation({
       query: (data) => {
         return {
@@ -51,6 +106,45 @@ const routesApi = baseApi.injectEndpoints({
         };
       },
       invalidatesTags: ["updateProfile"],
+    }),
+
+    getChassis: builder.query({
+      query: () => {
+        return {
+          url: "/chassis/get-chassis",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleChassis: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/chassis/get-chassis/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateChassis: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/chassis/update-chassis/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteChassis: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/chassis/delete-chassis/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
     }),
 
     //     updateFaq: builder.mutation({
@@ -171,6 +265,45 @@ const routesApi = baseApi.injectEndpoints({
           url: "/tire/add-tire",
           method: "POST",
           body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+        getTire: builder.query({
+      query: () => {
+        return {
+          url: "/tire/get-tire",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleTire: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/tire/get-tire/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateTire: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/tire/update-tire/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteTire: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/tire/delete-tire/${id}`,
+          method: "DELETE",
         };
       },
       invalidatesTags: ["terms"],
@@ -869,7 +1002,44 @@ getToilet: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
+   getOutdoor: builder.query({
+      query: () => {
+        return {
+          url: "/outdoor-radio/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleOutdoor: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/outdoor-radio/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateOutdoor: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/outdoor-radio/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
 
+    deleteOutdoor: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/outdoor-radio/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
     addSurroundSound: builder.mutation({
       query: (data) => {
         return {
@@ -943,7 +1113,7 @@ getToilet: builder.query({
     getSingleInternetSatettling: builder.query({
       query: ({ id }) => {
         return {
-          url: `/internet-satellite/${id}`,
+          url: `/internet-satellite/get/${id}`,
           method: "GET",
         };
       },
@@ -1052,6 +1222,110 @@ getToilet: builder.query({
       },
       providesTags: ["terms"],
     }),
+
+  addRepair: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/new-repair/create",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+       getRepair: builder.query({
+      query: () => {
+        return {
+          url: "/new-repair/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleRepair: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/new-repair/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateRepair: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/new-repair/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteRepair: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/new-repair/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+  addReports: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/reports/create",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+       getReports: builder.query({
+      query: () => {
+        return {
+          url: "/reports/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleReports: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/reports/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateReports: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/reports/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteReports: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/reports/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+
+
+
     // postPrivecy: builder.mutation({
     //     query: (data) => {
     //         return {
@@ -1067,11 +1341,20 @@ getToilet: builder.query({
 
 export const {
   useAddChassisMutation,
+  useDeleteChassisMutation,
+  useGetChassisQuery,
+  useGetSingleChassisQuery,
+  useUpdateChassisMutation,
+  useAddRvMutation,
+  useDeleteRvMutation,
+  useGetRvQuery,useUpdateRvMutation,useGetSingleRvQuery,
   useAddInsuranceMutation,
   useGetSingleInsuranceCompanyQuery,
   useUpdateInsuranceCompanyMutation,
   useDeleteInsuranceCompanyMutation,
   useAddTireMutation,
+  useDeleteTireMutation,
+  useGetSingleTireQuery,useGetTireQuery,useUpdateTireMutation,
   useAddAirConditionMutation,
   useDeleteAirConditionMutation,
   useGetAirConditionQuery,
@@ -1119,6 +1402,7 @@ export const {
   useAddGpsMutation,
   useGetGpsQuery,useGetSingleGpsQuery,useUpdateGpsMutation,useDeleteGpsMutation,
   useAddOutdoorMutation,
+  useDeleteOutdoorMutation,useGetOutdoorQuery,useGetSingleOutdoorQuery,useUpdateOutdoorMutation,
   useAddSurroundSoundMutation,
   useGetSurroundSoundQuery,useGetSingleSurroundSoundQuery,useDeleteSurroundSoundMutation,useUpdateSurroundSoundMutation,
   useAddInternetSatettlingMutation,
@@ -1129,4 +1413,7 @@ export const {
   useAddMemberMutation,
   useGetMemberShipQuery,
   useGetInsuranceCompanyQuery,
+  useAddReportsMutation,useDeleteReportsMutation,useGetReportsQuery,useGetSingleReportsQuery,useUpdateReportsMutation,
+  useAddRepairMutation,
+  useDeleteRepairMutation,useGetRepairQuery,useGetSingleRepairQuery,useUpdateRepairMutation,
 } = routesApi;

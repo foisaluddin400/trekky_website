@@ -16,12 +16,20 @@ import {
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Link, useNavigate } from "react-router-dom";
-import { useAddChassisMutation } from "../redux/api/routesApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useAddChassisMutation,
+  useGetSingleChassisQuery,
+  useUpdateChassisMutation,
+} from "../redux/api/routesApi";
+import { imageUrl } from "../redux/api/baseApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
-const Information = () => {
-  const [addChassisInformation] = useAddChassisMutation();
+const UpdateChassis = () => {
+  const { id } = useParams();
+  const { data: singleUpdate } = useGetSingleChassisQuery({ id });
+  console.log(singleUpdate);
+  const [addChassisInformation] = useUpdateChassisMutation();
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -55,9 +63,8 @@ const Information = () => {
     };
 
     try {
-      const res = await addChassisInformation(data).unwrap();
+      const res = await addChassisInformation({formData:data,id}).unwrap();
       message.success(res?.message);
-      navigate("/insuranceCompanyInfoForm");
     } catch (err) {
       message.error(err?.data?.message);
     }
@@ -65,15 +72,47 @@ const Information = () => {
   useEffect(() => {
     form.setFieldsValue({ cooking: [""], ingredients: [""], nutrition: [""] });
   }, [form]);
+
+  useEffect(() => {
+    if (singleUpdate?.chassis) {
+      const admin = singleUpdate.chassis;
+
+      form.setFieldsValue({
+        Manufacturer: admin.mfg || "",
+        Model: admin.modelNo || "",
+        Name: admin.name || "",
+        Serial: admin.serialId || "",
+        FuelType: admin.fuelType || "",
+        engineModel: admin.engineModel || "",
+        Horsepower: admin.hp || "",
+        // belt mapping
+        belts: admin.belt?.map((b) => ({
+          beltName: b.name,
+          partNumber: b.partNo,
+        })) || [{}],
+        // oil filter mapping
+        Oil: admin.oilFilter?.map((o) => ({
+          beltName: o.name,
+          partNumber: o.partNo,
+        })) || [{}],
+        // fuel filter mapping
+        Fuel: admin.fuelFilter?.map((f) => ({
+          beltName: f.name,
+          partNumber: f.partNo,
+        })) || [{}],
+      });
+    }
+  }, [singleUpdate, form]);
+
   return (
     <div className="container m-auto">
-      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
-        <div className="lg:w-[300px] pb-7 lg:pb-0">
+      <div className=" lg:mt-11 mt-6 px-3">
+        <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">
-            Chassis information
+            Update Chassis information
           </h1>
         </div>
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-4xl m-auto mt-11">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
@@ -423,4 +462,4 @@ const Information = () => {
   );
 };
 
-export default Information;
+export default UpdateChassis;

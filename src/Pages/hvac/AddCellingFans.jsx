@@ -24,6 +24,7 @@ import {
   useAddWaterPumpMutation,
 } from "../redux/api/routesApi";
 dayjs.extend(customParseFormat);
+
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
   let src =
@@ -55,7 +56,7 @@ const AddCellingFans = () => {
         : ""
     );
 
-    formData.append("price", values.cost ? Number(values.cost) : "");
+    formData.append("cost", values.cost ? Number(values.cost) : "");
 
     formData.append("notes", values.notes || "");
 

@@ -49,7 +49,7 @@ export const Navbar = () => {
     },
     {
       key: "information",
-      label: <Link to="/information">Chassis Information</Link>,
+      label: <Link to="/chassisInfo">Chassis Information</Link>,
     },
   ];
 

@@ -101,6 +101,21 @@ import UpdateWasherInfo from "../Pages/hvac/UpdateWasherInfo";
 import UpdateWaterHeater from "../Pages/hvac/UpdateWaterHeater";
 import UpdateToilet from "../Pages/hvac/UpdateToilet";
 import UpdateTv from "../Pages/hvac/UpdateTv";
+import UpdateDryer from "../Pages/hvac/UpdateDryer";
+import UpdateExhaust from "../Pages/hvac/UpdateExhaust";
+import UpdateVentFans from "../Pages/hvac/UpdateVentFans";
+import UpdateDishwasher from "../Pages/hvac/UpdateDishwasher";
+import UpdateCallingFans from "../Pages/hvac/UpdateCallingFans";
+import UpdateDvd from "../Pages/hvac/UpdateDvd";
+import UpdateGps from "../Pages/hvac/UpdateGps";
+import UpdateOutdoor from "../Pages/hvac/UpdateOutdoor";
+import UpdateSurround from "../Pages/hvac/UpdateSurround";
+import UpdateInternetStelling from "../Pages/hvac/UpdateInternetStelling";
+import UpdateRouter from "../Pages/hvac/UpdateRouter";
+import ChassisInfo from "../Pages/hvac/ChassisInfo";
+import UpdateChassis from "../Pages/hvac/UpdateChassis";
+import AddReports from "../Pages/reports/AddReports";
+import UpdateReports from "../Pages/reports/UpdateReports";
 
 export const router = createBrowserRouter([
   {
@@ -128,6 +143,14 @@ export const router = createBrowserRouter([
       {
         path: "/information",
         element: <Information></Information>,
+      },
+      {
+        path: "/chassisInfo",
+        element: <ChassisInfo></ChassisInfo>
+      },
+       {
+        path: "/chassisInfo/update-chassis/:id",
+        element: <UpdateChassis></UpdateChassis>
       },
       {
         path: "/information/addBelt",
@@ -223,44 +246,88 @@ export const router = createBrowserRouter([
         element: <DryerInfo></DryerInfo>
       },
       {
+        path: "/details/Dryer/update-dryer/:id",
+        element: <UpdateDryer></UpdateDryer>
+      },
+      {
         path: "/details/Exhaust",
         element: <ExhaustInfo></ExhaustInfo>
+      },
+      {
+        path: "/details/Exhaust/update-exhaust/:id",
+        element: <UpdateExhaust></UpdateExhaust>
       },
       {
         path: "/details/VentFans",
         element: <VentFansInfo></VentFansInfo>
       },
       {
+        path: "/details/VentFans/update-ventfans/:id",
+        element: <UpdateVentFans></UpdateVentFans>
+      },
+      {
         path: "/details/Dishwasher",
         element: <DishwasherInfo></DishwasherInfo>
+      },
+      {
+        path: "/details/Dishwasher/update-dishwasher/:id",
+        element: <UpdateDishwasher></UpdateDishwasher>
       },
       {
         path: "/details/Celling",
         element: <CellingInfo></CellingInfo>
       },
       {
+        path: "/details/Celling/updateCalling-fans/:id",
+        element: <UpdateCallingFans></UpdateCallingFans>
+      },
+      {
         path: "/details/DVD",
         element: <DVDInfo></DVDInfo>
       },
       {
+        path: "/details/DVD/update-dvd/:id",
+        element: <UpdateDvd></UpdateDvd>
+      },
+      {
         path: "/details/GPS",
         element: <GPSInfo></GPSInfo>
+      },
+       {
+        path: "/details/GPS/updateGps/:id",
+        element: <UpdateGps></UpdateGps>
       },
       {
         path: "/details/Outdoor",
         element: <OutdoorInfo></OutdoorInfo>
       },
       {
+        path: "/details/Outdoor/update-outdoor/:id",
+        element: <UpdateOutdoor></UpdateOutdoor>
+      },
+      {
         path: "/details/Surround",
         element: <SurroundInfo></SurroundInfo>
+      },
+       {
+        path: "/details/Surround/update-surround/:id",
+        element: <UpdateSurround></UpdateSurround>
       },
        {
         path: "/details/Internet_Satellite",
         element: <InternetInfo></InternetInfo>
       },
+      {
+        path: "/details/Internet_Satellite/update-internet/:id",
+        element: <UpdateInternetStelling></UpdateInternetStelling>
+      },
        {
         path: "/details/Router",
         element: <RouterInfo></RouterInfo>
+      },
+      {
+        path: "/details/Router/update-router/:id",
+        element: <UpdateRouter></UpdateRouter>
       },
    {
         path: "/details/AddHeater",
@@ -344,6 +411,14 @@ export const router = createBrowserRouter([
         path: "/myreports",
         element: <MyReport></MyReport>,
       },
+       {
+        path: "/addReports",
+        element: <AddReports></AddReports>
+      },
+      {
+        path: "/updateReports/:id",
+        element: <UpdateReports></UpdateReports>
+      },
       {
         path: "/newRepair",
         element: <NewRepair></NewRepair>,
@@ -353,7 +428,7 @@ export const router = createBrowserRouter([
         element: <AddNewRepair></AddNewRepair>,
       },
       {
-        path: "/UpdateRepairsOrder",
+        path: "/UpdateRepairsOrder/:id",
         element: <UpdateRepairOrder></UpdateRepairOrder>,
       },
       {
@@ -398,7 +473,7 @@ export const router = createBrowserRouter([
         element: <AddTire></AddTire>,
       },
       {
-        path: "/updateTire",
+        path: "/updateTire/:id",
         element: <UpdateTire></UpdateTire>,
       },
       {

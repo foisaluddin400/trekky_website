@@ -94,6 +94,12 @@ const DryerInfo = () => {
                   />
                 </div>
               )}
+{item.name && (
+                <div className="gap-4">
+                  <span>Name :</span>
+                  <span className="font-normal">{item.name}</span>
+                </div>
+              )}
 
               {/* Website Link */}
               {item.websiteLink && (
@@ -163,7 +169,7 @@ const DryerInfo = () => {
               >
                 Delete
               </button>
-              <Link to={`/updatedingInsurance/${item._id}`}>
+              <Link to={`/details/Dryer/update-dryer/${item._id}`}>
                 <button className="border border-black py-1 px-5 rounded-md font-medium">
                   Update
                 </button>

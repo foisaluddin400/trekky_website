@@ -52,7 +52,12 @@ const ExhaustInfo = () => {
                   />
                 </div>
               )}
-
+ {item.name && (
+                <div className="gap-4">
+                  <span>Name :</span>
+                  <span className="font-normal">{item.name}</span>
+                </div>
+              )}
               {/* Website Link */}
               {item.modelNumber && (
                 <div className="gap-4">
@@ -128,7 +133,7 @@ const ExhaustInfo = () => {
               >
                 Delete
               </button>
-              <Link to={`/updatedingInsurance/${item._id}`}>
+              <Link to={`/details/Exhaust/update-exhaust/${item._id}`}>
                 <button className="border border-black py-1 px-5 rounded-md font-medium">
                   Update
                 </button>

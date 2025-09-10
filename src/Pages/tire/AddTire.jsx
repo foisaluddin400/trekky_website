@@ -50,7 +50,8 @@ const AddTire = () => {
     console.log("Form Values:", values?.cost);
 
     const formData = new FormData();
-    formData.append("mfg", values.Manufacturer || "");
+    formData.append("manufacturer", values.Manufacturer || "");
+    formData.append("tireSize", values.size || "");
     formData.append("location", values.location || "");
     formData.append(
       "dateOfPurchase",
@@ -61,7 +62,7 @@ const AddTire = () => {
 
     formData.append("cost", values.cost ? Number(values.cost) : "");
 
-    formData.append("notes", values.notes || "");
+    formData.append("note", values.notes || "");
 
     // Multiple image upload
     fileList.forEach((file) => {
@@ -115,7 +116,7 @@ const AddTire = () => {
                 name="size"
               >
                 <Input
-                  type="number"
+               
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="Tire Size"
                 />

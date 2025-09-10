@@ -94,6 +94,12 @@ const VentFansInfo = () => {
                   />
                 </div>
               )}
+               {item.name && (
+                <div className="gap-4">
+                  <span>Name :</span>
+                  <span className="font-normal">{item.name}</span>
+                </div>
+              )}
    {item.modelNumber && (
                 <div className="gap-4">
                   <span>Model Number :</span>
@@ -184,7 +190,7 @@ const VentFansInfo = () => {
               >
                 Delete
               </button>
-              <Link to={`/updatedingInsurance/${item._id}`}>
+              <Link to={`/details/VentFans/update-ventfans/${item._id}`}>
                 <button className="border border-black py-1 px-5 rounded-md font-medium">
                   Update
                 </button>

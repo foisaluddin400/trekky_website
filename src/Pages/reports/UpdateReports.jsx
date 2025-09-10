@@ -9,14 +9,17 @@ import {
   Upload,
 } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import {
   useAddRepairMutation,
   useAddReportsMutation,
+  useGetSingleReportsQuery,
+  useUpdateReportsMutation,
 } from "../redux/api/routesApi";
+import { useParams } from "react-router-dom";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -32,8 +35,11 @@ const onPreview = async (file) => {
   const imgWindow = window.open(src);
   imgWindow?.document.write(image.outerHTML);
 };
-const AddReports = () => {
-  const [newRepair] = useAddReportsMutation();
+const UpdateReports = () => {
+  const { id } = useParams();
+  const { data: singleUpdate } = useGetSingleReportsQuery({ id });
+  console.log(singleUpdate);
+  const [newRepair] = useUpdateReportsMutation();
   const [form] = Form.useForm();
   const handleSubmit = async (values) => {
     const formData = new FormData();
@@ -50,9 +56,9 @@ const AddReports = () => {
     formData.append("note", values.notes || "");
 
     // Multiple image upload
-  
+
     try {
-      const res = await newRepair(formData).unwrap();
+      const res = await newRepair({formData,id}).unwrap();
       message.success(res?.message || "Saved successfully");
 
       form.resetFields();
@@ -76,12 +82,32 @@ const AddReports = () => {
     if (!value) return "";
     return value.replace(/,/g, "");
   };
+  useEffect(() => {
+    if (singleUpdate?.report) {
+      const admin = singleUpdate?.report;
 
+      // ✅ Form values set
+      form.setFieldsValue({
+        reportTitle: admin.reportTitle || "",
+        location: admin.location || "",
+        odometerReading: admin.odometerReading || "",
+        area: admin.area || "",
+        dateOfService: admin.dateOfService ? dayjs(admin.dateOfService) : null,
+        effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+        renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+        cost: admin.cost || "",
+        notes: admin.note || "",
+        policyNumber: admin.policyNumber || "",
+      });
+    }
+  }, [singleUpdate, form]);
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
-          <h1 className="text-3xl font-semibold text-[#F9B038]">Add Reports</h1>
+          <h1 className="text-3xl font-semibold text-[#F9B038]">
+            Update Reports
+          </h1>
         </div>
         <div className="max-w-4xl m-auto">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -172,7 +198,6 @@ const AddReports = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-1 gap-4 ">
-              
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
                 name="notes"
@@ -202,4 +227,4 @@ const AddReports = () => {
   );
 };
 
-export default AddReports;
+export default UpdateReports;
