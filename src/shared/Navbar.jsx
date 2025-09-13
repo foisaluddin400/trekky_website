@@ -5,6 +5,8 @@ import Logo from "../assets/Home/hero.png";
 import profile from "../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useGetProfileQuery } from "../Pages/redux/api/userApi";
+import { imageUrl } from "../Pages/redux/api/baseApi";
 
 export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -53,7 +55,8 @@ export const Navbar = () => {
     },
   ];
 
-
+  const {data:profileData} = useGetProfileQuery();
+  console.log(profileData)
   return (
     <div className="container m-auto ">
       {/* Desktop Navbar */}
@@ -81,10 +84,10 @@ export const Navbar = () => {
                 <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
                   <Link onClick={(e) => e.preventDefault()}>
                     <Space>
-                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={profile} alt="profile" />
+                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={`${imageUrl}/${profileData?.user?.profilePic}`} alt="profile" />
                       <div>
-                        <h1>Foisal</h1>
-                        <p>foisal@gmail.com</p>
+                        <h1>{profileData?.user?.name}</h1>
+                        <p>{profileData?.user?.email}</p>
                       </div>
                     </Space>
                   </Link>

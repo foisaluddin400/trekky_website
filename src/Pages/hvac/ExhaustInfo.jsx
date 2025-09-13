@@ -46,7 +46,7 @@ const ExhaustInfo = () => {
               {item.images?.length > 0 && (
                 <div className="flex justify-center">
                   <img
-                    className="w-full rounded object-cover"
+                    className="w-full h-[280px] rounded object-cover"
                     src={`${imageUrl}/${item.images[0]}`}
                     alt={item.name || "Insurance"}
                   />

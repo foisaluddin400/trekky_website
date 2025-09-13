@@ -8,49 +8,6 @@ import {
 } from "../redux/api/routesApi";
 import { message } from "antd";
 
-// Dummy data array
-const dummyData = [
-  {
-    id: "1",
-    name: "1 Ton Non-Inverter",
-    model: "Hsu-12dsdaf",
-    purchaseDate: "03-24-2025",
-    location: "Front",
-    cost: "$543",
-    note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, aut.",
-    image: ss,
-  },
-  {
-    id: "2",
-    name: "1.5 Ton Inverter",
-    model: "LG-AC345",
-    purchaseDate: "04-11-2024",
-    location: "Rear",
-    cost: "$645",
-    note: "LG brand inverter with energy-saving features.",
-    image: ss,
-  },
-  {
-    id: "3",
-    name: "2 Ton AC",
-    model: "Samsung123",
-    purchaseDate: "01-12-2023",
-    location: "Side",
-    cost: "$799",
-    note: "Samsung split AC with fast cooling mode.",
-    image: ss,
-  },
-  {
-    id: "4",
-    name: "1.5 Ton Split",
-    model: "BlueStarX5",
-    purchaseDate: "06-18-2022",
-    location: "Roof",
-    cost: "$599",
-    note: "Outdoor installed BlueStar split system.",
-    image: ss,
-  },
-];
 
 const DishwasherInfo = () => {
   const { data, isLoading, isError } = useGetDisherInfoQuery();

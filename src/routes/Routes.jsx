@@ -481,7 +481,7 @@ export const router = createBrowserRouter([
         element: <AddNewMaintanceSchedule></AddNewMaintanceSchedule>,
       },
       {
-        path: "/UpdateMaintanceSchedule",
+        path: "/UpdateMaintanceSchedule/:id",
         element: <UpdateMaintanceSchedule></UpdateMaintanceSchedule>,
       },
       {

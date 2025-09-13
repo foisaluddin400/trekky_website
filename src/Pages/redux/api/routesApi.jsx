@@ -1203,6 +1203,25 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
+     getMaintance: builder.query({
+      query: () => {
+        return {
+          url: "/maintenance-schedule/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+     deleteMaintance: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/maintenance-schedule/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
     addMember: builder.mutation({
       query: (data) => {
         return {
@@ -1410,6 +1429,8 @@ export const {
   useAddRouterMutation,
   useDeleteRouterMutation,useGetRouterQuery,useGetSingleRouterQuery,useUpdateRouterMutation,
   useAddMaintanceMutation,
+  useGetMaintanceQuery,
+  useDeleteMaintanceMutation,
   useAddMemberMutation,
   useGetMemberShipQuery,
   useGetInsuranceCompanyQuery,
