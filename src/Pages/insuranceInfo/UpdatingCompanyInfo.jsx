@@ -81,10 +81,15 @@ import { Button, DatePicker, Form, Input, message, Upload } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
-import { useAddInsuranceMutation, useGetSingleInsuranceCompanyQuery, useUpdateInsuranceCompanyMutation } from "../redux/api/routesApi";
+import {
+  useAddInsuranceMutation,
+  useGetSingleInsuranceCompanyQuery,
+  useUpdateInsuranceCompanyMutation,
+} from "../redux/api/routesApi";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { imageUrl } from "../redux/api/baseApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
@@ -109,12 +114,12 @@ const UpdatingCompanyInfo = () => {
   const navigate = useNavigate();
   const [fileList, setFileList] = useState([]);
   const [updateIinsurance] = useUpdateInsuranceCompanyMutation();
-  const {id} = useParams();
-  console.log(id)
-  const {data:singleInsurance} = useGetSingleInsuranceCompanyQuery({id})
-  console.log(singleInsurance)
+  const { id } = useParams();
+  console.log(id);
+  const { data: singleInsurance } = useGetSingleInsuranceCompanyQuery({ id });
+  console.log(singleInsurance);
 
- const handleUploadChange = ({ fileList: newFileList }) => {
+  const handleUploadChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
@@ -122,37 +127,34 @@ const UpdatingCompanyInfo = () => {
     setFileList(fileList.filter((item) => item.uid !== file.uid));
   };
 
-useEffect(() => {
-  if (singleInsurance?.insuranceCompany) {
-    const admin = singleInsurance?.insuranceCompany;
+  useEffect(() => {
+    if (singleInsurance?.insuranceCompany) {
+      const admin = singleInsurance?.insuranceCompany;
 
-    // ✅ Form values set
-    form.setFieldsValue({
-      insuranceCompany: admin.insuranceCompany || '',
-      websiteLink: admin.websiteLink || '',
-      phoneNumber: admin.phoneNumber || "",
-      effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
-      renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
-      cost: admin.cost || "",
-      notes: admin.notes || "",
-      policyNumber: admin.policyNumber || "",
-    });
+      // ✅ Form values set
+      form.setFieldsValue({
+        insuranceCompany: admin.insuranceCompany || "",
+        websiteLink: admin.websiteLink || "",
+        phoneNumber: admin.phoneNumber || "",
+        effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+        renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+        cost: admin.cost || "",
+        notes: admin.notes || "",
+        policyNumber: admin.policyNumber || "",
+      });
 
-    // ✅ Image list set for Upload component
-    if (admin.images && admin.images.length > 0) {
-      const formattedImages = admin.images.map((img, index) => ({
-        uid: String(index),
-        name: img.split("\\").pop(), 
-        status: "done",
-        url: `${imageUrl}/${img}`, 
-      }));
-      setFileList(formattedImages);
+      // ✅ Image list set for Upload component
+      if (admin.images && admin.images.length > 0) {
+        const formattedImages = admin.images.map((img, index) => ({
+          uid: String(index),
+          name: img.split("\\").pop(),
+          status: "done",
+          url: `${img}`,
+        }));
+        setFileList(formattedImages);
+      }
     }
-  }
-}, [singleInsurance, form]);
-
-
-
+  }, [singleInsurance, form]);
 
   const formatWithCommas = (value) => {
     if (!value) return "";
@@ -168,16 +170,21 @@ useEffect(() => {
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
+  const { data: profileData } = useGetProfileQuery();
 
   const handleSubmit = async (values) => {
-    const id = singleInsurance?.insuranceCompany?._id
+    const id = singleInsurance?.insuranceCompany?._id;
     console.log("Form Values:", values?.cost);
-   const existingImages = fileList
-      .filter((file) => file.url)
-      .map((file) => file.url.replace(imageUrl, ""));
-    const newImages = fileList.filter((file) => file.originFileObj);
-    const formData = new FormData();
 
+    const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("insuranceCompany", values.insuranceCompany || "");
     formData.append("websiteLink", values.websiteLink || "");
     formData.append(
@@ -194,14 +201,13 @@ useEffect(() => {
     formData.append("policyNumber", values.policyNumber || "");
     formData.append("notes", values.notes || "");
 
-    // Multiple image upload
-      newImages.forEach((file) => {
-      formData.append("images", file.originFileObj);
+  fileList.forEach((file) => {
+      if (file.originFileObj) {
+        formData.append("images", file.originFileObj);
+      }
     });
-
-
     try {
-      const res = await updateIinsurance({formData,id}).unwrap();
+      const res = await updateIinsurance({ formData, id }).unwrap();
       message.success(res?.message || "Saved successfully");
       form.resetFields();
       setFileList([]);
@@ -307,32 +313,23 @@ useEffect(() => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div>
                 <h1 className="text-[#F9B038]">Upload Image</h1>
-                {/* <Upload
+             
+                <Upload
                   style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
                   listType="picture-card"
                   fileList={fileList}
-                  onChange={onChange}
-                  onPreview={onPreview}
-                  multiple={true}
+                  onChange={handleUploadChange}
+                  onRemove={handleRemove}
+                  beforeUpload={() => false}
+                  multiple
                 >
-                  {fileList.length < 5 && "+ Upload"}
-                </Upload> */}
-                 <Upload
-                  style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
-            listType="picture-card"
-            fileList={fileList}
-            onChange={handleUploadChange}
-            onRemove={handleRemove}
-            beforeUpload={() => false}
-            multiple
-          >
-            {fileList.length >= 4 ? null : (
-              <div className="flex items-center gap-2">
-                <PlusOutlined />
-                <div>Add Image</div>
-              </div>
-            )}
-          </Upload>
+                  {fileList.length >= 1 ? null : (
+                    <div className="flex items-center gap-2">
+                      <PlusOutlined />
+                      <div>Add Image</div>
+                    </div>
+                  )}
+                </Upload>
               </div>
 
               <Form.Item label="Notes" name="notes">

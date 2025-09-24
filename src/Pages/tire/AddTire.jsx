@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
 import { useAddTireMutation } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
@@ -29,6 +30,7 @@ const AddTire = () => {
   const [cost, setCost] = useState("");
   const [fileList, setFileList] = useState([]);
   const [addTire] = useAddTireMutation();
+const {data:profileData} = useGetProfileQuery();
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -48,10 +50,16 @@ const AddTire = () => {
 
   const handleSubmit = async (values) => {
     console.log("Form Values:", values?.cost);
+  const rvId = profileData?.user?.selectedRvId?._id;
 
+  if (!rvId) {
+    message.error("Please select your RV from the home page before submitting.");
+    return; 
+  }
     const formData = new FormData();
     formData.append("manufacturer", values.Manufacturer || "");
     formData.append("tireSize", values.size || "");
+    formData.append("rvId", rvId);
     formData.append("location", values.location || "");
     formData.append(
       "dateOfPurchase",

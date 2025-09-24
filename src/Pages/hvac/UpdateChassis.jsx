@@ -23,6 +23,7 @@ import {
   useUpdateChassisMutation,
 } from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
 const UpdateChassis = () => {
@@ -33,10 +34,16 @@ const UpdateChassis = () => {
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const {data:profileData} = useGetProfileQuery();
+    const rvId = profileData?.user?.selectedRvId?._id;
   const handleSubmit = async (values) => {
     console.log(values);
-
+  if (!rvId) {
+    message.error("Please select your RV from the home page before submitting.");
+    return; 
+  }
     const data = {
+      rvId: rvId,
       mfg: values.Manufacturer,
       modelNo: values.Model,
       name: values.Name,

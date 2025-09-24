@@ -41,7 +41,7 @@ const NewRepair = () => {
                            <div className="flex justify-center">
                              <img
                                className="w-full rounded object-cover"
-                               src={`${imageUrl}/${item.images[0]}`}
+                               src={`${item.images[0]}`}
                                alt={item.name || "Insurance"}
                              />
                            </div>

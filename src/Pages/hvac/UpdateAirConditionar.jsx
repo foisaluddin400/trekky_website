@@ -16,6 +16,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAddAirConditionMutation, useGetSingleAirConditionQuery, useUpdateAirConditionMutation } from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -48,7 +49,7 @@ const UpdateAirConditionar = () => {
     const onlyNumbers = value.toString().replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
-
+const {data:profileData} = useGetProfileQuery();
   const parseNumber = (value) => {
     if (!value) return "";
     return value.replace(/,/g, "");
@@ -57,6 +58,15 @@ const UpdateAirConditionar = () => {
     
     console.log(values);
     const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
+
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("name", values.name || "");
     formData.append("location", values.location || "");
     formData.append("modelNumber", values.modelNumber || "");
@@ -113,7 +123,7 @@ const UpdateAirConditionar = () => {
           uid: String(index),
           name: img.split("\\").pop(), 
           status: "done",
-          url: `${imageUrl}/${img}`, 
+          url: `${img}`, 
         }));
         setFileList(formattedImages);
       }

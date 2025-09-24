@@ -2,7 +2,10 @@ import React from "react";
 import ss from "../../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
 import { message } from "antd";
-import { useDeleteDriyerMutation, useGetDriyerQuery } from "../redux/api/routesApi";
+import {
+  useDeleteDriyerMutation,
+  useGetDriyerQuery,
+} from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
 
 // Dummy data array
@@ -50,7 +53,7 @@ const dummyData = [
 ];
 
 const DryerInfo = () => {
-    const { data, isLoading, isError } = useGetDriyerQuery()
+  const { data, isLoading, isError } = useGetDriyerQuery();
   const [deleteInsurance] = useDeleteDriyerMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -64,7 +67,7 @@ const DryerInfo = () => {
       message.error(err?.data?.message);
     }
   };
-   return (
+  return (
     <div className="container m-auto py-8 px-3 lg:px-0">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold text-[#F9B038] mb-6">
@@ -89,12 +92,12 @@ const DryerInfo = () => {
                 <div className="flex justify-center">
                   <img
                     className="w-full h-[280px] rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    src={`${item.images[0]}`}
                     alt={item.name || "Insurance"}
                   />
                 </div>
               )}
-{item.name && (
+              {item.name && (
                 <div className="gap-4">
                   <span>Name :</span>
                   <span className="font-normal">{item.name}</span>
@@ -180,6 +183,6 @@ const DryerInfo = () => {
       </div>
     </div>
   );
-}
+};
 
-export default DryerInfo
+export default DryerInfo;

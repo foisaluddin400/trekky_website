@@ -5,7 +5,11 @@ import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAddTireMutation, useGetSingleTireQuery, useUpdateTireMutation } from "../redux/api/routesApi";
+import {
+  useAddTireMutation,
+  useGetSingleTireQuery,
+  useUpdateTireMutation,
+} from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
 
 dayjs.extend(customParseFormat);
@@ -26,9 +30,9 @@ const onPreview = async (file) => {
 };
 
 const UpdateTire = () => {
-   const {id} = useParams();
-    const {data:singleUpdate} = useGetSingleTireQuery({id})
-    console.log(singleUpdate)
+  const { id } = useParams();
+  const { data: singleUpdate } = useGetSingleTireQuery({ id });
+  console.log(singleUpdate);
   const [form] = Form.useForm();
   const [cost, setCost] = useState("");
   const [fileList, setFileList] = useState([]);
@@ -54,7 +58,7 @@ const UpdateTire = () => {
     console.log("Form Values:", values?.cost);
 
     const formData = new FormData();
-        formData.append("manufacturer", values.Manufacturer || "");
+    formData.append("manufacturer", values.Manufacturer || "");
     formData.append("tireSize", values.size || "");
     formData.append("location", values.location || "");
     formData.append(
@@ -76,51 +80,47 @@ const UpdateTire = () => {
     });
 
     try {
-      const res = await addTire({formData,id}).unwrap();
+      const res = await addTire({ formData, id }).unwrap();
       message.success(res?.message || "Saved successfully");
-        form.resetFields();
-  setFileList([]);
-    
+      form.resetFields();
+      setFileList([]);
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong");
     }
   };
 
-   useEffect(() => {
-      if (singleUpdate?.tire
-) {
-        const admin = singleUpdate?.tire
+  useEffect(() => {
+    if (singleUpdate?.tire) {
+      const admin = singleUpdate?.tire;
 
+      // ✅ Form values set
+      form.setFieldsValue({
+        Manufacturer: admin.manufacturer || "",
+        size: admin.tireSize || "",
+        location: admin.location || "",
+        modelNumber: admin.modelNumber || "",
+        phoneNumber: admin.phoneNumber || "",
+        dateOfPurchase: admin.dateOfPurchase
+          ? dayjs(admin.dateOfPurchase)
+          : null,
+        effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+        renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+        cost: admin.cost || "",
+        notes: admin.note || "",
+        policyNumber: admin.policyNumber || "",
+      });
 
-  ;
-    
-        // ✅ Form values set
-        form.setFieldsValue({
-          Manufacturer: admin.manufacturer || '',
-          size: admin.tireSize || '',
-          location: admin.location || '',
-          modelNumber: admin.modelNumber || '',
-          phoneNumber: admin.phoneNumber || "",
-          dateOfPurchase: admin.dateOfPurchase ? dayjs(admin.dateOfPurchase) : null,
-          effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
-          renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
-          cost: admin.cost || "",
-          notes: admin.note || "",
-          policyNumber: admin.policyNumber || "",
-        });
-    
-        // ✅ Image list set for Upload component
-        if (admin.images && admin.images.length > 0) {
-          const formattedImages = admin.images.map((img, index) => ({
-            uid: String(index),
-            name: img.split("\\").pop(), 
-            status: "done",
-            url: `${imageUrl}/${img}`, 
-          }));
-          setFileList(formattedImages);
-        }
+      if (admin.images && admin.images.length > 0) {
+        const formattedImages = admin.images.map((img, index) => ({
+          uid: String(index),
+          name: img.split("\\").pop(),
+          status: "done",
+          url: `${img}`,
+        }));
+        setFileList(formattedImages);
       }
-    }, [singleUpdate, form]);
+    }
+  }, [singleUpdate, form]);
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
@@ -156,7 +156,6 @@ const UpdateTire = () => {
                 name="size"
               >
                 <Input
-             
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="Tire Size"
                 />

@@ -54,6 +54,7 @@ const dummyData = [
 
 const Details = () => {
   const { data: airConditionData } = useGetAirConditionQuery();
+  console.log(airConditionData)
   const [deleteAirCondition] = useDeleteAirConditionMutation();
   const handleDelete = async (id) => {
     console.log(id);
@@ -88,8 +89,8 @@ const Details = () => {
               {item.images?.length > 0 && (
                 <div className="flex justify-center">
                   <img
-                    className="w-full rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    className="w-full rounded object-cover h-[300px]"
+                    src={`${item.images[0]}`}
                     alt={item.name || "Insurance"}
                   />
                 </div>

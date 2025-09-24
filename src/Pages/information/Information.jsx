@@ -18,20 +18,28 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate } from "react-router-dom";
 import { useAddChassisMutation } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
 const Information = () => {
   const [addChassisInformation] = useAddChassisMutation();
-
+  const { data: profileData } = useGetProfileQuery();
+ 
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const handleSubmit = async (values) => {
     console.log(values);
+  const rvId = profileData?.user?.selectedRvId?._id;
 
+  if (!rvId) {
+    message.error("Please select your RV from the home page before submitting.");
+    return; 
+  }
     const data = {
       mfg: values.Manufacturer,
       modelNo: values.Model,
       name: values.Name,
+      rvId: rvId,
       serialId: values.Serial,
       fuelType: values.FuelType,
 

@@ -84,7 +84,7 @@ export const Navbar = () => {
                 <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
                   <Link onClick={(e) => e.preventDefault()}>
                     <Space>
-                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={`${imageUrl}/${profileData?.user?.profilePic}`} alt="profile" />
+                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={`${profileData?.user?.profilePic}`} alt="profile" />
                       <div>
                         <h1>{profileData?.user?.name}</h1>
                         <p>{profileData?.user?.email}</p>
@@ -119,7 +119,7 @@ export const Navbar = () => {
                 <Dropdown menu={{ items: dropdownItemsProfile }} trigger={["click"]}>
                   <Link onClick={(e) => e.preventDefault()}>
                     <Space>
-                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={profile} alt="profile" />
+                      <img className="w-[40px] h-[40px] rounded-full object-cover" src={profileData?.user?.profilePic} alt="profile" />
                       <div>
                         <h1>Foisal</h1>
                         <p>foisal@gmail.com</p>

@@ -9,6 +9,7 @@ import { message } from "antd";
 
 const InsuranceInfo = () => {
   const { data, isLoading, isError } = useGetInsuranceCompanyQuery();
+  console.log(data)
   const [deleteInsurance] = useDeleteInsuranceCompanyMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -37,7 +38,7 @@ const InsuranceInfo = () => {
       </div>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
-        {data?.insuranceCompany?.map((item) => (
+        {data?.insuranceCompanies?.map((item) => (
           <div
             key={item._id}
             className="bg-[#F59B07] py-4 w-full rounded gap-8 px-4"
@@ -48,7 +49,7 @@ const InsuranceInfo = () => {
                 <div className="flex justify-center">
                   <img
                     className="w-full rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    src={`${item.images[0]}`}
                     alt={item.insuranceCompany || "Insurance"}
                   />
                 </div>

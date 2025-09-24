@@ -7,6 +7,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAddRepairMutation, useGetSingleRepairQuery, useUpdateRepairMutation } from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
 import { useParams } from "react-router-dom";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -29,9 +30,19 @@ const UpdateRepairOrder = () => {
 
   const[newRepair] = useUpdateRepairMutation()
   const [form] = Form.useForm();
+  const {data:profileData} = useGetProfileQuery();
   const handleSubmit = async (values) => {
    
      const formData = new FormData();
+     const rvId = profileData?.user?.selectedRvId?._id;
+
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("vendor", values.vendor || "");
     formData.append("cityState", values.cityState || "");
     formData.append(
@@ -107,7 +118,7 @@ const UpdateRepairOrder = () => {
             uid: String(index),
             name: img.split("\\").pop(), 
             status: "done",
-            url: `${imageUrl}/${img}`, 
+            url: `${img}`, 
           }));
           setFileList(formattedImages);
         }

@@ -1,4 +1,13 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, message, Select, Upload } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Select,
+  Upload,
+} from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
@@ -6,6 +15,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate } from "react-router-dom";
 import { useAddWaterPumpMutation } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -23,12 +33,21 @@ const onPreview = async (file) => {
 };
 const AddWaterPump = () => {
   const navigate = useNavigate();
-  const [addHeater] = useAddWaterPumpMutation()
+  const [addHeater] = useAddWaterPumpMutation();
   const [form] = Form.useForm();
-    const [fileList, setFileList] = useState([]);
-  const handleSubmit =async (values) => {
+  const { data: profileData } = useGetProfileQuery();
+  const [fileList, setFileList] = useState([]);
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
 
-      const formData = new FormData();
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("name", values.name || "");
     // formData.append("location", values.location || "");
     formData.append("modelNumber", values.modelNumber || "");
@@ -53,13 +72,12 @@ const AddWaterPump = () => {
     try {
       const res = await addHeater(formData).unwrap();
       message.success(res?.message || "Saved successfully");
-        navigate("/details/AddWasherInfo");
+      navigate("/details/AddWasherInfo");
       form.resetFields();
       setFileList([]);
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong");
     }
-  
   };
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -76,18 +94,20 @@ const AddWaterPump = () => {
     return value.replace(/,/g, "");
   };
 
-//   const handleChange = (e) => {
-//     const input = e.target.value;
-//     const formatted = formatWithCommas(input);
-//     setMileage(formatted);
-//     form.setFieldsValue({ qty: formatted });
-//   };
+  //   const handleChange = (e) => {
+  //     const input = e.target.value;
+  //     const formatted = formatWithCommas(input);
+  //     setMileage(formatted);
+  //     form.setFieldsValue({ qty: formatted });
+  //   };
 
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
-          <h1 className="text-3xl font-semibold text-[#F9B038]">Add Water Pump Information</h1>
+          <h1 className="text-3xl font-semibold text-[#F9B038]">
+            Add Water Pump Information
+          </h1>
         </div>
         <div className="max-w-4xl m-auto mt-11">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -102,55 +122,54 @@ const AddWaterPump = () => {
                   placeholder="Name"
                 />
               </Form.Item>
-            <Form.Item
-                         label={
-                           <span style={{ color: "#F9B038" }}>Date of Purchase</span>
-                         }
-                         name="dateOfPurchase"
-                       >
-                         <DatePicker
-                           className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                           format={dateFormat}
-                         />
-                       </Form.Item>
+              <Form.Item
+                label={
+                  <span style={{ color: "#F9B038" }}>Date of Purchase</span>
+                }
+                name="dateOfPurchase"
+              >
+                <DatePicker
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  format={dateFormat}
+                />
+              </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <Form.Item
-                        label={<span style={{ color: "#F9B038" }}>Model Number</span>}
-                        name="modelNumber"
-                        //   rules={[
-                        //     { required: true, message: "Please input Model Number!" },
-                        //   ]}
-                      >
-                        <Input
-                          className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                          placeholder="Model Number"
-                        />
-                      </Form.Item>
-               <Form.Item
-                           label={<span style={{ color: "#F9B038" }}>Cost</span>}
-                           name="cost"
-                           normalize={(value) => parseNumber(value)}
-                           getValueProps={(value) => ({
-                             value: formatWithCommas(value),
-                           })}
-                           rules={[
-                             {
-                               pattern: /^\d+$/,
-                               message: "Please enter a valid number",
-                             },
-                           ]}
-                         >
-                           <Input
-                             className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                             placeholder="$"
-                           />
-                         </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Model Number</span>}
+                name="modelNumber"
+                //   rules={[
+                //     { required: true, message: "Please input Model Number!" },
+                //   ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="Model Number"
+                />
+              </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Cost</span>}
+                name="cost"
+                normalize={(value) => parseNumber(value)}
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter a valid number",
+                  },
+                ]}
+              >
+                <Input
+                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                  placeholder="$"
+                />
+              </Form.Item>
             </div>
-           
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-             <div>
+              <div>
                 <h1 className="text-[#F9B038]">Upload Image</h1>
                 <Upload
                   style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}

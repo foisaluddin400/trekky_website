@@ -32,6 +32,7 @@ const props = {
 };
 const Reports = () => {
    const { data, isLoading, isError } = useGetReportsQuery();
+   console.log(data)
   const [deleteInsurance] = useDeleteReportsMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -70,7 +71,7 @@ const Reports = () => {
                            <div className="flex justify-center">
                              <img
                                className="w-full rounded object-cover"
-                               src={`${imageUrl}/${item.images[0]}`}
+                               src={`${item.images[0]}`}
                                alt={item.insuranceCompany || "Insurance"}
                              />
                            </div>

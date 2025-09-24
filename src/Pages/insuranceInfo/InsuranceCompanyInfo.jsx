@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAddInsuranceMutation } from "../redux/api/routesApi";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useGetProfileQuery } from "../redux/api/userApi";
 
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
@@ -29,6 +30,7 @@ const InsuranceCompanyInfo = () => {
   const navigate = useNavigate();
   const [fileList, setFileList] = useState([]);
   const [addInsurance] = useAddInsuranceMutation();
+const {data:profileData} = useGetProfileQuery();
 
   const formatWithCommas = (value) => {
     if (!value) return "";
@@ -53,11 +55,19 @@ const InsuranceCompanyInfo = () => {
     form.setFieldsValue({ cost: onlyNumbers });
   };
   const handleSubmit = async (values) => {
+      const rvId = profileData?.user?.selectedRvId?._id;
+
+  if (!rvId) {
+    message.error("Please select your RV from the home page before submitting.");
+    return; // stop submission
+  }
     console.log("Form Values:", values?.cost);
 
     const formData = new FormData();
     formData.append("insuranceCompany", values.insuranceCompany || "");
     formData.append("websiteLink", values.websiteLink || "");
+    formData.append("rvId", rvId);
+
     formData.append(
       "effectiveDate",
       values.effectiveDate ? dayjs(values.effectiveDate).format(dateFormat) : ""

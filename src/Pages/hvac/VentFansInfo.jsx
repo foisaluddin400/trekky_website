@@ -1,7 +1,10 @@
 import React from "react";
 import ss from "../../assets/Home/ss.jpg";
 import { Link } from "react-router-dom";
-import { useDeleteVentFansMutation, useGetVentFansQuery } from "../redux/api/routesApi";
+import {
+  useDeleteVentFansMutation,
+  useGetVentFansQuery,
+} from "../redux/api/routesApi";
 import { message } from "antd";
 import { imageUrl } from "../redux/api/baseApi";
 
@@ -50,7 +53,7 @@ const dummyData = [
 ];
 
 const VentFansInfo = () => {
-    const { data, isLoading, isError } = useGetVentFansQuery();
+  const { data, isLoading, isError } = useGetVentFansQuery();
   const [deleteInsurance] = useDeleteVentFansMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -77,7 +80,7 @@ const VentFansInfo = () => {
         </Link>
       </div>
 
-     <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
         {data?.ventFans?.map((item) => (
           <div
             key={item._id}
@@ -89,24 +92,24 @@ const VentFansInfo = () => {
                 <div className="flex justify-center">
                   <img
                     className="w-full rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    src={`${item.images[0]}`}
                     alt={item.insuranceCompany || "Insurance"}
                   />
                 </div>
               )}
-               {item.name && (
+              {item.name && (
                 <div className="gap-4">
                   <span>Name :</span>
                   <span className="font-normal">{item.name}</span>
                 </div>
               )}
-   {item.modelNumber && (
+              {item.modelNumber && (
                 <div className="gap-4">
                   <span>Model Number :</span>
                   <span className="font-normal">{item.modelNumber}</span>
                 </div>
               )}
-                  {/* Effective Date */}
+              {/* Effective Date */}
               {item.dateOfPurchase && (
                 <div className="gap-4">
                   <span>Date Of Purchase :</span>
@@ -115,13 +118,13 @@ const VentFansInfo = () => {
                   </span>
                 </div>
               )}
-               {item.location && (
+              {item.location && (
                 <div className="gap-4">
                   <span>Location :</span>
                   <span className="font-normal">{item.location}</span>
                 </div>
               )}
-              
+
               {/* Website Link */}
               {item.websiteLink && (
                 <div className="gap-4">
@@ -201,6 +204,6 @@ const VentFansInfo = () => {
       </div>
     </div>
   );
-}
+};
 
-export default VentFansInfo
+export default VentFansInfo;

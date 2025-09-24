@@ -22,6 +22,7 @@ import {
   useAddWaterHeaterMutation,
   useAddWaterPumpMutation,
 } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -42,8 +43,18 @@ const AddExhaustFansInfo = () => {
   const [addHeater] = useAddExhaustFansMutation();
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
+  const {data:profileData} = useGetProfileQuery();
   const handleSubmit = async (values) => {
     const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
+
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("name", values.name || "");
     formData.append("location", values.location || "");
     formData.append("modelNumber", values.modelNumber || "");

@@ -9,6 +9,7 @@ import { imageUrl } from "../redux/api/baseApi";
 import { message } from "antd";
 const NewMaintenace = () => {
   const { data, isLoading, isError } = useGetMaintanceQuery();
+  console.log(data)
   const [deleteInsurance] = useDeleteMaintanceMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -47,7 +48,7 @@ const NewMaintenace = () => {
                 <div className="flex justify-center">
                   <img
                     className="w-full rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    src={`${item.images[0]}`}
                     alt={item.name || "Insurance"}
                   />
                 </div>

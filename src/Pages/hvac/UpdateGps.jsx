@@ -16,6 +16,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAddGpsMutation, useAddWasherMutation, useAddWaterPumpMutation, useGetSingleGpsQuery, useUpdateGpsMutation } from "../redux/api/routesApi";
 import { imageUrl } from "../redux/api/baseApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -39,8 +40,18 @@ const UpdateGps = () => {
   const [addHeater] = useUpdateGpsMutation();
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
+  const {data:profileData} = useGetProfileQuery();
   const handleSubmit = async (values) => {
     const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
+
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("name", values.name || "");
     // formData.append("location", values.location || "");
     formData.append("modelNumber", values.modelNumber || "");
@@ -121,7 +132,7 @@ const UpdateGps = () => {
             uid: String(index),
             name: img.split("\\").pop(), 
             status: "done",
-            url: `${imageUrl}/${img}`, 
+            url: `${img}`, 
           }));
           setFileList(formattedImages);
         }

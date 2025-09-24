@@ -6,6 +6,7 @@ import { useDeleteTireMutation, useGetTireQuery } from "../redux/api/routesApi";
 import { message } from "antd";
 const Tire = () => {
   const { data, isLoading, isError } = useGetTireQuery();
+  console.log(data);
   const [deleteInsurance] = useDeleteTireMutation();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
@@ -33,7 +34,7 @@ const Tire = () => {
         </Link>
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
-        {data?.tire?.map((item) => (
+        {data?.tires?.map((item) => (
           <div
             key={item._id}
             className="bg-[#F59B07] py-4 w-full rounded gap-8 px-4"
@@ -43,28 +44,26 @@ const Tire = () => {
               {item.images?.length > 0 && (
                 <div className="flex justify-center">
                   <img
-                    className="w-full rounded object-cover"
-                    src={`${imageUrl}/${item.images[0]}`}
+                    className="w-full rounded object-cover h-[300px]"
+                    src={`${item.images[0]}`}
                     alt={item.name || "Insurance"}
                   />
                 </div>
               )}
 
-  {item.manufacturer && (
+              {item.manufacturer && (
                 <div className="gap-4">
                   <span>Manufacturer :</span>
                   <span className="font-normal">{item.manufacturer}</span>
                 </div>
               )}
 
-  {item.tireSize && (
+              {item.tireSize && (
                 <div className="gap-4">
                   <span>Tire Size :</span>
                   <span className="font-normal">{item.tireSize}</span>
                 </div>
               )}
-
-
 
               {item.name && (
                 <div className="gap-4">
@@ -109,7 +108,7 @@ const Tire = () => {
                 </div>
               )}
 
-                {item.location && (
+              {item.location && (
                 <div className="gap-4">
                   <span>Location :</span>
                   <span className="font-normal">{item.location}</span>

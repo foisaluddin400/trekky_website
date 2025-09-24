@@ -5,6 +5,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAddRepairMutation } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
 const onPreview = async (file) => {
@@ -23,10 +24,20 @@ const onPreview = async (file) => {
 const AddNewRepair = () => {
   const[newRepair] = useAddRepairMutation()
   const [form] = Form.useForm();
+  const {data:profileData} = useGetProfileQuery();
   const handleSubmit = async (values) => {
     const rawMileage = values.qty.replace(/,/g, "");
     console.log({ ...values, qty: rawMileage });
      const formData = new FormData();
+     const rvId = profileData?.user?.selectedRvId?._id;
+
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
     formData.append("vendor", values.vendor || "");
     formData.append("cityState", values.cityState || "");
     formData.append(

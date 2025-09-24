@@ -77,7 +77,7 @@ const ProfilePage = () => {
                   style={{ width: 140, height: 140, borderRadius: "100%" }}
                   src={`${image
                       ? URL.createObjectURL(image)
-                      : `${imageUrl}/${profileData?.user?.profilePic}`
+                      : `${profileData?.user?.profilePic}`
                     }`}
                   // src={img}
                   alt=""
