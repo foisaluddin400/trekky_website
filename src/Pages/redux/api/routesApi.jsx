@@ -42,7 +42,7 @@ const routesApi = baseApi.injectEndpoints({
     //     providesTags: ["updateProfile"],
     // }),
 
-     addRv: builder.mutation({
+    addRv: builder.mutation({
       query: (data) => {
         return {
           url: "/rv/add-rv",
@@ -53,9 +53,7 @@ const routesApi = baseApi.injectEndpoints({
       invalidatesTags: ["updateProfile"],
     }),
 
-
-
-getRv: builder.query({
+    getRv: builder.query({
       query: () => {
         return {
           url: "/rv/get-rvs",
@@ -93,9 +91,6 @@ getRv: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
-
-
-
 
     addChassis: builder.mutation({
       query: (data) => {
@@ -270,7 +265,7 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getTire: builder.query({
+    getTire: builder.query({
       query: () => {
         return {
           url: "/tire/get-tire",
@@ -369,7 +364,7 @@ getRv: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
-  getHeater: builder.query({
+    getHeater: builder.query({
       query: () => {
         return {
           url: "/heater/get",
@@ -408,8 +403,6 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-
     addWaterPump: builder.mutation({
       query: (data) => {
         return {
@@ -421,7 +414,7 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-      getWaterPump: builder.query({
+    getWaterPump: builder.query({
       query: () => {
         return {
           url: "/water-pump/get",
@@ -471,7 +464,7 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-      getWasher: builder.query({
+    getWasher: builder.query({
       query: () => {
         return {
           url: "/washer/get",
@@ -510,17 +503,101 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-
-
-
-
     addWaterHeater: builder.mutation({
       query: (data) => {
         return {
           url: "/water-heater/create",
           method: "POST",
           body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    getWaterHeater: builder.query({
+      query: () => {
+        return {
+          url: "/water-heater/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleWaterHeater: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/water-heater/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateWaterHeater: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/water-heater/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteWaterHeater: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/water-heater/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    addExpense: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/expense/create",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    getExpense: builder.query({
+      query: () => {
+        return {
+          url: "/expense/get",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    getSingleExpense: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/expense/get/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+    updateExpense: builder.mutation({
+      query: ({ formData, id }) => {
+        return {
+          url: `/expense/update/${id}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    deleteExpense: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/expense/delete/${id}`,
+          method: "DELETE",
         };
       },
       invalidatesTags: ["terms"],
@@ -537,8 +614,7 @@ getRv: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-getToilet: builder.query({
+    getToilet: builder.query({
       query: () => {
         return {
           url: "/toilet/get",
@@ -576,10 +652,6 @@ getToilet: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
-
-
-
-
 
     addTv: builder.mutation({
       query: (data) => {
@@ -631,7 +703,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addDriyer: builder.mutation({
       query: (data) => {
         return {
@@ -682,8 +753,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-
     addExhaustFans: builder.mutation({
       query: (data) => {
         return {
@@ -695,7 +764,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getExhaustFans: builder.query({
+    getExhaustFans: builder.query({
       query: () => {
         return {
           url: "/exhaust-fans/get",
@@ -733,7 +802,6 @@ getToilet: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
-
 
     addVentFans: builder.mutation({
       query: (data) => {
@@ -785,9 +853,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-
-
     addDisherInfo: builder.mutation({
       query: (data) => {
         return {
@@ -799,7 +864,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getDisherInfo: builder.query({
+    getDisherInfo: builder.query({
       query: () => {
         return {
           url: "/dishwasher/get",
@@ -838,7 +903,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addCallingFans: builder.mutation({
       query: (data) => {
         return {
@@ -850,7 +914,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getCallingFans: builder.query({
+    getCallingFans: builder.query({
       query: () => {
         return {
           url: "/celling-fans/get",
@@ -889,7 +953,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addDvdInfo: builder.mutation({
       query: (data) => {
         return {
@@ -901,7 +964,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getDvdInfo: builder.query({
+    getDvdInfo: builder.query({
       query: () => {
         return {
           url: "/dvd/get",
@@ -940,7 +1003,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addGps: builder.mutation({
       query: (data) => {
         return {
@@ -952,7 +1014,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-        getGps: builder.query({
+    getGps: builder.query({
       query: () => {
         return {
           url: "/gps/get",
@@ -991,7 +1053,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addOutdoor: builder.mutation({
       query: (data) => {
         return {
@@ -1002,7 +1063,7 @@ getToilet: builder.query({
       },
       invalidatesTags: ["terms"],
     }),
-   getOutdoor: builder.query({
+    getOutdoor: builder.query({
       query: () => {
         return {
           url: "/outdoor-radio/get",
@@ -1051,7 +1112,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-   getSurroundSound: builder.query({
+    getSurroundSound: builder.query({
       query: () => {
         return {
           url: "/surround-sound/get",
@@ -1101,7 +1162,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-       getInternetSatettling: builder.query({
+    getInternetSatettling: builder.query({
       query: () => {
         return {
           url: "/internet-satellite/get",
@@ -1140,7 +1201,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addRouter: builder.mutation({
       query: (data) => {
         return {
@@ -1152,7 +1212,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-       getRouter: builder.query({
+    getRouter: builder.query({
       query: () => {
         return {
           url: "/wifi-router/get",
@@ -1191,7 +1251,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
     addMaintance: builder.mutation({
       query: (data) => {
         return {
@@ -1203,7 +1262,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-     getMaintance: builder.query({
+    getMaintance: builder.query({
       query: () => {
         return {
           url: "/maintenance-schedule/get",
@@ -1212,7 +1271,7 @@ getToilet: builder.query({
       },
       providesTags: ["terms"],
     }),
-     deleteMaintance: builder.mutation({
+    deleteMaintance: builder.mutation({
       query: (id) => {
         return {
           url: `/maintenance-schedule/delete/${id}`,
@@ -1242,7 +1301,7 @@ getToilet: builder.query({
       providesTags: ["terms"],
     }),
 
-  addRepair: builder.mutation({
+    addRepair: builder.mutation({
       query: (data) => {
         return {
           url: "/new-repair/create",
@@ -1253,7 +1312,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-       getRepair: builder.query({
+    getRepair: builder.query({
       query: () => {
         return {
           url: "/new-repair/get",
@@ -1292,7 +1351,7 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-  addReports: builder.mutation({
+    addReports: builder.mutation({
       query: (data) => {
         return {
           url: "/reports/create",
@@ -1303,7 +1362,27 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-       getReports: builder.query({
+    addFavouriteReports: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/reports/toggleFavorite/${id}`,
+          method: "POST",
+        };
+      },
+      invalidatesTags: ["terms"],
+    }),
+
+    getFavouriteReports: builder.query({
+      query: () => {
+        return {
+          url: "/reports/getFavorite",
+          method: "GET",
+        };
+      },
+      providesTags: ["terms"],
+    }),
+
+    getReports: builder.query({
       query: () => {
         return {
           url: "/reports/get",
@@ -1342,9 +1421,6 @@ getToilet: builder.query({
       invalidatesTags: ["terms"],
     }),
 
-
-
-
     // postPrivecy: builder.mutation({
     //     query: (data) => {
     //         return {
@@ -1366,14 +1442,18 @@ export const {
   useUpdateChassisMutation,
   useAddRvMutation,
   useDeleteRvMutation,
-  useGetRvQuery,useUpdateRvMutation,useGetSingleRvQuery,
+  useGetRvQuery,
+  useUpdateRvMutation,
+  useGetSingleRvQuery,
   useAddInsuranceMutation,
   useGetSingleInsuranceCompanyQuery,
   useUpdateInsuranceCompanyMutation,
   useDeleteInsuranceCompanyMutation,
   useAddTireMutation,
   useDeleteTireMutation,
-  useGetSingleTireQuery,useGetTireQuery,useUpdateTireMutation,
+  useGetSingleTireQuery,
+  useGetTireQuery,
+  useUpdateTireMutation,
   useAddAirConditionMutation,
   useDeleteAirConditionMutation,
   useGetAirConditionQuery,
@@ -1395,6 +1475,10 @@ export const {
   useGetSingleWasherQuery,
   useUpdateWasherMutation,
   useAddWaterHeaterMutation,
+  useGetWaterHeaterQuery,
+  useGetSingleWaterHeaterQuery,
+  useUpdateWaterHeaterMutation,
+  useDeleteWaterHeaterMutation,
   useAddToiletMutation,
   useDeleteToiletMutation,
   useGetSingleToiletQuery,
@@ -1402,39 +1486,85 @@ export const {
   useUpdateToiletMutation,
   useAddTvMutation,
   useDeleteTvMutation,
-  useGetSingleTvQuery,useGetTvQuery,
+  useGetSingleTvQuery,
+  useGetTvQuery,
   useUpdateTvMutation,
   useAddDriyerMutation,
   useDeleteDriyerMutation,
-  useGetDriyerQuery,useGetSingleDriyerQuery,useUpdateDriyerMutation,
+  useGetDriyerQuery,
+  useGetSingleDriyerQuery,
+  useUpdateDriyerMutation,
   useAddExhaustFansMutation,
   useDeleteExhaustFansMutation,
-  useGetExhaustFansQuery,useGetSingleExhaustFansQuery,useUpdateExhaustFansMutation,
+  useGetExhaustFansQuery,
+  useGetSingleExhaustFansQuery,
+  useUpdateExhaustFansMutation,
   useAddVentFansMutation,
-  useDeleteVentFansMutation,useGetVentFansQuery,useGetSingleVentFansQuery, useUpdateVentFansMutation,
+  useDeleteVentFansMutation,
+  useGetVentFansQuery,
+  useGetSingleVentFansQuery,
+  useUpdateVentFansMutation,
   useAddDisherInfoMutation,
-  useDeleteDisherInfoMutation,useGetDisherInfoQuery,useGetSingleDisherInfoQuery,useUpdateDisherInfoMutation,
+  useDeleteDisherInfoMutation,
+  useGetDisherInfoQuery,
+  useGetSingleDisherInfoQuery,
+  useUpdateDisherInfoMutation,
   useAddCallingFansMutation,
-  useGetCallingFansQuery,useGetSingleCallingFansQuery,useUpdateCallingFansMutation,useDeleteCallingFansMutation,
+  useGetCallingFansQuery,
+  useGetSingleCallingFansQuery,
+  useUpdateCallingFansMutation,
+  useDeleteCallingFansMutation,
   useAddDvdInfoMutation,
-  useGetDvdInfoQuery,useGetSingleDvdInfoQuery,useUpdateDvdInfoMutation,useDeleteDvdInfoMutation,
+  useGetDvdInfoQuery,
+  useGetSingleDvdInfoQuery,
+  useUpdateDvdInfoMutation,
+  useDeleteDvdInfoMutation,
   useAddGpsMutation,
-  useGetGpsQuery,useGetSingleGpsQuery,useUpdateGpsMutation,useDeleteGpsMutation,
+  useGetGpsQuery,
+  useGetSingleGpsQuery,
+  useUpdateGpsMutation,
+  useDeleteGpsMutation,
   useAddOutdoorMutation,
-  useDeleteOutdoorMutation,useGetOutdoorQuery,useGetSingleOutdoorQuery,useUpdateOutdoorMutation,
+  useDeleteOutdoorMutation,
+  useGetOutdoorQuery,
+  useGetSingleOutdoorQuery,
+  useUpdateOutdoorMutation,
   useAddSurroundSoundMutation,
-  useGetSurroundSoundQuery,useGetSingleSurroundSoundQuery,useDeleteSurroundSoundMutation,useUpdateSurroundSoundMutation,
+  useGetSurroundSoundQuery,
+  useGetSingleSurroundSoundQuery,
+  useDeleteSurroundSoundMutation,
+  useUpdateSurroundSoundMutation,
   useAddInternetSatettlingMutation,
-  useDeleteInternetSatettlingMutation,useGetInternetSatettlingQuery,useGetSingleInternetSatettlingQuery,useUpdateInternetSatettlingMutation,
+  useDeleteInternetSatettlingMutation,
+  useGetInternetSatettlingQuery,
+  useGetSingleInternetSatettlingQuery,
+  useUpdateInternetSatettlingMutation,
   useAddRouterMutation,
-  useDeleteRouterMutation,useGetRouterQuery,useGetSingleRouterQuery,useUpdateRouterMutation,
+  useDeleteRouterMutation,
+  useGetRouterQuery,
+  useGetSingleRouterQuery,
+  useUpdateRouterMutation,
   useAddMaintanceMutation,
   useGetMaintanceQuery,
   useDeleteMaintanceMutation,
   useAddMemberMutation,
   useGetMemberShipQuery,
   useGetInsuranceCompanyQuery,
-  useAddReportsMutation,useDeleteReportsMutation,useGetReportsQuery,useGetSingleReportsQuery,useUpdateReportsMutation,
+  useAddReportsMutation,
+  useDeleteReportsMutation,
+  useGetReportsQuery,
+  useGetSingleReportsQuery,
+  useUpdateReportsMutation,
+  useGetFavouriteReportsQuery,
+  useAddFavouriteReportsMutation,
   useAddRepairMutation,
-  useDeleteRepairMutation,useGetRepairQuery,useGetSingleRepairQuery,useUpdateRepairMutation,
+  useDeleteRepairMutation,
+  useGetRepairQuery,
+  useGetSingleRepairQuery,
+  useUpdateRepairMutation,
+  useAddExpenseMutation,
+  useDeleteExpenseMutation,
+  useGetExpenseQuery,
+  useGetSingleExpenseQuery,
+  useUpdateExpenseMutation,
 } = routesApi;

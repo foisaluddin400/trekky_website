@@ -1,184 +1,198 @@
-import { Button, ConfigProvider, DatePicker, Form, Input, Select } from "antd";
+import { Button, ConfigProvider, DatePicker, Form, Input, message, Select, Upload } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import React, { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useNavigate } from "react-router-dom";
+import { useAddExpenseMutation } from "../redux/api/routesApi";
+import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
+
 const dateFormat = "MM/DD/YYYY";
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
+const onPreview = async (file) => {
+  let src =
+    file.url ||
+    (await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file.originFileObj);
+      reader.onload = () => resolve(reader.result);
+    }));
+  const image = new Image();
+  image.src = src;
+  const imgWindow = window.open(src);
+  imgWindow?.document.write(image.outerHTML);
 };
 const AddNewExpense = () => {
+  const navigate = useNavigate();
+  const [addHeater] = useAddExpenseMutation();
   const [form] = Form.useForm();
-  const handleSubmit = (values) => {
-    const rawMileage = values.qty.replace(/,/g, "");
-    console.log({ ...values, qty: rawMileage });
-  };
+  const [fileList, setFileList] = useState([]);
+  const { data: profileData } = useGetProfileQuery();
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    const rvId = profileData?.user?.selectedRvId?._id;
 
-  const [qty, setMileage] = useState("");
-  const [cost, setCost] = useState("");
-  const handleCostChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setCost(formatted);
-    form.setFieldsValue({ cost: formatted });
+    if (!rvId) {
+      message.error(
+        "Please select your RV from the home page before submitting."
+      );
+      return;
+    }
+    formData.append("rvId", rvId);
+    formData.append("vendor", values.vendor || "");
+    formData.append("qty", Number(values.qty) || "");
+    formData.append("expenseType", values.expenseType || "");
+    formData.append(
+      "date",
+      values.date
+        ? dayjs(values.date).format(dateFormat)
+        : ""
+    );
+
+    formData.append("cost", values.cost ? Number(values.cost) : "");
+
+    formData.append("notes", values.notes || "");
+
+    // Multiple image upload
+    fileList.forEach((file) => {
+      if (file.originFileObj) {
+        formData.append("images", file.originFileObj);
+      }
+    });
+
+    try {
+      const res = await addHeater(formData).unwrap();
+      message.success(res?.message || "Saved successfully");
+
+      form.resetFields();
+      setFileList([]);
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong");
+    }
+  };
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
   };
 
   const formatWithCommas = (value) => {
-    const onlyNumbers = value.replace(/[^\d]/g, "");
+    if (!value) return "";
+    const onlyNumbers = value.toString().replace(/[^\d]/g, "");
     return onlyNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const handleChange = (e) => {
-    const input = e.target.value;
-    const formatted = formatWithCommas(input);
-    setMileage(formatted);
-    form.setFieldsValue({ qty: formatted });
+  const parseNumber = (value) => {
+    if (!value) return "";
+    return value.replace(/,/g, "");
   };
 
+  //   const handleChange = (e) => {
+  //     const input = e.target.value;
+  //     const formatted = formatWithCommas(input);
+  //     setMileage(formatted);
+  //     form.setFieldsValue({ qty: formatted });
+  //   };
   return (
     <div className="container m-auto">
-      <div className="lg:flex gap-4 lg:mt-11 mt-6 px-3">
-        <div className="lg:w-[300px] pb-7 lg:pb-0">
+      <div className=" gap-4 lg:mt-11 mt-6 px-3">
+        <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">Add New Expense</h1>
         </div>
-        <div className="max-w-4xl ">
+        <div className="max-w-4xl m-auto">
           <Form form={form} onFinish={handleSubmit} layout="vertical">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Expense Type</span>}
-                name="expense"
-                // rules={[
-                //   { required: true, message: "Please input Expense Type!" },
-                // ]}
-              >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: "#F9B038",
-                      borderRadius: 8,
-                      controlHeight: 40,
-                    },
-                  }}
-                >
-                  <Select placeholder="Select Inquiry" className="w-full">
-                    <Option value="General_Inquiry">Select</Option>
-                    <Option value="Service_Request">DEF</Option>
-                    <Option value="Partnership_Inquiry">Fuel</Option>
-                    <Option value="Partnership_Inquiry">Oil</Option>
-                    <Option value="Partnership_Inquiry">Other</Option>
-                  </Select>
-                </ConfigProvider>
-              </Form.Item>
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Date</span>}
-                name="date"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input your company name!",
-                //   },
-                // ]}
-              >
-                <DatePicker
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  format={dateFormat}
-                  defaultValue={dayjs("09/03/2019", dateFormat)}
-                  minDate={dayjs("08/01/2019", dateFormat)}
-                  maxDate={dayjs("10/31/2020", dateFormat)}
-                />
-              </Form.Item>
-            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Vendor</span>}
                 name="vendor"
-                // rules={[
-                //   { required: true, message: "Please input vendor!" },
-                // ]}
+                // rules={[{ required: true, message: "Please input Name!" }]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Eddlie"
+                  placeholder="Vendor"
                 />
               </Form.Item>
-
               <Form.Item
-                label={<span style={{ color: "#F9B038" }}>City/State</span>}
-                name="city"
-                // rules={[
-                //   { required: true, message: "Please input city/state!" },
-                // ]}
+                label={
+                  <span style={{ color: "#F9B038" }}>Date</span>
+                }
+                name="date"
               >
-                <Input
+                <DatePicker
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type city/state"
+                  format={dateFormat}
                 />
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Form.Item
-               label={<span style={{ color: "#F9B038" }}>Cost</span>}
+                label={<span style={{ color: "#F9B038" }}>Expense Type</span>}
+                name="expenseType"
+              >
+                <Select
+                  className="custom-select"
+                  style={{ height: "40px" }}
+                  placeholder="Select Type"
+                >
+                  <Select.Option value="">Select</Select.Option>
+                  <Select.Option value="Front Left">Oil</Select.Option>
+                  <Select.Option value="Front Right">Fuel</Select.Option>
+                  <Select.Option value="Mid Front Left">
+                    Others
+                  </Select.Option>
+              
+               
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label={<span style={{ color: "#F9B038" }}>Cost</span>}
                 name="cost"
-                // rules={[{ required: true, message: "Please input cost!" }]}
+                normalize={(value) => parseNumber(value)}
+                getValueProps={(value) => ({
+                  value: formatWithCommas(value),
+                })}
+                rules={[
+                  {
+                    pattern: /^\d+$/,
+                    message: "Please enter a valid number",
+                  },
+                ]}
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
                   placeholder="$"
-                  value={cost}
-                  onChange={handleCostChange}
-                />
-              </Form.Item>
-
-              <Form.Item
-                label={<span style={{ color: "#F9B038" }}>Qty</span>}
-                name="qty"
-                // rules={[
-                //   { required: true, message: "Please input mileage!" },
-                // ]}
-              >
-                <Input
-                  className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Qty"
-                  value={qty}
-                  onChange={handleChange}
                 />
               </Form.Item>
             </div>
-
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon ">
-                  <InboxOutlined />
-                </p>
-                <p className=" text-[#F9B038]">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="text-[#F9B038]">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+            <Form.Item
+              label={<span style={{ color: "#F9B038" }}>Qty</span>}
+              name="qty"
+              //   rules={[
+              //     { required: true, message: "Please input qty!" },
+              //   ]}
+            >
+              <Input
+              type="number"
+                className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
+                placeholder="qty"
+              />
+            </Form.Item>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+              <div>
+                <h1 className="text-[#F9B038]">Upload Image</h1>
+                <Upload
+                  style={{ width: "100%", marginTop: "10px", color: "#F9B038" }}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={onChange}
+                  onPreview={onPreview}
+                  multiple={true}
+                >
+                  {fileList.length < 5 && "+ Upload"}
+                </Upload>
+              </div>
               <Form.Item
                 label={<span style={{ color: "#F9B038" }}>Notes</span>}
-                name="feedback"
+                name="notes"
                 // rules={[{ required: true, message: "Please input Notes!" }]}
               >
                 <Input.TextArea

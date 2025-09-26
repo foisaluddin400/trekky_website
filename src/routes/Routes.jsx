@@ -137,7 +137,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/updateNewExpense",
+        path: "/updateNewExpense/:id",
         element: <UpdateNewExpense></UpdateNewExpense>,
       },
       {

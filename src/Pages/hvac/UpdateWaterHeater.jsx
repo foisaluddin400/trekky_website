@@ -9,12 +9,12 @@ import {
   Upload,
 } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAddWasherMutation, useAddWaterHeaterMutation, useAddWaterPumpMutation } from "../redux/api/routesApi";
+import { useAddWasherMutation, useAddWaterHeaterMutation, useAddWaterPumpMutation, useGetSingleHeaterQuery, useGetSingleWaterHeaterQuery, useUpdateHeaterMutation, useUpdateWaterHeaterMutation } from "../redux/api/routesApi";
 import { useGetProfileQuery } from "../redux/api/userApi";
 dayjs.extend(customParseFormat);
 const dateFormat = "MM/DD/YYYY";
@@ -32,11 +32,11 @@ const onPreview = async (file) => {
   imgWindow?.document.write(image.outerHTML);
 };
 const UpdateWaterHeater = () => {
-    // const {id} = useParams();
-    // const {data:singleUpdate} = useGetSingleAirConditionQuery({id})
-    // console.log(singleUpdate)
+    const {id} = useParams();
+    const {data:singleUpdate} = useGetSingleWaterHeaterQuery({id})
+    console.log(singleUpdate)
   const navigate = useNavigate();
-  const [addHeater] = useAddWaterHeaterMutation();
+  const [addHeater] = useUpdateWaterHeaterMutation();
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
   const {data:profileData} = useGetProfileQuery();
@@ -73,9 +73,9 @@ const UpdateWaterHeater = () => {
     });
 
     try {
-      const res = await addHeater(formData).unwrap();
+      const res = await addHeater({formData,id}).unwrap();
       message.success(res?.message || "Saved successfully");
-      navigate("/details/AddToiletInfo");
+   
       form.resetFields();
       setFileList([]);
     } catch (err) {
@@ -104,12 +104,43 @@ const UpdateWaterHeater = () => {
   //     form.setFieldsValue({ qty: formatted });
   //   };
 
+   useEffect(() => {
+      if (singleUpdate?.waterHeater) {
+        const admin = singleUpdate?.waterHeater;
+    
+        // ✅ Form values set
+        form.setFieldsValue({
+          name: admin.name || '',
+          location: admin.location || '',
+          modelNumber: admin.modelNumber || '',
+          phoneNumber: admin.phoneNumber || "",
+          dateOfPurchase: admin.dateOfPurchase ? dayjs(admin.dateOfPurchase) : null,
+          effectiveDate: admin.effectiveDate ? dayjs(admin.effectiveDate) : null,
+          renewalDate: admin.renewalDate ? dayjs(admin.renewalDate) : null,
+          cost: admin.cost || "",
+          notes: admin.notes || "",
+          policyNumber: admin.policyNumber || "",
+        });
+    
+        // ✅ Image list set for Upload component
+        if (admin.images && admin.images.length > 0) {
+          const formattedImages = admin.images.map((img, index) => ({
+            uid: String(index),
+            name: img.split("\\").pop(), 
+            status: "done",
+            url: `${img}`, 
+          }));
+          setFileList(formattedImages);
+        }
+      }
+    }, [singleUpdate, form]);
+
   return (
     <div className="container m-auto">
       <div className=" lg:mt-11 mt-6 px-3">
         <div className=" pb-7 lg:pb-0">
           <h1 className="text-3xl font-semibold text-[#F9B038]">
-            Add Water Heater Information
+            Update Water Heater Information
           </h1>
         </div>
         <div className="max-w-4xl m-auto mt-11">

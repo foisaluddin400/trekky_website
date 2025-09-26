@@ -114,7 +114,7 @@ const AddReports = () => {
               >
                 <Input
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Eddlie"
+                  placeholder="Area"
                 />
               </Form.Item>
 
@@ -130,7 +130,7 @@ const AddReports = () => {
                 <Input
                   type="number"
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type city/state"
+                  placeholder="Odometer Reading"
                 />
               </Form.Item>
             </div>

@@ -81,7 +81,7 @@ const InternetInfo = () => {
       </div>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
-        {data?.internetSatellite?.map((item) => (
+        {data?.internetSatellites?.map((item) => (
           <div
             key={item._id}
             className="bg-[#F59B07] py-4 w-full rounded gap-8 px-4"

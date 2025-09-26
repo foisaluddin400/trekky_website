@@ -83,8 +83,8 @@ const UpdateReports = () => {
     return value.replace(/,/g, "");
   };
   useEffect(() => {
-    if (singleUpdate?.report) {
-      const admin = singleUpdate?.report;
+    if (singleUpdate?.data) {
+      const admin = singleUpdate?.data;
 
       // ✅ Form values set
       form.setFieldsValue({
@@ -156,7 +156,7 @@ const UpdateReports = () => {
                 <Input
                   type="number"
                   className="w-full bg-transparent border border-[#F9B038] text-[#F9B038] py-2"
-                  placeholder="Type city/state"
+                  placeholder="Odometer Reading"
                 />
               </Form.Item>
             </div>
